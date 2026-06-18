@@ -146,7 +146,7 @@
     .facilitator-box h4 { color: #fcd34d; margin-bottom: 12px; font-size: 0.95rem; }
     .facilitator-box ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
     .facilitator-box ul li { font-size: 0.85rem; color: var(--text-secondary); display: flex; gap: 10px; }
-    .facilitator-box ul li::before { content: '⚡'; font-size: 12px; }
+    .facilitator-box ul li::before { content: '\f0e7  '; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 12px; color: var(--primary-light); }
 
     @media (max-width: 600px) {
       .agenda-header { padding: 24px; }
@@ -185,7 +185,7 @@
     <div class="container">
       <div class="page-hero-content">
         <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Schedule</span></div>
-        <div class="level-badge" style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);color:#6ee7b7;">⚡ Tomorrow — June 19, 2026</div>
+        <div class="level-badge" style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);color:#6ee7b7;"><i class="fa-solid fa-bolt" style="margin-right:6px;"></i> Tomorrow — June 19, 2026</div>
         <h1>Session <span class="gradient-text">Agenda</span></h1>
         <p style="font-size:1.05rem;color:var(--text-secondary);max-width:540px;">
           One hour. Everything you need to go from zero to confident with AI at work — covering L1 foundations, AI policy, and two hands-on group activities.
@@ -201,7 +201,7 @@
         <!-- Session header card -->
         <div class="agenda-header animate-on-scroll">
           <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);border-radius:999px;padding:4px 14px;font-size:0.75rem;font-weight:700;color:#6ee7b7;margin-bottom:14px;">
-            ⚡ TOMORROW
+            <i class="fa-solid fa-bolt" style="margin-right:6px;"></i> TOMORROW
           </div>
           <h2 style="margin-bottom:4px;">Lunch &amp; Learn: Proper AI Utilization</h2>
           <p style="font-size:0.9rem;color:var(--text-secondary);margin:0;">Covering L1 Foundations + AI Policy Introduction</p>
@@ -209,7 +209,7 @@
             <div class="agenda-detail"><i class="fa-solid fa-calendar-days"></i> <strong>June 19, 2026</strong></div>
             <div class="agenda-detail">⏰ <strong>12:00 PM – 1:00 PM</strong></div>
             <div class="agenda-detail"><i class="fa-solid fa-stopwatch"></i> <strong>60 Minutes</strong></div>
-            <div class="agenda-detail">🟦 <strong>Tool: Atlassian Rovo (new L1) · Any AI (Senior L1/L2+)</strong></div>
+            <div class="agenda-detail"><i class="fa-brands fa-atlassian" style="color:var(--atlassian-light); margin-right:6px;"></i> <strong>Tool: Atlassian Rovo (new L1) · Any AI (Senior L1/L2+)</strong></div>
           </div>
         </div>
 
@@ -222,7 +222,7 @@
             <div class="timeline-block highlight">
               <div class="timeline-time">12:00 PM</div>
               <div class="timeline-title">
-                👋 Welcome &amp; Why AI, Why Now
+                <i class="fa-solid fa-door-open" style="color:var(--secondary-light); margin-right:6px;"></i> Welcome &amp; Why AI, Why Now
                 <span class="duration-pill">5 min</span>
               </div>
               <p class="timeline-desc">Set the room. Explain the goal of the session — not to make everyone an AI expert, but to build enough fluency to use it safely and effectively at work.</p>
@@ -240,7 +240,7 @@
             <div class="timeline-block">
               <div class="timeline-time">12:05 PM</div>
               <div class="timeline-title">
-                🧠 What Is AI Actually Doing?
+                <i class="fa-solid fa-brain" style="color:var(--secondary-light); margin-right:6px;"></i> What Is AI Actually Doing?
                 <span class="duration-pill">8 min</span>
               </div>
               <p class="timeline-desc">Plain-language explainer — no jargon. Walk through the AI Fluency cheat sheet on the Level 1 page.</p>
@@ -296,7 +296,7 @@
             <div class="timeline-block">
               <div class="timeline-time">12:32 PM</div>
               <div class="timeline-title">
-                ✍️ Prompt Engineering — PCTF Framework
+                <i class="fa-solid fa-pen-nib" style="color:var(--secondary-light); margin-right:6px;"></i> Prompt Engineering — PCTF Framework
                 <span class="duration-pill">8 min</span>
               </div>
               <p class="timeline-desc">Teach the one framework that immediately improves everyone's prompts. Show a before/after example from the service desk context.</p>
@@ -334,13 +334,13 @@
             <div class="timeline-block">
               <div class="timeline-time">12:52 PM</div>
               <div class="timeline-title">
-                🗺️ Resources &amp; What's Next
+                <i class="fa-solid fa-map" style="color:var(--secondary-light); margin-right:6px;"></i> Resources &amp; What's Next
                 <span class="duration-pill">5 min</span>
               </div>
               <p class="timeline-desc">Point everyone to the live training site. Walk through the key links they'll use beyond today.</p>
               <ul class="block-points">
-                <li>🟦 <a href="https://community.atlassian.com/learning/team-training/course:15697742" target="_blank" rel="noopener" style="color:var(--atlassian-light);">Atlassian Team Training Course (course:15697742)</a> — required for L1</li>
-                <li>📚 <a href="level1.html" style="color:var(--primary-light);">Level 1 page</a> — full cheat sheet, Rovo setup, PCTF guide</li>
+                <li><i class="fa-brands fa-atlassian" style="color:var(--atlassian-light); margin-right:6px;"></i> <a href="https://community.atlassian.com/learning/team-training/course:15697742" target="_blank" rel="noopener" style="color:var(--atlassian-light);">Atlassian Team Training Course (course:15697742)</a> — required for L1</li>
+                <li><i class="fa-solid fa-book" style="color:var(--primary-light); margin-right:6px;"></i> <a href="level1.html" style="color:var(--primary-light);">Level 1 page</a> — full cheat sheet, Rovo setup, PCTF guide</li>
                 <li><i class="fa-solid fa-bullseye"></i> <a href="activities.html" style="color:var(--primary-light);">Activities page</a> — all 6 group activities with bad output examples</li>
                 <li><i class="fa-solid fa-vault"></i> <a href="level2.html#policy" style="color:var(--secondary-light);">Level 2 — AI Policy</a> — full governance guide for Senior L1 / L2+</li>
               </ul>
@@ -353,7 +353,7 @@
             <div class="timeline-block highlight">
               <div class="timeline-time">12:57 PM</div>
               <div class="timeline-title">
-                💬 Q&amp;A + Open Discussion
+                <i class="fa-solid fa-comments" style="color:var(--secondary-light); margin-right:6px;"></i> Q&amp;A + Open Discussion
                 <span class="duration-pill">3 min</span>
               </div>
               <p class="timeline-desc">Open floor. What questions came up during the activities? What scenarios from your actual job are you unsure about?</p>
@@ -366,7 +366,7 @@
             <div class="timeline-block" style="background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.2);">
               <div class="timeline-time">1:00 PM</div>
               <div class="timeline-title" style="color:#6ee7b7;">
-                ✅ End of Session
+                <i class="fa-solid fa-circle-check" style="color:var(--primary-light); margin-right:6px;"></i> End of Session
               </div>
               <p class="timeline-desc">Thanks for attending. The training site stays live — bookmark it and share it with your team.</p>
             </div>
@@ -377,7 +377,7 @@
 
         <!-- Facilitator tips -->
         <div class="facilitator-box animate-on-scroll">
-          <h4>⚡ Facilitator Tips</h4>
+          <h4><i class="fa-solid fa-bolt" style="color:var(--primary-light); margin-right:6px;"></i> Facilitator Tips</h4>
           <ul>
             <li>Pull up <strong>activities.html</strong> on the projector before noon — everything is self-contained, no slides needed</li>
             <li>For Activity 1: have groups submit the prompt to Rovo live, then reveal the built-in bad output — the contrast is the lesson</li>
@@ -390,7 +390,7 @@
 
         <!-- Navigation -->
         <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px;">
-          <a href="level1.html" class="btn btn-secondary" id="btn-sched-l1">📖 Level 1 Content</a>
+          <a href="level1.html" class="btn btn-secondary" id="btn-sched-l1"><i class="fa-solid fa-book-open"></i> Level 1 Content</a>
           <a href="activities.html" class="btn btn-primary" id="btn-sched-acts"><i class="fa-solid fa-bullseye"></i> View All Activities</a>
         </div>
 
@@ -426,7 +426,7 @@
             <li><a href="level2.html">Level 2</a></li>
             <li><a href="activities.html">Activities</a></li>
             <li><a href="resources.html">Resources</a></li>
-            <li><a href="instructor.html" style="color:rgba(139,92,246,0.8);"><span style="margin-right:4px;">🔒</span>Instructor Portal</a></li>
+            <li><a href="instructor.html" style="color:rgba(139,92,246,0.8);"><span style="margin-right:6px;"><i class="fa-solid fa-lock"></i></span>Instructor Portal</a></li>
           </ul>
         </div>
         <div class="footer-col">

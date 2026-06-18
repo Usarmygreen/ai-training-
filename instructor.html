@@ -40,11 +40,13 @@
   <!-- ── MAIN CONTENT ───────────────────────────────────────── -->
   <main style="min-height: 80vh;">
 
-    <!-- 🔒 LOCK SCREEN PORTAL -->
+    <!-- SECURE LOCK SCREEN PORTAL -->
     <div id="lockScreen" class="locked-only" style="padding-top: 120px; padding-bottom: 80px;">
       <div class="vault-container">
         <div class="vault-card" id="vaultCard">
-          <div class="vault-icon"><i class="fa-solid fa-vault"></i></div>
+          <div style="text-align:center; margin-bottom:20px;">
+            <img src="cyberpunk_vault.png" alt="Biometric Lock Screen" class="cyber-bevel" style="width: 100px; height: 100px; border: 1px solid rgba(0,240,255,0.25); box-shadow: 0 0 15px rgba(0,240,255,0.15);" />
+          </div>
           <h2 class="vault-title">Instructor Portal</h2>
           <p class="vault-subtitle">Enter administrator passcode to access teaching scripts.</p>
           
@@ -66,7 +68,7 @@
       </div>
     </div>
 
-    <!-- 🔓 INSTRUCTOR DASHBOARD -->
+    <!-- SECURE INSTRUCTOR DASHBOARD -->
     <div id="instructorDashboard" class="auth-only" style="padding-top:120px; padding-bottom:80px;">
       <div class="container">
         
@@ -85,7 +87,7 @@
           
           <!-- Facilitation Timeline (Left) -->
           <div class="inst-panel">
-            <h3 style="border-bottom:1px solid var(--border-subtle); padding-bottom:12px; margin-bottom:24px;">📝 Session Run-of-Show Script</h3>
+            <h3 style="border-bottom:1px solid var(--border-subtle); padding-bottom:12px; margin-bottom:24px;"><i class="fa-solid fa-clipboard-list" style="color:var(--primary-light); margin-right:6px;"></i> Session Run-of-Show Script</h3>
             
             <div class="inst-agenda-list">
               
@@ -93,11 +95,11 @@
               <div class="inst-agenda-item active" id="seg1">
                 <div class="inst-agenda-time">12:00 PM – 12:05 PM (5 mins)</div>
                 <div class="inst-agenda-title">
-                  👋 Welcome &amp; Setup Check
+                  <i class="fa-solid fa-door-open" style="color:var(--primary-light); margin-right:6px;"></i> Welcome &amp; Setup Check
                 </div>
                 <div class="inst-agenda-desc">Set target goals, confirm screen share, and check Rovo login credentials.</div>
                 <div class="inst-notes-box">
-                  <div class="inst-notes-title">🎙️ Facilitator Script</div>
+                  <div class="inst-notes-title"><i class="fa-solid fa-microphone-lines" style="margin-right:6px;"></i> Facilitator Script</div>
                   <div class="inst-notes-content">
                     <p>"Welcome everyone to our AI training session. Today, our goal is to build fluency in using Large Language Models safely, securely, and efficiently within the RTP Service Desk context. Over the next hour, we'll cover key AI concepts, walk through company usage policies, and complete two group scripting audits. Let's make sure everyone can access Atlassian Rovo at this time before we proceed."</p>
                     <ul>
@@ -113,11 +115,11 @@
               <div class="inst-agenda-item" id="seg2">
                 <div class="inst-agenda-time">12:05 PM – 12:13 PM (8 mins)</div>
                 <div class="inst-agenda-title">
-                  🧠 What Is AI Actually Doing?
+                  <i class="fa-solid fa-brain" style="color:var(--primary-light); margin-right:6px;"></i> What Is AI Actually Doing?
                 </div>
                 <div class="inst-agenda-desc">Plain language explanation of next-word prediction and hallucination patterns.</div>
                 <div class="inst-notes-box">
-                  <div class="inst-notes-title">🎙️ Facilitator Script</div>
+                  <div class="inst-notes-title"><i class="fa-solid fa-microphone-lines" style="margin-right:6px;"></i> Facilitator Script</div>
                   <div class="inst-notes-content">
                     <p>"AI doesn't 'think' or understand facts. It is trained to predict the next most probable word based on massive patterns. This means AI will generate syntactically perfect code or IP addresses that are completely fabricated — a phenomenon called 'hallucinating.' This is why we verify, always."</p>
                     <ul>
@@ -136,7 +138,7 @@
                 </div>
                 <div class="inst-agenda-desc">Review the two-tier usage rule. Explain data boundaries and public sharing risk.</div>
                 <div class="inst-notes-box">
-                  <div class="inst-notes-title">🎙️ Facilitator Script</div>
+                  <div class="inst-notes-title"><i class="fa-solid fa-microphone-lines" style="margin-right:6px;"></i> Facilitator Script</div>
                   <div class="inst-notes-content">
                     <p>"We enforce a strict two-tier policy: New L1 employees use <strong>Atlassian Rovo only</strong> for work tasks. Rovo is enterprise-governed, data stays internal, and it is native to Jira. Senior L1 and L2+ staff may use external AIs (like Claude or Gemini) but must manually strip PII, credentials, or proprietary source code before pasting. You are fully responsible for what you deploy."</p>
                     <ul>
@@ -155,7 +157,7 @@
                 </div>
                 <div class="inst-agenda-desc">Groups audit an AI script disabling AD users. Run diagnostics in activities panel.</div>
                 <div class="inst-notes-box">
-                  <div class="inst-notes-title">🎙️ Facilitator Script &amp; Answer Key</div>
+                  <div class="inst-notes-title"><i class="fa-solid fa-microphone-lines" style="margin-right:6px;"></i> Facilitator Script &amp; Answer Key</div>
                   <div class="inst-notes-content">
                     <p>"Let's open our first group exercise: PowerShell Roulette. We asked the AI to disable stale AD accounts. Split into groups of 3 and take 5 minutes to audit the AI's script. What errors can you find?"</p>
                     <p><strong>Answer Key — 3 Critical Bugs:</strong></p>
@@ -172,11 +174,11 @@
               <div class="inst-agenda-item" id="seg5">
                 <div class="inst-agenda-time">12:32 PM – 12:40 PM (8 mins)</div>
                 <div class="inst-agenda-title">
-                  ✍️ Prompt Engineering &amp; PCTF
+                  <i class="fa-solid fa-pen-nib" style="color:var(--primary-light); margin-right:6px;"></i> Prompt Engineering &amp; PCTF
                 </div>
                 <div class="inst-agenda-desc">Introduce the PCTF framework. Demonstrate the interactive Prompt Composer.</div>
                 <div class="inst-notes-box">
-                  <div class="inst-notes-title">🎙️ Facilitator Script</div>
+                  <div class="inst-notes-title"><i class="fa-solid fa-microphone-lines" style="margin-right:6px;"></i> Facilitator Script</div>
                   <div class="inst-notes-content">
                     <p>"Vague prompts yield generic, hallucination-prone results. Using the **PCTF framework** (Persona, Context, Task, Format) grounds the model. Let's look at the **Interactive Prompt Playground** on the homepage to demonstrate how we structure these fields for system admins."</p>
                     <ul>
@@ -195,7 +197,7 @@
                 </div>
                 <div class="inst-agenda-desc">Pairs run the macOS M2 troubleshoot diagnostic. Highlight SMC platform errors.</div>
                 <div class="inst-notes-box">
-                  <div class="inst-notes-title">🎙️ Facilitator Script &amp; Answer Key</div>
+                  <div class="inst-notes-title"><i class="fa-solid fa-microphone-lines" style="margin-right:6px;"></i> Facilitator Script &amp; Answer Key</div>
                   <div class="inst-notes-content">
                     <p>"Let's look at Activity 2: The Apple Silicon platform trap. The prompt describes a Bluetooth issue on an M2 Mac. AI suggests holding Shift-Control-Option-Power to reset the SMC chip."</p>
                     <p><strong>Answer Key — SMC does not exist:</strong></p>
@@ -211,11 +213,11 @@
               <div class="inst-agenda-item" id="seg7">
                 <div class="inst-agenda-time">12:52 PM – 1:00 PM (8 mins)</div>
                 <div class="inst-agenda-title">
-                  🗺️ Wrap-up, Toolkit, &amp; Open Q&amp;A
+                  <i class="fa-solid fa-map" style="color:var(--primary-light); margin-right:6px;"></i> Wrap-up, Toolkit, &amp; Open Q&amp;A
                 </div>
                 <div class="inst-agenda-desc">Walk through the Resource toolkit, answer final questions, and close.</div>
                 <div class="inst-notes-box">
-                  <div class="inst-notes-title">🎙️ Facilitator Script</div>
+                  <div class="inst-notes-title"><i class="fa-solid fa-microphone-lines" style="margin-right:6px;"></i> Facilitator Script</div>
                   <div class="inst-notes-content">
                     <p>"To wrap up, please bookmark our Resources &amp; Toolkit page. New L1s, you are required to complete the Atlassian Course linked there in your first two weeks. Everyone else: use Microsoft Learn and PowerShell documentation links to verify scripts before running them. Any final questions?"</p>
                     <ul>
@@ -249,24 +251,24 @@
 
             <!-- Quick Copy Scripts -->
             <div class="inst-quick-links">
-              <h4>📋 Facilitator Quick Copies</h4>
+              <h4><i class="fa-solid fa-list-check" style="color:var(--primary-light); margin-right:6px;"></i> Facilitator Quick Copies</h4>
               <ul>
                 <li>
                   <a href="#" class="copy-script-btn" data-script="Welcome team! Please confirm you have rovo.atlassian.com open and ready to follow along today.">
-                    <span>💬 Welcome Chat Notice</span>
-                    <span>📋</span>
+                    <span><i class="fa-solid fa-comment-dots" style="color:var(--primary-light); margin-right:6px;"></i> Welcome Chat Notice</span>
+                    <span><i class="fa-solid fa-copy"></i></span>
                   </a>
                 </li>
                 <li>
                   <a href="#" class="copy-script-btn" data-script="Group Activity 1: Open activities.html and audit the PowerShell AD script in Activity 1. Find all 3 critical errors. You have 5 minutes.">
-                    <span>💻 Activity 1 Launch Script</span>
-                    <span>📋</span>
+                    <span><i class="fa-solid fa-terminal" style="color:var(--primary-light); margin-right:6px;"></i> Activity 1 Launch Script</span>
+                    <span><i class="fa-solid fa-copy"></i></span>
                   </a>
                 </li>
                 <li>
                   <a href="#" class="copy-script-btn" data-script="Here is the Atlassian Course link for L1 completion: https://community.atlassian.com/learning/team-training/course:15697742">
-                    <span>🟦 Atlassian course link</span>
-                    <span>📋</span>
+                    <span><i class="fa-brands fa-atlassian" style="color:var(--atlassian-light); margin-right:6px;"></i> Atlassian course link</span>
+                    <span><i class="fa-solid fa-copy"></i></span>
                   </a>
                 </li>
               </ul>
@@ -274,7 +276,7 @@
 
             <!-- Segment Selector -->
             <div class="inst-quick-links" style="margin-top:20px;">
-              <h4>🧭 Jump to Segment</h4>
+              <h4><i class="fa-solid fa-compass" style="color:var(--primary-light); margin-right:6px;"></i> Jump to Segment</h4>
               <ul style="gap:4px;">
                 <li><button class="timer-btn" style="width:100%; text-align:left;" onclick="setSegment(1)">1. Welcome &amp; Setup (5m)</button></li>
                 <li><button class="timer-btn" style="width:100%; text-align:left;" onclick="setSegment(2)">2. What is AI? (8m)</button></li>
@@ -486,7 +488,7 @@
         const textToCopy = btn.dataset.script;
         navigator.clipboard.writeText(textToCopy).then(() => {
           const originalText = btn.innerHTML;
-          btn.innerHTML = '<span>✓ Copied to clipboard!</span>';
+          btn.innerHTML = '<span><i class="fa-solid fa-check" style="margin-right:6px;"></i> Copied to clipboard!</span>';
           setTimeout(() => {
             btn.innerHTML = originalText;
           }, 2000);

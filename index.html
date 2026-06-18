@@ -173,9 +173,12 @@
 
         <!-- Left Column -->
         <div>
-          <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Internal AI Training · RTP Service Desk
+          <div style="display:flex; gap:16px; align-items:center; margin-bottom:24px;">
+            <img src="cyberpunk_hero.png" alt="Cyberpunk AI Avatar" class="cyber-bevel" style="width: 70px; height: 70px; border: 1px solid rgba(0,240,255,0.25); box-shadow: 0 0 15px rgba(0,240,255,0.15);" />
+            <div class="eyebrow" style="margin-bottom:0;">
+              <span class="eyebrow-dot"></span>
+              Internal AI Training · RTP Service Desk
+            </div>
           </div>
 
           <h1>
@@ -209,7 +212,7 @@
 
           <div class="hero-panel-card">
             <div class="panel-header">
-              <div class="panel-icon panel-icon-atl">🟦</div>
+              <div class="panel-icon panel-icon-atl"><i class="fa-brands fa-atlassian"></i></div>
               <div>
                 <div class="panel-title">Atlassian Rovo</div>
                 <div class="panel-sub">Standard L1 Tool · RTP Service Desk</div>
@@ -243,8 +246,8 @@
             </div>
             <div class="terminal-body" style="font-size:0.76rem;padding:14px 18px;">
               <div><span class="t-prompt">PS C:\&gt; </span><span class="t-cmd">Get-ADUser</span> <span class="t-flag">-Filter</span> <span class="t-str">{LastLogonDate -lt ...}</span></div>
-              <div style="margin-top:4px;"><span class="t-err">❌ Cannot use LastLogonDate in -Filter</span></div>
-              <div style="margin-top:8px;"><span class="t-comment"># ✓ Correct approach:</span></div>
+              <div style="margin-top:4px;"><span class="t-err"><i class="fa-solid fa-circle-xmark"></i> Cannot use LastLogonDate in -Filter</span></div>
+              <div style="margin-top:8px;"><span class="t-comment"># <i class="fa-solid fa-circle-check"></i> Correct approach:</span></div>
               <div><span class="t-cmd">Get-ADUser</span> <span class="t-flag">-Filter *</span> <span class="t-good">| Where-Object</span> <span class="t-str">{...}</span></div>
               <div style="margin-top:6px;color:var(--text-muted);font-size:0.7rem;">→ Activity 1: PowerShell Roulette · 12:20 PM</div>
             </div>
@@ -262,7 +265,7 @@
         <div class="session-banner-left">
           <div class="session-live-dot"></div>
           <div>
-            <h4>⚡ Session 1 — Tomorrow, June 19, 2026</h4>
+            <h4><i class="fa-solid fa-bolt" style="color:var(--primary-light); margin-right:6px;"></i> Session 1 — Tomorrow, June 19, 2026</h4>
             <p style="color:var(--text-muted);">12:00 PM – 1:00 PM · 60 minutes · L1 Foundations + AI Policy + 2 Group Activities</p>
           </div>
         </div>
@@ -301,7 +304,7 @@
   <section class="section">
     <div class="container">
       <div class="section-header animate-on-scroll">
-        <div class="eyebrow-sm">📚 Learning Tracks</div>
+        <div class="eyebrow-sm"><i class="fa-solid fa-book-open" style="margin-right:6px;"></i> Learning Tracks</div>
         <h2>Two Levels, <span class="gradient-text">One Session</span></h2>
         <p>Tomorrow's session hits both tracks. L1 foundations for everyone, L2 policy awareness for senior staff — in 60 focused minutes.</p>
       </div>
@@ -342,26 +345,26 @@
 
       <!-- ── Tool Showcase ──────────────────────────────────── -->
       <div class="section-header animate-on-scroll" style="margin-bottom:32px;">
-        <div class="eyebrow-sm">🛠️ Approved AI Toolkit</div>
+        <div class="eyebrow-sm"><i class="fa-solid fa-screwdriver-wrench" style="margin-right:6px;"></i> Approved AI Toolkit</div>
         <h2>The Right Tool for <span class="gradient-text">Your Role</span></h2>
         <p>Tool access is determined by your level. Know which one is yours before the session tomorrow.</p>
       </div>
 
       <div class="tool-showcase animate-on-scroll stagger">
         <div class="tool-card rovo">
-          <div class="tool-icon rovo">🟦</div>
+          <div class="tool-icon rovo"><i class="fa-brands fa-atlassian" style="color:var(--atlassian-light);"></i></div>
           <h4>Atlassian Rovo</h4>
           <p>Enterprise AI embedded in Jira &amp; Confluence. Critical for the RTP Service Desk team — triage tickets, search Confluence, draft responses.</p>
           <span class="tool-who who-l1">New L1 Standard · Required</span>
         </div>
         <div class="tool-card claude">
-          <div class="tool-icon claude">🟠</div>
+          <div class="tool-icon claude"><i class="fa-solid fa-fire-flame-curved" style="color:#f97316;"></i></div>
           <h4>Anthropic Claude</h4>
           <p>Powerful general-purpose AI for analysis, drafting, and brainstorming. Available to Senior L1 &amp; L2+ staff who've completed vetting training.</p>
           <span class="tool-who who-senior">Senior L1 / L2+ Only</span>
         </div>
         <div class="tool-card google">
-          <div class="tool-icon google">🔵</div>
+          <div class="tool-icon google"><i class="fa-brands fa-google" style="color:#4285F4;"></i></div>
           <h4>Google Gemini</h4>
           <p>AI integrated into Google Workspace — Docs, Gmail, Slides. Explore credentials via the Google Skills Catalog for Workspace AI badges.</p>
           <span class="tool-who who-senior">Senior L1 / L2+ Only</span>
@@ -462,19 +465,19 @@
 
       <div class="grid-3 animate-on-scroll stagger" style="margin-bottom:32px;">
         <div class="card">
-          <div style="font-size:2rem;margin-bottom:14px;">💻</div>
+          <div style="font-size:2rem;margin-bottom:14px;color:var(--primary-light);"><i class="fa-solid fa-terminal"></i></div>
           <div class="module-tag tag-purple" style="margin-bottom:10px;">PowerShell</div>
           <h4>PowerShell Roulette</h4>
           <p style="font-size:0.83rem;margin-top:8px;">AI writes an AD script with 3 critical bugs. Your group finds them before it hits production.</p>
         </div>
         <div class="card">
-          <div style="font-size:2rem;margin-bottom:14px;">🍎💻</div>
+          <div style="font-size:2rem;margin-bottom:14px;color:var(--secondary-light);"><i class="fa-brands fa-apple" style="margin-right:8px;"></i><i class="fa-solid fa-terminal"></i></div>
           <div class="module-tag tag-blue" style="margin-bottom:10px;">Mac / PC</div>
           <h4>The Platform Trap</h4>
           <p style="font-size:0.83rem;margin-top:8px;">AI gives SMC reset instructions for an M2 Mac where SMC doesn't exist. Catch it before you send it to a user.</p>
         </div>
         <div class="card">
-          <div style="font-size:2rem;margin-bottom:14px;">🌐</div>
+          <div style="font-size:2rem;margin-bottom:14px;color:var(--accent-light);"><i class="fa-solid fa-globe"></i></div>
           <div class="module-tag tag-cyan" style="margin-bottom:10px;">Networking</div>
           <h4>Network Ghost</h4>
           <p style="font-size:0.83rem;margin-top:8px;">AI fabricates a DNS server IP (157.58.0.0). Deploy it and you break production. Find it first.</p>
@@ -542,7 +545,7 @@
             <li><a href="level1.html#prompting">PCTF Guide</a></li>
             <li><a href="activities.html#act1">PowerShell Activity</a></li>
             <li><a href="schedule.html">Tomorrow's Agenda</a></li>
-            <li><a href="instructor.html" style="color:rgba(139,92,246,0.8);"><span style="margin-right:4px;">🔒</span>Instructor Portal</a></li>
+            <li><a href="instructor.html" style="color:rgba(139,92,246,0.8);"><span style="margin-right:6px;"><i class="fa-solid fa-lock"></i></span>Instructor Portal</a></li>
           </ul>
         </div>
       </div>

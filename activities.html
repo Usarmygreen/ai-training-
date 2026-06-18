@@ -162,7 +162,7 @@
     .debrief-title { font-size: 0.8rem; font-weight: 700; color: var(--accent-light); margin-bottom: 8px; }
     .debrief ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
     .debrief ul li { font-size: 0.82rem; color: var(--text-secondary); }
-    .debrief ul li::before { content: '💬 '; }
+    .debrief ul li::before { content: '\f086  '; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--primary-light); margin-right: 4px; }
 
     /* Filter tabs */
     .filter-tabs {
@@ -243,7 +243,7 @@
         </p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;">
           <span class="phase-pill active"><span class="dot"></span> 6 Activities · All Levels</span>
-          <span style="font-size:0.8rem;color:var(--text-muted);display:flex;align-items:center;">🟦 Optimized for Atlassian Rovo</span>
+          <span style="font-size:0.8rem;color:var(--text-muted);display:flex;align-items:center;"><i class="fa-brands fa-atlassian" style="color:var(--atlassian-light); margin-right:6px;"></i> Optimized for Atlassian Rovo</span>
         </div>
       </div>
     </div>
@@ -254,7 +254,7 @@
 
       <!-- Scoreboard / Stats -->
       <div class="scoreboard animate-on-scroll">
-        <h4 style="margin-bottom:4px;">📊 Activity Overview</h4>
+        <h4 style="margin-bottom:4px;"><i class="fa-solid fa-chart-column"></i> Activity Overview</h4>
         <p style="font-size:0.85rem;margin:0;">Use these across Sessions 1–4. Mix and match based on your group's skill level.</p>
         <div class="score-grid">
           <div class="score-item"><div class="score-value">6</div><div class="score-label">Total Activities</div></div>
@@ -267,11 +267,11 @@
       <!-- Filter tabs (visual only — all activities always shown) -->
       <div class="filter-tabs animate-on-scroll">
         <span class="filter-tab active">All Activities</span>
-        <span class="filter-tab">💻 PowerShell</span>
-        <span class="filter-tab">🍎 Mac Troubleshooting</span>
-        <span class="filter-tab">🪟 Windows/PC</span>
-        <span class="filter-tab">🌐 Networking</span>
-        <span class="filter-tab">✍️ Prompt Craft</span>
+        <span class="filter-tab"><i class="fa-solid fa-terminal"></i> PowerShell</span>
+        <span class="filter-tab"><i class="fa-brands fa-apple"></i> Mac Troubleshooting</span>
+        <span class="filter-tab"><i class="fa-brands fa-windows"></i> Windows/PC</span>
+        <span class="filter-tab"><i class="fa-solid fa-network-wired"></i> Networking</span>
+        <span class="filter-tab"><i class="fa-solid fa-pen-nib"></i> Prompt Craft</span>
       </div>
 
       <!-- ═══════════════════════════════════════════ -->
@@ -280,7 +280,7 @@
       <div class="activity-card animate-on-scroll" id="act1">
         <div class="activity-number">01</div>
         <div class="activity-header">
-          <div class="activity-icon card-icon-purple">💻</div>
+          <div class="activity-icon card-icon-purple"><i class="fa-solid fa-terminal"></i></div>
           <div>
             <div class="module-tag tag-purple" style="margin-bottom:6px;">PowerShell · L1</div>
             <h3 style="margin-bottom:4px;">"PowerShell Roulette" — Script Audit</h3>
@@ -288,10 +288,10 @@
           </div>
         </div>
         <div class="activity-meta">
-          <span>👥 Groups of 3–4</span>
+          <span><i class="fa-solid fa-users" style="margin-right:6px;"></i> Groups of 3–4</span>
           <span><i class="fa-solid fa-stopwatch"></i> 12 min</span>
-          <span class="meta-highlight">🟦 Rovo</span>
-          <span>🎫 Service Desk</span>
+          <span class="meta-highlight"><i class="fa-brands fa-atlassian" style="color:var(--atlassian-light); margin-right:4px;"></i> Rovo</span>
+          <span><i class="fa-solid fa-ticket-simple" style="margin-right:6px;"></i> Service Desk</span>
           <span>⭐ Beginner Friendly</span>
         </div>
 
@@ -318,7 +318,7 @@
         </div>
 
         <div class="why-wrong">
-          <div class="why-wrong-title">🔍 Why This Is Wrong — 3 Critical Errors</div>
+          <div class="why-wrong-title"><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-light); margin-right:6px;"></i> Why This Is Wrong — 3 Critical Errors</div>
           <ul>
             <li><span class="err-num">①</span><div><strong style="color:var(--text-primary);">LastLogonDate is NOT usable inside -Filter:</strong> The AD <code>-Filter</code> parameter uses a limited query language that cannot evaluate date comparisons using <code>LastLogonDate</code>. The script will throw an error or silently return 0 users. The correct approach: <code>Get-ADUser -Filter * -Properties LastLogonDate | Where-Object { $_.LastLogonDate -lt (Get-Date).AddDays(-30) }</code></div></li>
             <li><span class="err-num">②</span><div><strong style="color:var(--text-primary);">No -WhatIf flag — this WILL disable accounts immediately:</strong> In a real environment with hundreds of users, this script would disable service accounts, shared mailboxes, and admin accounts with zero warning. Always add <code>-WhatIf</code> and pipe to a review step first.</div></li>
@@ -331,7 +331,7 @@
         </div>
 
         <div class="debrief">
-          <div class="debrief-title">💬 Group Debrief Questions</div>
+          <div class="debrief-title"><i class="fa-solid fa-comments" style="margin-right:6px;"></i> Group Debrief Questions</div>
           <ul>
             <li>Was the bad script syntactically convincing? Would you have run it?</li>
             <li>What's the worst-case outcome if this ran against your real AD environment?</li>
@@ -347,7 +347,7 @@
       <div class="activity-card animate-on-scroll" id="act2">
         <div class="activity-number">02</div>
         <div class="activity-header">
-          <div class="activity-icon card-icon-amber">🍎</div>
+          <div class="activity-icon card-icon-amber"><i class="fa-brands fa-apple"></i></div>
           <div>
             <div class="module-tag tag-atl" style="margin-bottom:6px;">Mac Troubleshooting · L1</div>
             <h3 style="margin-bottom:4px;">"The Apple Silicon Trap" — Hardware Platform Mismatch</h3>
@@ -355,10 +355,10 @@
           </div>
         </div>
         <div class="activity-meta">
-          <span>👥 Pairs</span>
+          <span><i class="fa-solid fa-users" style="margin-right:6px;"></i> Pairs</span>
           <span><i class="fa-solid fa-stopwatch"></i> 10 min</span>
-          <span class="meta-highlight">🟦 Rovo</span>
-          <span>🍎 Mac Focus</span>
+          <span class="meta-highlight"><i class="fa-brands fa-atlassian" style="color:var(--atlassian-light); margin-right:4px;"></i> Rovo</span>
+          <span><i class="fa-brands fa-apple" style="margin-right:6px;"></i> Mac Focus</span>
           <span>⭐ Common Real-World Scenario</span>
         </div>
 
@@ -386,7 +386,7 @@
         </div>
 
         <div class="why-wrong">
-          <div class="why-wrong-title">🔍 Why This Is Wrong — 3 Errors</div>
+          <div class="why-wrong-title"><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-light); margin-right:6px;"></i> Why This Is Wrong — 3 Errors</div>
           <ul>
             <li><span class="err-num">①</span><div><strong style="color:var(--text-primary);">SMC does NOT exist on Apple Silicon Macs (M1/M2/M3/M4):</strong> The System Management Controller was a physical chip on Intel Macs. It simply does not exist on any M-series Mac. Performing this key combo does absolutely nothing and wastes the user's time. Sending this to a user erodes their trust in you.</div></li>
             <li><span class="err-num">②</span><div><strong style="color:var(--text-primary);">NVRAM reset via ⌘+⌥+P+R does NOT work the same on Apple Silicon:</strong> On M-chip Macs, NVRAM is reset automatically on every boot as part of the secure boot process. The key combination has no equivalent effect. Apple's official documentation confirms this.</div></li>
@@ -399,7 +399,7 @@
         </div>
 
         <div class="debrief">
-          <div class="debrief-title">💬 Group Debrief Questions</div>
+          <div class="debrief-title"><i class="fa-solid fa-comments" style="margin-right:6px;"></i> Group Debrief Questions</div>
           <ul>
             <li>If you sent the bad instructions to a user, how long would they spend on Step 3 before realizing it did nothing?</li>
             <li>What prompt addition forces AI to specify which Mac generation it's giving instructions for?</li>
@@ -414,7 +414,7 @@
       <div class="activity-card animate-on-scroll" id="act3">
         <div class="activity-number">03</div>
         <div class="activity-header">
-          <div class="activity-icon card-icon-blue">🪟</div>
+          <div class="activity-icon card-icon-blue"><i class="fa-brands fa-windows"></i></div>
           <div>
             <div class="module-tag tag-blue" style="margin-bottom:6px;">Windows Troubleshooting · L1</div>
             <h3 style="margin-bottom:4px;">"Legacy Command Trap" — Windows 7 Advice on Windows 11</h3>
@@ -422,10 +422,10 @@
           </div>
         </div>
         <div class="activity-meta">
-          <span>👥 Groups of 3</span>
+          <span><i class="fa-solid fa-users" style="margin-right:6px;"></i> Groups of 3</span>
           <span><i class="fa-solid fa-stopwatch"></i> 12 min</span>
-          <span class="meta-highlight">🟦 Rovo</span>
-          <span>🪟 Windows 11 Focus</span>
+          <span class="meta-highlight"><i class="fa-brands fa-atlassian" style="color:var(--atlassian-light); margin-right:4px;"></i> Rovo</span>
+          <span><i class="fa-brands fa-windows" style="margin-right:6px;"></i> Windows 11 Focus</span>
         </div>
 
         <div class="prompt-box">
@@ -452,7 +452,7 @@
         </div>
 
         <div class="why-wrong">
-          <div class="why-wrong-title">🔍 Why This Is Wrong — 3 Errors</div>
+          <div class="why-wrong-title"><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-light); margin-right:6px;"></i> Why This Is Wrong — 3 Errors</div>
           <ul>
             <li><span class="err-num">①</span><div><strong style="color:var(--text-primary);">F8 at startup is DISABLED by default on Windows 10/11:</strong> Fast Startup + UEFI boot makes Windows boot too fast for F8 to register. This will fail for the vast majority of users. Correct methods: Shift+Restart → Troubleshoot → Advanced → Startup Settings, or <code>bcdedit /set {default} safeboot minimal</code> from an elevated CMD (if Windows still loads).</div></li>
             <li><span class="err-num">②</span><div><strong style="color:var(--text-primary);">0xc000021a is a critical process death — sfc/scannow alone won't fix it:</strong> This BSOD means a critical user-mode process (winlogon.exe or csrss.exe) crashed fatally. SFC fixes corrupt system files, not crashed processes. The correct path: Boot from Windows 11 installation media → Startup Repair, or <code>DISM /Image:C:\ /Cleanup-Image /RestoreHealth</code> from WinPE.</div></li>
@@ -465,7 +465,7 @@
         </div>
 
         <div class="debrief">
-          <div class="debrief-title">💬 Group Debrief Questions</div>
+          <div class="debrief-title"><i class="fa-solid fa-comments" style="margin-right:6px;"></i> Group Debrief Questions</div>
           <ul>
             <li>A user follows the F8 instructions for 10 minutes and can't get Safe Mode. What's the support call like?</li>
             <li>How do you prompt AI to always specify OS version compatibility for its instructions?</li>
@@ -480,7 +480,7 @@
       <div class="activity-card animate-on-scroll" id="act4">
         <div class="activity-number">04</div>
         <div class="activity-header">
-          <div class="activity-icon card-icon-cyan">🌐</div>
+          <div class="activity-icon card-icon-cyan"><i class="fa-solid fa-network-wired"></i></div>
           <div>
             <div class="module-tag tag-cyan" style="margin-bottom:6px;">Networking · L1–L2</div>
             <h3 style="margin-bottom:4px;">"Network Ghost" — Fabricated IPs & DNS Hallucinations</h3>
@@ -488,11 +488,11 @@
           </div>
         </div>
         <div class="activity-meta">
-          <span>👥 Teams of 3–5</span>
+          <span><i class="fa-solid fa-users" style="margin-right:6px;"></i> Teams of 3–5</span>
           <span><i class="fa-solid fa-stopwatch"></i> 20 min</span>
-          <span class="meta-highlight">🟦 Rovo</span>
-          <span>🌐 Networking</span>
-          <span>🏆 Competitive — find all 4 errors first</span>
+          <span class="meta-highlight"><i class="fa-brands fa-atlassian" style="color:var(--atlassian-light); margin-right:4px;"></i> Rovo</span>
+          <span><i class="fa-solid fa-globe" style="margin-right:6px;"></i> Networking</span>
+          <span><i class="fa-solid fa-trophy" style="color:var(--primary-light); margin-right:6px;"></i> Competitive — find all 4 errors first</span>
         </div>
 
         <div class="prompt-box">
@@ -519,7 +519,7 @@
         </div>
 
         <div class="why-wrong">
-          <div class="why-wrong-title">🔍 Why This Is Wrong — 3 Errors</div>
+          <div class="why-wrong-title"><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-light); margin-right:6px;"></i> Why This Is Wrong — 3 Errors</div>
           <ul>
             <li><span class="err-num">①</span><div><strong style="color:var(--text-primary);">157.58.0.0 is a FABRICATED IP — not a Microsoft DNS server:</strong> This address does not exist as a public Microsoft resolver. Configuring production machines with this address causes complete DNS failure. Microsoft's actual resolver (Azure DNS) is at 168.63.129.16 — and that's only reachable from within Azure VNets. Always verify DNS IPs against official Microsoft documentation or your own AD DNS servers.</div></li>
             <li><span class="err-num">②</span><div><strong style="color:var(--text-primary);">Using Google 8.8.8.8 or external DNS for internal hostname resolution is wrong:</strong> Internal hostnames (like <code>internalserver.corp</code>) only resolve via your internal AD/DNS infrastructure. External DNS servers have no knowledge of your internal zones. This makes the problem worse, not better.</div></li>
@@ -527,7 +527,7 @@
           </ul>
         </div>
 
-        <div class="bad-output-label">❌ Bad AI Output — Prompt B (Static IP)</div>
+        <div class="bad-output-label"><i class="fa-solid fa-circle-xmark" style="color:var(--accent-light); margin-right:6px;"></i> Bad AI Output — Prompt B (Static IP)</div>
         <div class="bad-output">
           New-NetIPAddress -InterfaceAlias "Local Area Connection" `<br>
           &nbsp;&nbsp;-IPAddress 192.168.1.50 -PrefixLength 24 `<br>
@@ -537,7 +537,7 @@
         </div>
 
         <div class="why-wrong">
-          <div class="why-wrong-title">🔍 Why This Is Wrong — 1 Critical Error</div>
+          <div class="why-wrong-title"><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-light); margin-right:6px;"></i> Why This Is Wrong — 1 Critical Error</div>
           <ul>
             <li><span class="err-num">①</span><div><strong style="color:var(--text-primary);">"Local Area Connection" is a Windows 7/Vista-era interface name:</strong> Windows 10 and 11 name interfaces "Ethernet", "Ethernet 2", "Wi-Fi", etc. This command will fail with a silent error ("interface not found") or throw an exception. Before setting any IP config, always run <code>Get-NetAdapter</code> to get the actual interface alias name on this specific machine.</div></li>
           </ul>
@@ -548,7 +548,7 @@
         </div>
 
         <div class="debrief">
-          <div class="debrief-title">💬 Group Debrief Questions</div>
+          <div class="debrief-title"><i class="fa-solid fa-comments" style="margin-right:6px;"></i> Group Debrief Questions</div>
           <ul>
             <li>If you pushed 157.58.0.0 as the DNS server to 50 workstations via GPO, what breaks and how fast?</li>
             <li>What's your team's policy for verifying any IP address an AI gives you?</li>
@@ -564,7 +564,7 @@
       <div class="activity-card animate-on-scroll" id="act5">
         <div class="activity-number">05</div>
         <div class="activity-header">
-          <div class="activity-icon card-icon-atl">🎫</div>
+          <div class="activity-icon card-icon-atl"><i class="fa-solid fa-ticket-simple"></i></div>
           <div>
             <div class="module-tag tag-atl" style="margin-bottom:6px;">Rovo / Jira · L1</div>
             <h3 style="margin-bottom:4px;">"Ticket Triage" — Rovo for the Service Desk</h3>
@@ -572,15 +572,15 @@
           </div>
         </div>
         <div class="activity-meta">
-          <span>👥 Pairs</span>
+          <span><i class="fa-solid fa-users" style="margin-right:6px;"></i> Pairs</span>
           <span><i class="fa-solid fa-stopwatch"></i> 15 min</span>
-          <span class="meta-highlight">🟦 Rovo — Required</span>
-          <span>🎫 RTP Service Desk</span>
+          <span class="meta-highlight"><i class="fa-brands fa-atlassian" style="color:var(--atlassian-light); margin-right:4px;"></i> Rovo — Required</span>
+          <span><i class="fa-solid fa-ticket-simple" style="margin-right:6px;"></i> RTP Service Desk</span>
           <span>⭐ L1 Core Skill</span>
         </div>
 
         <div style="background:rgba(0,82,204,0.08);border:1px solid rgba(87,157,255,0.2);border-radius:var(--radius-md);padding:18px 20px;margin-bottom:16px;">
-          <h4 style="font-size:0.9rem;color:var(--atlassian-light);margin-bottom:8px;">🎫 Mock Ticket — User Submitted</h4>
+          <h4 style="font-size:0.9rem;color:var(--atlassian-light);margin-bottom:8px;"><i class="fa-solid fa-ticket-simple" style="margin-right:6px;"></i> Mock Ticket — User Submitted</h4>
           <p style="font-size:0.85rem;color:var(--text-secondary);margin:0;font-style:italic;">"Hi, my laptop is really slow lately and I can't get to my email. Also I think I clicked something weird in an email yesterday and now I have a bunch of popups. The wifi keeps disconnecting too. I need this fixed ASAP — I have a presentation at 2pm."</p>
         </div>
 
@@ -601,7 +601,7 @@
         </div>
 
         <div class="debrief">
-          <div class="debrief-title">💬 Group Debrief Questions</div>
+          <div class="debrief-title"><i class="fa-solid fa-comments" style="margin-right:6px;"></i> Group Debrief Questions</div>
           <ul>
             <li>Did Rovo flag the phishing risk as a priority? Should it have?</li>
             <li>How much did you have to edit the AI's draft response to make it sound like you?</li>
@@ -617,7 +617,7 @@
       <div class="activity-card animate-on-scroll" id="act6">
         <div class="activity-number">06</div>
         <div class="activity-header">
-          <div class="activity-icon card-icon-green">🏆</div>
+          <div class="activity-icon card-icon-green"><i class="fa-solid fa-trophy"></i></div>
           <div>
             <div class="module-tag tag-cyan" style="margin-bottom:6px;">Prompt Crafting · All Levels</div>
             <h3 style="margin-bottom:4px;">"The Prompt Olympics" — Iteration & PCTF Challenge</h3>
@@ -625,15 +625,15 @@
           </div>
         </div>
         <div class="activity-meta">
-          <span>👥 Teams of 3–5</span>
+          <span><i class="fa-solid fa-users" style="margin-right:6px;"></i> Teams of 3–5</span>
           <span><i class="fa-solid fa-stopwatch"></i> 20 min</span>
-          <span class="meta-highlight">🟦 Rovo or any AI</span>
-          <span>🏆 Competitive</span>
+          <span class="meta-highlight"><i class="fa-brands fa-atlassian" style="color:var(--atlassian-light); margin-right:4px;"></i> Rovo or any AI</span>
+          <span><i class="fa-solid fa-trophy" style="color:var(--primary-light); margin-right:6px;"></i> Competitive</span>
           <span>All Levels</span>
         </div>
 
         <div style="background:rgba(6,182,212,0.06);border:1px solid rgba(6,182,212,0.15);border-radius:var(--radius-md);padding:18px 20px;margin-bottom:16px;">
-          <h4 style="font-size:0.9rem;color:var(--accent-light);margin-bottom:8px;">📋 PCTF Reminder</h4>
+          <h4 style="font-size:0.9rem;color:var(--accent-light);margin-bottom:8px;"><i class="fa-solid fa-clipboard-list" style="margin-right:6px;"></i> PCTF Reminder</h4>
           <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px;">
             <div style="text-align:center;"><span style="font-size:1.5rem;font-weight:900;color:var(--accent-light);">P</span><p style="font-size:0.75rem;margin:0;color:var(--text-muted);">Persona — who should AI act as?</p></div>
             <div style="text-align:center;"><span style="font-size:1.5rem;font-weight:900;color:var(--accent-light);">C</span><p style="font-size:0.75rem;margin:0;color:var(--text-muted);">Context — what background?</p></div>
@@ -655,7 +655,7 @@
         </ul>
 
         <div class="debrief">
-          <div class="debrief-title">💬 Group Debrief Questions</div>
+          <div class="debrief-title"><i class="fa-solid fa-comments" style="margin-right:6px;"></i> Group Debrief Questions</div>
           <ul>
             <li>What single change between Round 1 and Round 2 made the biggest difference in quality?</li>
             <li>Which PCTF element (Persona, Context, Task, or Format) had the most impact for this scenario?</li>
@@ -703,7 +703,7 @@
             <li><a href="level1.html">Level 1</a></li>
             <li><a href="level2.html">Level 2</a></li>
             <li><a href="schedule.html">Schedule</a></li>
-            <li><a href="instructor.html" style="color:rgba(139,92,246,0.8);"><span style="margin-right:4px;">🔒</span>Instructor Portal</a></li>
+            <li><a href="instructor.html" style="color:rgba(139,92,246,0.8);"><span style="margin-right:6px;"><i class="fa-solid fa-lock"></i></span>Instructor Portal</a></li>
           </ul>
         </div>
         <div class="footer-col">

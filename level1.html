@@ -77,7 +77,7 @@
     .discussion-q p { font-size: 0.82rem; color: var(--accent-light); margin: 0; }
     .discussion-q ul { list-style: none; margin: 6px 0 0; padding: 0; }
     .discussion-q ul li { font-size: 0.8rem; color: var(--text-secondary); padding: 3px 0; }
-    .discussion-q ul li::before { content: '💬 '; }
+    .discussion-q ul li::before { content: '\f086  '; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--primary-light); margin-right: 4px; }
 
     /* Cheat sheet */
     .cheat-sheet {
@@ -165,20 +165,25 @@
   <!-- ── Page Hero ──────────────────────────────────────────── -->
   <section class="page-hero">
     <div class="container">
-      <div class="page-hero-content">
-        <div class="breadcrumb">
-          <a href="index.html">Home</a>
-          <span>›</span>
-          <span>Level 1</span>
+      <div class="page-hero-content" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:40px; max-width:1200px;">
+        <div style="flex:1; min-width:300px; max-width:700px;">
+          <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>›</span>
+            <span>Level 1</span>
+          </div>
+          <div class="level-badge level-badge-l1"><i class="fa-solid fa-graduation-cap"></i> Level 1 · Foundations</div>
+          <h1>AI <span class="gradient-text">Foundations</span></h1>
+          <p style="font-size:1.1rem;color:var(--text-secondary);max-width:560px;">
+            Build personal comfort with AI — understand the technology, work with <strong style="color:var(--atlassian-light)">Atlassian Rovo</strong> (your designated L1 tool), and develop core prompting skills through hands-on group activities.
+          </p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;">
+            <span class="phase-pill active"><span class="dot"></span> Active Track</span>
+            <span style="font-size:0.8rem;color:var(--text-muted);display:flex;align-items:center;">3 Modules · Group Activities Included</span>
+          </div>
         </div>
-        <div class="level-badge level-badge-l1">🎓 Level 1 · Foundations</div>
-        <h1>AI <span class="gradient-text">Foundations</span></h1>
-        <p style="font-size:1.1rem;color:var(--text-secondary);max-width:560px;">
-          Build personal comfort with AI — understand the technology, work with <strong style="color:var(--atlassian-light)">Atlassian Rovo</strong> (your designated L1 tool), and develop core prompting skills through hands-on group activities.
-        </p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;">
-          <span class="phase-pill active"><span class="dot"></span> Active Track</span>
-          <span style="font-size:0.8rem;color:var(--text-muted);display:flex;align-items:center;">3 Modules · Group Activities Included</span>
+        <div style="flex-shrink:0; z-index:1;">
+          <img src="cyberpunk_hero.png" alt="Cyberpunk AI Foundations" class="cyber-bevel-lg" style="width:200px; height:200px; border:1px solid rgba(0,240,255,0.25); box-shadow: 0 0 20px rgba(0,240,255,0.15);" />
         </div>
       </div>
     </div>
@@ -193,7 +198,7 @@
       <div class="module animate-on-scroll" style="margin-top:64px;" id="mindset">
         <div class="module-number">1.1</div>
         <div class="module-header">
-          <div class="module-icon card-icon-purple">🧠</div>
+          <div class="module-icon card-icon-purple"><i class="fa-solid fa-brain"></i></div>
           <div>
             <div class="module-tag tag-purple">Module 1.1</div>
             <h2>Mindset &amp; Fluency</h2>
@@ -202,14 +207,14 @@
         </div>
 
         <!-- Cheat Sheet -->
-        <h4 style="margin-bottom:14px;">📋 AI Fluency Cheat Sheet <span style="font-size:0.75rem;color:var(--text-muted);font-weight:400;">(Based on Anthropic Framework &amp; Foundations)</span></h4>
+        <h4 style="margin-bottom:14px;"><i class="fa-solid fa-clipboard-list" style="margin-right:6px;"></i> AI Fluency Cheat Sheet <span style="font-size:0.75rem;color:var(--text-muted);font-weight:400;">(Based on Anthropic Framework &amp; Foundations)</span></h4>
         <div class="cheat-sheet">
           <div class="cheat-row">
             <div class="cheat-label"><i class="fa-solid fa-robot"></i> What is an LLM?</div>
             <div class="cheat-value">A Large Language Model is a neural network trained on massive amounts of text. It predicts the most statistically likely next word — it does <em>not</em> "think" or "know." It patterns-matches from training data.</div>
           </div>
           <div class="cheat-row">
-            <div class="cheat-label">✅ What AI is GOOD at</div>
+            <div class="cheat-label"><i class="fa-solid fa-circle-check" style="color:#10b981; margin-right:6px;"></i> What AI is GOOD at</div>
             <div class="cheat-value">Summarizing, drafting, brainstorming, reformatting, explaining concepts, generating options, writing first drafts, identifying patterns in text.</div>
           </div>
           <div class="cheat-row">
@@ -217,7 +222,7 @@
             <div class="cheat-value">Real-time facts, precise math, current events (post training cutoff), niche proprietary info, and consistency across very long conversations.</div>
           </div>
           <div class="cheat-row">
-            <div class="cheat-label">🌀 Hallucinations</div>
+            <div class="cheat-label"><i class="fa-solid fa-wand-magic-sparkles" style="color:#a855f7; margin-right:6px;"></i> Hallucinations</div>
             <div class="cheat-value">AI can confidently state incorrect information. This is not a bug — it's a fundamental trait. <strong style="color:#fcd34d;">Always verify facts, links, and citations.</strong> Never copy-paste directly without review.</div>
           </div>
           <div class="cheat-row">
@@ -249,10 +254,10 @@
         <div class="activity-card">
           <h4>Activity 1.1 — "PowerShell Roulette" — Script Validation</h4>
           <div class="activity-meta">
-            <span>👥 Small Groups (3–4)</span>
+            <span><i class="fa-solid fa-users" style="margin-right:6px;"></i> Small Groups (3–4)</span>
             <span><i class="fa-solid fa-stopwatch"></i> 12 Minutes</span>
-            <span>🟦 Tool: Rovo</span>
-            <span>💻 PowerShell Focus</span>
+            <span><i class="fa-brands fa-atlassian" style="color:var(--atlassian-light); margin-right:6px;"></i> Tool: Rovo</span>
+            <span><i class="fa-solid fa-terminal" style="color:var(--primary-light); margin-right:6px;"></i> PowerShell Focus</span>
           </div>
           <p>Ask Rovo to write a PowerShell script for a common IT task, then audit the output for errors, deprecated commands, or security risks before running anything.</p>
           <ul class="activity-steps">
@@ -264,7 +269,7 @@
           <div class="prompt-example">"Write me a PowerShell script to find all Active Directory users who have not logged in for more than 30 days and disable their accounts."</div>
 
           <div style="margin-top:14px;">
-            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;color:#fca5a5;margin-bottom:8px;">❌ EXAMPLE BAD AI OUTPUT — DO NOT USE AS-IS</div>
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;color:#fca5a5;margin-bottom:8px;"><i class="fa-solid fa-circle-xmark"></i> EXAMPLE BAD AI OUTPUT — DO NOT USE AS-IS</div>
             <div class="prompt-example" style="border-left-color:#fca5a5;color:#fca5a5;">
               Get-ADUser -Filter {LastLogonDate -lt (Get-Date).AddDays(-30)} -Properties LastLogonDate |<br>
               &nbsp;&nbsp;Disable-ADAccount<br><br>
@@ -272,7 +277,7 @@
               Send-MailMessage -To "admin@company.com" -From "script@company.com" -SmtpServer "smtp.company.com" -Subject "Disabled Users" -Body $disabledUsers
             </div>
             <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius-md);padding:16px;margin-top:10px;">
-              <p style="font-size:0.78rem;color:#fca5a5;font-weight:700;margin-bottom:8px;">🔍 Why this is WRONG — 3 Problems:</p>
+              <p style="font-size:0.78rem;color:#fca5a5;font-weight:700;margin-bottom:8px;"><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-light); margin-right:6px;"></i> Why this is WRONG — 3 Problems:</p>
               <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
                 <li style="font-size:0.8rem;color:var(--text-secondary);"><span style="color:#fca5a5;">①</span> <strong style="color:var(--text-primary);">LastLogonDate is NOT filterable:</strong> The <code style="color:#fcd34d;">-Filter</code> parameter cannot use <code>LastLogonDate</code> directly — it requires fetching all users first and filtering in PowerShell with <code>Where-Object</code>. The script will fail or return wrong results.</li>
                 <li style="font-size:0.8rem;color:var(--text-secondary);"><span style="color:#fca5a5;">②</span> <strong style="color:var(--text-primary);">No -WhatIf or confirmation:</strong> <code>Disable-ADAccount</code> runs immediately with no safety check. A production run could disable hundreds of accounts — including service accounts — with no warning.</li>
@@ -281,7 +286,7 @@
             </div>
           </div>
           <div class="discussion-q" style="margin-top:12px;">
-            <p><strong>💬 Debrief Questions:</strong></p>
+            <p><strong><i class="fa-solid fa-comments" style="margin-right:6px;"></i> Debrief Questions:</strong></p>
             <ul>
               <li>Was the AI's script syntactically convincing? Would you have caught this?</li>
               <li>What's the worst-case outcome if you ran the unreviewed script in production?</li>
@@ -297,7 +302,7 @@
       <div class="module animate-on-scroll" id="rovo">
         <div class="module-number">1.2</div>
         <div class="module-header">
-          <div class="module-icon card-icon-atl">🟦</div>
+          <div class="module-icon card-icon-atl"><i class="fa-brands fa-atlassian"></i></div>
           <div>
             <div class="module-tag tag-atl">Module 1.2</div>
             <h2>Getting Started with Atlassian Rovo</h2>
@@ -307,7 +312,7 @@
 
         <!-- Rovo Spotlight -->
         <div class="atlassian-spotlight">
-          <div class="atlassian-spotlight-badge">🟦 Standard L1 Tool · RTP Service Desk</div>
+          <div class="atlassian-spotlight-badge"><i class="fa-brands fa-atlassian"></i> Standard L1 Tool · RTP Service Desk</div>
           <h3 style="margin-bottom:10px;">Why Rovo is your L1 Standard</h3>
           <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:20px;">
             Atlassian Rovo is the AI assistant built directly into Jira and Confluence. For new L1 employees — especially those on the RTP Service Desk — Rovo is the <strong style="color:var(--atlassian-light)">only approved AI tool</strong> for work tasks. Your data never leaves the Atlassian ecosystem, it's enterprise-governed, and it understands your project context natively.
@@ -319,12 +324,12 @@
               <p style="font-size:0.78rem;margin:0;">Data stays within your Atlassian organization — no consumer data sharing.</p>
             </div>
             <div style="background:rgba(0,82,204,0.12);border:1px solid rgba(87,157,255,0.15);border-radius:var(--radius-md);padding:16px;">
-              <div style="font-size:1.4rem;margin-bottom:8px;">🎫</div>
+              <div style="font-size:1.4rem;margin-bottom:8px;color:var(--atlassian-light);"><i class="fa-solid fa-ticket-simple"></i></div>
               <h5 style="font-size:0.85rem;margin-bottom:4px;">Jira Native</h5>
               <p style="font-size:0.78rem;margin:0;">Summarize tickets, generate descriptions, and triage issues without leaving Jira.</p>
             </div>
             <div style="background:rgba(0,82,204,0.12);border:1px solid rgba(87,157,255,0.15);border-radius:var(--radius-md);padding:16px;">
-              <div style="font-size:1.4rem;margin-bottom:8px;">📖</div>
+              <div style="font-size:1.4rem;margin-bottom:8px;color:var(--atlassian-light);"><i class="fa-solid fa-book-open"></i></div>
               <h5 style="font-size:0.85rem;margin-bottom:4px;">Confluence Aware</h5>
               <p style="font-size:0.78rem;margin:0;">Rovo can search, summarize, and draft content from your Confluence knowledge base.</p>
             </div>
@@ -344,7 +349,7 @@
 
         <!-- External Resource Link -->
         <a href="https://community.atlassian.com/learning/team-training/course:15697742" target="_blank" rel="noopener" class="resource-link" style="margin-top:20px;" id="rovo-atlassian-course">
-          <div class="resource-link-icon" style="background:rgba(0,82,204,0.15);border:1px solid rgba(87,157,255,0.2);">🟦</div>
+          <div class="resource-link-icon" style="background:rgba(0,82,204,0.15);border:1px solid rgba(87,157,255,0.2);color:var(--atlassian-light);"><i class="fa-brands fa-atlassian"></i></div>
           <div class="resource-link-body">
             <div class="resource-link-title">Atlassian Team Training — Course 15697742</div>
             <div class="resource-link-desc">Official Atlassian course on AI in Jira &amp; Confluence — heavily used by the RTP Service Desk team. Complete this as part of your L1 requirement.</div>
@@ -352,7 +357,7 @@
           <span class="resource-link-arrow">↗</span>
         </a>
         <a href="https://www.anthropic.com/learn/claude-for-you" target="_blank" rel="noopener" class="resource-link" id="l1-claude-resource">
-          <div class="resource-link-icon" style="background:rgba(212,163,115,0.15);border:1px solid rgba(212,163,115,0.2);">🟠</div>
+          <div class="resource-link-icon" style="background:rgba(212,163,115,0.15);border:1px solid rgba(212,163,115,0.2);color:#f97316;"><i class="fa-solid fa-fire-flame-curved"></i></div>
           <div class="resource-link-body">
             <div class="resource-link-title">Anthropic: Claude for You</div>
             <div class="resource-link-desc">Reference resource — useful for Senior L1 / L2+ staff who are approved to use Claude alongside Rovo.</div>
@@ -364,10 +369,10 @@
         <div class="activity-card">
           <h4>Activity 1.2 — "Platform Trap" — Mac vs. PC Troubleshooting</h4>
           <div class="activity-meta">
-            <span>👥 Pairs or Groups of 3</span>
+            <span><i class="fa-solid fa-users" style="margin-right:6px;"></i> Pairs or Groups of 3</span>
             <span><i class="fa-solid fa-stopwatch"></i> 15 Minutes</span>
-            <span>🟦 Tool: Rovo</span>
-            <span>🍎💻 Mac &amp; Windows Focus</span>
+            <span><i class="fa-brands fa-atlassian" style="color:var(--atlassian-light); margin-right:6px;"></i> Tool: Rovo</span>
+            <span><i class="fa-brands fa-apple" style="margin-right:4px;"></i> &amp; <i class="fa-brands fa-windows" style="margin-right:4px;"></i> Focus</span>
           </div>
           <p>AI frequently gives troubleshooting steps for the wrong platform, wrong OS version, or wrong hardware generation. Your job: catch the platform trap before you send it to a user.</p>
           <ul class="activity-steps">
@@ -382,12 +387,12 @@
           </div>
 
           <div style="margin-top:14px;">
-            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;color:#fca5a5;margin-bottom:8px;">❌ EXAMPLE BAD AI OUTPUT — PROMPT A (Mac M2 Bluetooth)</div>
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;color:#fca5a5;margin-bottom:8px;"><i class="fa-solid fa-circle-xmark"></i> EXAMPLE BAD AI OUTPUT — PROMPT A (Mac M2 Bluetooth)</div>
             <div class="prompt-example" style="border-left-color:#fca5a5;color:#fca5a5;">
               "Step 3: Reset the SMC (System Management Controller). Shut down your Mac, then hold Shift + Control + Option on the left keyboard side and press the Power button simultaneously for 10 seconds. Release all keys, then turn the Mac back on. This resets low-level hardware settings including Bluetooth."
             </div>
             <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius-md);padding:16px;margin-top:10px;">
-              <p style="font-size:0.78rem;color:#fca5a5;font-weight:700;margin-bottom:8px;">🔍 Why this is WRONG — The Apple Silicon Trap:</p>
+              <p style="font-size:0.78rem;color:#fca5a5;font-weight:700;margin-bottom:8px;"><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-light); margin-right:6px;"></i> Why this is WRONG — The Apple Silicon Trap:</p>
               <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
                 <li style="font-size:0.8rem;color:var(--text-secondary);"><span style="color:#fca5a5;">①</span> <strong style="color:var(--text-primary);">SMC does not exist on Apple Silicon (M1/M2/M3/M4):</strong> The SMC was an Intel-era chip. Apple Silicon Macs handle all of this within the chip itself. This step literally does nothing on an M2 Mac — it wastes the user's time and may confuse them.</li>
                 <li style="font-size:0.8rem;color:var(--text-secondary);"><span style="color:#fca5a5;">②</span> <strong style="color:var(--text-primary);">NVRAM reset procedure also differs:</strong> On Apple Silicon, NVRAM resets automatically on each boot. The old Intel command <code>⌘+⌥+P+R</code> at startup doesn't apply the same way.</li>
@@ -395,12 +400,12 @@
               </ul>
             </div>
 
-            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;color:#fca5a5;margin-top:16px;margin-bottom:8px;">❌ EXAMPLE BAD AI OUTPUT — PROMPT B (Windows 11 0xc000021a)</div>
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;color:#fca5a5;margin-top:16px;margin-bottom:8px;"><i class="fa-solid fa-circle-xmark"></i> EXAMPLE BAD AI OUTPUT — PROMPT B (Windows 11 0xc000021a)</div>
             <div class="prompt-example" style="border-left-color:#fca5a5;color:#fca5a5;">
               "Boot into Safe Mode by pressing F8 during startup. Once in Safe Mode, open Command Prompt as administrator and run: sfc /scannow. After the scan completes, type: chkdsk C: /f /r and press Y to confirm. Restart normally."
             </div>
             <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius-md);padding:16px;margin-top:10px;">
-              <p style="font-size:0.78rem;color:#fca5a5;font-weight:700;margin-bottom:8px;">🔍 Why this is WRONG — Windows 11 Legacy Trap:</p>
+              <p style="font-size:0.78rem;color:#fca5a5;font-weight:700;margin-bottom:8px;"><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-light); margin-right:6px;"></i> Why this is WRONG — Windows 11 Legacy Trap:</p>
               <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
                 <li style="font-size:0.8rem;color:var(--text-secondary);"><span style="color:#fca5a5;">①</span> <strong style="color:var(--text-primary);">F8 Safe Mode boot does NOT work on Windows 11 by default:</strong> Fast Startup disables the traditional F8 key. The correct method is: hold Shift while clicking Restart → Troubleshoot → Advanced Options → Startup Settings.</li>
                 <li style="font-size:0.8rem;color:var(--text-secondary);"><span style="color:#fca5a5;">②</span> <strong style="color:var(--text-primary);">0xc000021a is a critical process failure — sfc alone won't fix it:</strong> This BSOD typically means winlogon.exe or csrss.exe crashed. The real fix is often <code>DISM /Online /Cleanup-Image /RestoreHealth</code> followed by sfc, or a startup repair via WinPE.</li>
@@ -408,7 +413,7 @@
             </div>
           </div>
           <div class="discussion-q" style="margin-top:12px;">
-            <p><strong>💬 Debrief Questions:</strong></p>
+            <p><strong><i class="fa-solid fa-comments" style="margin-right:6px;"></i> Debrief Questions:</strong></p>
             <ul>
               <li>How would a user feel receiving wrong platform instructions from the service desk?</li>
               <li>What's your verification habit before sending AI-generated steps to an end user?</li>
@@ -424,7 +429,7 @@
       <div class="module animate-on-scroll" id="prompting">
         <div class="module-number">1.3</div>
         <div class="module-header">
-          <div class="module-icon card-icon-cyan">✍️</div>
+          <div class="module-icon card-icon-cyan"><i class="fa-solid fa-pen-nib"></i></div>
           <div>
             <div class="module-tag tag-cyan">Module 1.3</div>
             <h2>Prompt Engineering 101</h2>
@@ -433,7 +438,7 @@
         </div>
 
         <div class="callout callout-success" style="margin-bottom:24px;">
-          <span class="callout-icon">✦</span>
+          <span class="callout-icon"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--secondary-light); font-size:0.85rem;"></i></span>
           <span><strong>The golden rule:</strong> Garbage in = garbage out. A vague prompt returns a vague answer. A specific, structured prompt returns a specific, useful answer.</span>
         </div>
 
@@ -468,12 +473,12 @@
           <h4 style="margin-bottom:14px;">Before &amp; After: Bad Prompt → Great Prompt</h4>
           <div class="grid-2" style="gap:16px;">
             <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius-md);padding:20px;">
-              <div style="font-size:0.7rem;font-weight:700;color:#fca5a5;letter-spacing:0.08em;margin-bottom:10px;">❌ WEAK PROMPT</div>
+              <div style="font-size:0.7rem;font-weight:700;color:#fca5a5;letter-spacing:0.08em;margin-bottom:10px;"><i class="fa-solid fa-circle-xmark" style="color:#ef4444; margin-right:6px;"></i> WEAK PROMPT</div>
               <div class="prompt-example" style="border-left-color:#fca5a5;color:#fca5a5;">"Write an email about the outage."</div>
               <p style="font-size:0.78rem;margin-top:8px;">Too vague — the AI guesses the audience, tone, length, and format. The output will likely miss the mark.</p>
             </div>
             <div style="background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.2);border-radius:var(--radius-md);padding:20px;">
-              <div style="font-size:0.7rem;font-weight:700;color:#6ee7b7;letter-spacing:0.08em;margin-bottom:10px;">✅ STRONG PROMPT (PCTF)</div>
+              <div style="font-size:0.7rem;font-weight:700;color:#6ee7b7;letter-spacing:0.08em;margin-bottom:10px;"><i class="fa-solid fa-circle-check" style="color:#10b981; margin-right:6px;"></i> STRONG PROMPT (PCTF)</div>
               <div class="prompt-example" style="border-left-color:#6ee7b7;color:#6ee7b7;">"Act as an IT communications specialist [P]. Our production environment had a 2-hour outage this morning affecting 300 users [C]. Write a post-incident email to end users explaining what happened and what we're doing to prevent it [T]. Keep it professional, under 200 words, use 3 bullet points for the timeline [F]."</div>
             </div>
           </div>
@@ -551,7 +556,7 @@
 
         <!-- Resource link -->
         <a href="https://www.anthropic.com/learn" target="_blank" rel="noopener" class="resource-link" style="margin-top:20px;" id="l1-prompt-library">
-          <div class="resource-link-icon" style="background:rgba(212,163,115,0.15);border:1px solid rgba(212,163,115,0.2);">📚</div>
+          <div class="resource-link-icon" style="background:rgba(212,163,115,0.15);border:1px solid rgba(212,163,115,0.2);color:var(--primary-light);"><i class="fa-solid fa-book"></i></div>
           <div class="resource-link-body">
             <div class="resource-link-title">Anthropic: Guides, Tutorials &amp; Prompt Library</div>
             <div class="resource-link-desc">Real prompt examples across categories — summarization, coding, analysis, creative writing, and more.</div>
@@ -563,11 +568,11 @@
         <div class="activity-card">
           <h4>Activity 1.3 — "Network Ghost" — IP &amp; DNS Hallucination Hunt</h4>
           <div class="activity-meta">
-            <span>👥 Teams of 3–5</span>
+            <span><i class="fa-solid fa-users" style="margin-right:6px;"></i> Teams of 3–5</span>
             <span><i class="fa-solid fa-stopwatch"></i> 20 Minutes</span>
-            <span>🟦 Tool: Rovo or any approved AI</span>
-            <span>🌐 Networking Focus</span>
-            <span>🏆 Competitive</span>
+            <span><i class="fa-brands fa-atlassian" style="color:var(--atlassian-light); margin-right:6px;"></i> Tool: Rovo or any approved AI</span>
+            <span><i class="fa-solid fa-network-wired" style="color:var(--accent-light); margin-right:6px;"></i> Networking Focus</span>
+            <span><i class="fa-solid fa-trophy" style="color:var(--primary-light); margin-right:6px;"></i> Competitive</span>
           </div>
           <p>AI loves to fabricate IP addresses, DNS servers, subnet masks, and command syntax with complete confidence. Teams race to find all the networking errors in the AI outputs before they hit production.</p>
           <ul class="activity-steps">
@@ -582,7 +587,7 @@
           </div>
 
           <div style="margin-top:14px;">
-            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;color:#fca5a5;margin-bottom:8px;">❌ EXAMPLE BAD AI OUTPUT — PROMPT A (DNS Troubleshooting)</div>
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;color:#fca5a5;margin-bottom:8px;"><i class="fa-solid fa-circle-xmark"></i> EXAMPLE BAD AI OUTPUT — PROMPT A (DNS Troubleshooting)</div>
             <div class="prompt-example" style="border-left-color:#fca5a5;color:#fca5a5;">
               Step 1: Clear the DNS cache<br>
               &nbsp;&nbsp;ipconfig /flushdns<br><br>
@@ -594,7 +599,7 @@
               &nbsp;&nbsp;Resolve-DnsName -Name internalsite.company.com -Type A -DnsOnly
             </div>
             <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius-md);padding:16px;margin-top:10px;">
-              <p style="font-size:0.78rem;color:#fca5a5;font-weight:700;margin-bottom:8px;">🔍 Why this is WRONG — 3 Networking Errors:</p>
+              <p style="font-size:0.78rem;color:#fca5a5;font-weight:700;margin-bottom:8px;"><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-light); margin-right:6px;"></i> Why this is WRONG — 3 Networking Errors:</p>
               <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
                 <li style="font-size:0.8rem;color:var(--text-secondary);"><span style="color:#fca5a5;">①</span> <strong style="color:var(--text-primary);">157.58.0.0 is a FABRICATED IP:</strong> This is not a Microsoft public DNS server — it doesn't exist as a resolver. Pointing production machines at a fake DNS address breaks all name resolution. Always verify DNS IPs against official Microsoft documentation.</li>
                 <li style="font-size:0.8rem;color:var(--text-secondary);"><span style="color:#fca5a5;">②</span> <strong style="color:var(--text-primary);">Hardcoding an external DNS for internal resolution is wrong:</strong> Internal hostnames resolve only via internal DNS (your AD/DNS servers). Pointing to Google (8.8.8.8) or fabricated IPs won't resolve private names — it makes the problem worse.</li>
@@ -602,13 +607,13 @@
               </ul>
             </div>
 
-            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;color:#fca5a5;margin-top:16px;margin-bottom:8px;">❌ EXAMPLE BAD AI OUTPUT — PROMPT B (Static IP via netsh)</div>
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;color:#fca5a5;margin-top:16px;margin-bottom:8px;"><i class="fa-solid fa-circle-xmark"></i> EXAMPLE BAD AI OUTPUT — PROMPT B (Static IP via netsh)</div>
             <div class="prompt-example" style="border-left-color:#fca5a5;color:#fca5a5;">
               netsh interface ip set address "Local Area Connection" static 192.168.1.50 255.255.255.0 192.168.1.1 1<br><br>
               netsh interface ip set dns "Local Area Connection" static 8.8.8.8
             </div>
             <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius-md);padding:16px;margin-top:10px;">
-              <p style="font-size:0.78rem;color:#fca5a5;font-weight:700;margin-bottom:8px;">🔍 Why this is WRONG — Interface Name Problem:</p>
+              <p style="font-size:0.78rem;color:#fca5a5;font-weight:700;margin-bottom:8px;"><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-light); margin-right:6px;"></i> Why this is WRONG — Interface Name Problem:</p>
               <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
                 <li style="font-size:0.8rem;color:var(--text-secondary);"><span style="color:#fca5a5;">①</span> <strong style="color:var(--text-primary);">"Local Area Connection" is a Windows 7/8 name — not Windows 11:</strong> Modern Windows 11 interfaces are named "Ethernet", "Ethernet 2", "Wi-Fi", etc. Running this command with the wrong adapter name silently fails. Always run <code>netsh interface show interface</code> first to get the exact name.</li>
                 <li style="font-size:0.8rem;color:var(--text-secondary);"><span style="color:#fca5a5;">②</span> <strong style="color:var(--text-primary);">Better modern alternative:</strong> Use PowerShell: <code>New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 192.168.1.50 -PrefixLength 24 -DefaultGateway 192.168.1.1</code> — this is the current Microsoft-recommended approach for Windows 10/11.</li>
@@ -616,7 +621,7 @@
             </div>
           </div>
           <div class="discussion-q" style="margin-top:12px;">
-            <p><strong>💬 Debrief Questions:</strong></p>
+            <p><strong><i class="fa-solid fa-comments" style="margin-right:6px;"></i> Debrief Questions:</strong></p>
             <ul>
               <li>If you deployed the fabricated DNS IP, how long before users noticed? Who would get the blame?</li>
               <li>What's your personal verification checklist before applying any AI-generated network config?</li>
@@ -661,7 +666,7 @@
             <li><a href="level2.html">Level 2</a></li>
             <li><a href="activities.html">Activities</a></li>
             <li><a href="schedule.html">Schedule</a></li>
-            <li><a href="instructor.html" style="color:rgba(139,92,246,0.8);"><span style="margin-right:4px;">🔒</span>Instructor Portal</a></li>
+            <li><a href="instructor.html" style="color:rgba(139,92,246,0.8);"><span style="margin-right:6px;"><i class="fa-solid fa-lock"></i></span>Instructor Portal</a></li>
           </ul>
         </div>
         <div class="footer-col">

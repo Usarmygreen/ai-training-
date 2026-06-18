@@ -1577,6 +1577,12 @@ code { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
 .matrix-card {
   clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px)) !important;
 }
+.cyber-bevel {
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)) !important;
+}
+.cyber-bevel-lg {
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px)) !important;
+}
 
 /* CRT Scanline overlay on Simulated terminals */
 .terminal {
