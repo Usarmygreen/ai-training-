@@ -106,11 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 1.5 + 0.5,
-        dx: (Math.random() - 0.5) * 0.3,
-        dy: (Math.random() - 0.5) * 0.3,
-        alpha: Math.random() * 0.3 + 0.1,
-        color: Math.random() > 0.5 ? '255,255,255' : '6,182,212',
+        r: Math.random() * 2 + 0.5,
+        dx: (Math.random() - 0.5) * 0.4,
+        dy: (Math.random() - 0.5) * 0.4,
+        alpha: Math.random() * 0.4 + 0.1,
+        color: Math.random() > 0.5 ? '252,238,10' : '0,240,255',
       });
     }
 
@@ -134,16 +134,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Policy accordion ───────────────────────────────────────
   document.querySelectorAll('.accordion-trigger').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item    = btn.closest('.accordion-item');
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const item = btn.closest('.accordion-item');
+      if (!item) return;
       const content = item.querySelector('.accordion-content');
-      const isOpen  = item.classList.contains('open');
+      if (!content) return;
+      
+      const isOpen = item.classList.contains('open');
+      
+      // Close all other items
       document.querySelectorAll('.accordion-item').forEach(i => {
-        i.classList.remove('open');
-        i.querySelector('.accordion-content').style.maxHeight = '0';
+        if (i !== item) {
+          i.classList.remove('open');
+          const trigger = i.querySelector('.accordion-trigger');
+          if (trigger) trigger.setAttribute('aria-expanded', 'false');
+          const c = i.querySelector('.accordion-content');
+          if (c) c.style.maxHeight = '0px';
+        }
       });
-      if (!isOpen) {
+      
+      // Toggle current item
+      if (isOpen) {
+        item.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        content.style.maxHeight = '0px';
+      } else {
         item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
         content.style.maxHeight = content.scrollHeight + 'px';
       }
     });

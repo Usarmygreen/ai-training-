@@ -8,13 +8,6 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    .accordion-item { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 8px; overflow: hidden; }
-    .accordion-trigger { width: 100%; background: none; border: none; padding: 16px 20px; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
-    .accordion-trigger:hover { background: var(--bg-card-hover); }
-    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding: 0 20px; }
-    .accordion-item.open .accordion-content { padding: 0 20px 16px; }
-    .accordion-arrow { transition: transform 0.3s ease; color: var(--text-muted); }
-    .accordion-item.open .accordion-arrow { transform: rotate(180deg); }
     .policy-tier { border-radius: var(--radius-lg); padding: 28px 32px; margin-bottom: 16px; position: relative; overflow: hidden; }
     .policy-tier-l1 { background: linear-gradient(135deg, rgba(0,82,204,0.12) 0%, rgba(87,157,255,0.05) 100%); border: 2px solid rgba(0,82,204,0.35); }
     .policy-tier-l2 { background: linear-gradient(135deg, rgba(124,58,237,0.10) 0%, rgba(6,182,212,0.04) 100%); border: 1px solid rgba(124,58,237,0.25); }
@@ -100,7 +93,7 @@
           </div>
         </div>
         <div style="flex-shrink:0; z-index:1;">
-          <img src="clean_ai_mesh.png" alt="AI Network Mesh" style="width:200px; height:200px; border-radius: var(--radius-lg); border:1px solid var(--border); box-shadow: var(--shadow-md);" />
+          <img src="cyber_ai_mesh.png" alt="Cyberpunk AI Workflows" class="cyber-bevel-lg" style="width:200px; height:200px; border:1px solid var(--border); box-shadow: 0 0 20px rgba(0,240,255,0.15);" />
         </div>
       </div>
     </div>
@@ -174,7 +167,7 @@
         <div id="bestPracticesAccordion">
 
           <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="false">
+            <button type="button" class="accordion-trigger" aria-expanded="false">
               <span>1&#65038; &nbsp;Never copy-paste AI output without review</span>
               <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
@@ -184,7 +177,7 @@
           </div>
 
           <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="false">
+            <button type="button" class="accordion-trigger" aria-expanded="false">
               <span>2&#65038; &nbsp;Cite when AI assisted in work product</span>
               <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
@@ -194,7 +187,7 @@
           </div>
 
           <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="false">
+            <button type="button" class="accordion-trigger" aria-expanded="false">
               <span>3&#65038; &nbsp;Verify all facts, links, and code before deploying</span>
               <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
@@ -204,7 +197,7 @@
           </div>
 
           <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="false">
+            <button type="button" class="accordion-trigger" aria-expanded="false">
               <span>4&#65038; &nbsp;Use PCTF prompting for better, safer outputs</span>
               <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
@@ -214,7 +207,7 @@
           </div>
 
           <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="false">
+            <button type="button" class="accordion-trigger" aria-expanded="false">
               <span>5&#65038; &nbsp;Report AI output that seems wrong or dangerous</span>
               <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
