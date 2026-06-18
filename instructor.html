@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     /* Custom page adjustments */
-    .locked-only { display: none; }
-    .auth-only { display: block; }
+    .locked-only { display: block; }
+    .auth-only { display: none; }
   </style>
 </head>
 <body>
@@ -40,7 +40,31 @@
   <!-- ── MAIN CONTENT ───────────────────────────────────────── -->
   <main style="min-height: 80vh;">
 
+    <!-- 🔒 LOCK SCREEN PORTAL -->
+    <div id="lockScreen" class="locked-only" style="padding-top: 120px; padding-bottom: 80px;">
+      <div class="vault-container">
+        <div class="vault-card" id="vaultCard">
+          <div class="vault-icon"><i class="fa-solid fa-vault"></i></div>
+          <h2 class="vault-title">Instructor Portal</h2>
+          <p class="vault-subtitle">Enter administrator passcode to access teaching scripts.</p>
+          
+          <div style="margin-bottom:20px;">
+            <input type="password" id="vaultPass" class="pb-input" style="width:100%; text-align:center; letter-spacing:0.1em; font-weight:700;" placeholder="••••••••••••" autofocus />
+          </div>
 
+          <div class="passcode-dots" id="dotsContainer" style="display:none;">
+            <span class="passcode-dot"></span>
+            <span class="passcode-dot"></span>
+            <span class="passcode-dot"></span>
+            <span class="passcode-dot"></span>
+          </div>
+
+          <button id="btnUnlock" class="btn btn-primary" style="width:100%; justify-content:center; padding:14px;">Verify Credentials</button>
+          
+          <div class="vault-error-msg" id="vaultError">Incorrect Passcode. Lockout active in 3 attempts.</div>
+        </div>
+      </div>
+    </div>
 
     <!-- 🔓 INSTRUCTOR DASHBOARD -->
     <div id="instructorDashboard" class="auth-only" style="padding-top:120px; padding-bottom:80px;">
@@ -54,6 +78,7 @@
             <h1 style="margin:0;">Instructor <span class="gradient-text">Dashboard</span></h1>
             <p style="margin:6px 0 0; font-size:0.95rem;">Facilitation scripts, timing logs, and answer keys for tomorrow's Lunch &amp; Learn.</p>
           </div>
+          <button id="btnLogout" class="btn-logout">Logout &amp; Lock</button>
         </div>
 
         <div class="inst-grid">
@@ -283,10 +308,68 @@
   <!-- ── SCRIPTS ────────────────────────────────────────────── -->
   <script src="app.js"></script>
   <script>
-    // Initialize Timer on load
-    document.addEventListener('DOMContentLoaded', () => {
+    // SHA-256 hash of "rtp-admin-2026"
+    const AUTH_HASH = "c61879fc0c6c4c44acd3748ad50d4510ace7a3073c38e8abba5e2897466c731b";
+
+    const lockScreen = document.getElementById('lockScreen');
+    const dashboard = document.getElementById('instructorDashboard');
+    const vaultPass = document.getElementById('vaultPass');
+    const vaultError = document.getElementById('vaultError');
+    const btnUnlock = document.getElementById('btnUnlock');
+    const btnLogout = document.getElementById('btnLogout');
+    const vaultCard = document.getElementById('vaultCard');
+
+    // Cryptographic hashing using Web Crypto API
+    async function hashPassword(str) {
+      const utf8 = new TextEncoder().encode(str);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      return hashHex;
+    }
+
+    async function attemptUnlock() {
+      const password = vaultPass.value;
+      const hashed = await hashPassword(password);
+      
+      if (hashed === AUTH_HASH) {
+        sessionStorage.setItem('inst_logged_in', 'true');
+        showDashboard();
+      } else {
+        vaultPass.value = '';
+        vaultCard.classList.add('shake');
+        vaultError.classList.add('visible');
+        setTimeout(() => {
+          vaultCard.classList.remove('shake');
+        }, 500);
+      }
+    }
+
+    function showDashboard() {
+      lockScreen.style.display = 'none';
+      dashboard.style.display = 'block';
       initializeTimer();
+    }
+
+    function showLockScreen() {
+      sessionStorage.removeItem('inst_logged_in');
+      lockScreen.style.display = 'block';
+      dashboard.style.display = 'none';
+      clearInterval(timerInterval);
+    }
+
+    // Auto login check on load
+    if (sessionStorage.getItem('inst_logged_in') === 'true') {
+      showDashboard();
+    } else {
+      showLockScreen();
+    }
+
+    btnUnlock.addEventListener('click', attemptUnlock);
+    vaultPass.addEventListener('keypress', e => {
+      if (e.key === 'Enter') attemptUnlock();
     });
+    btnLogout.addEventListener('click', showLockScreen);
 
     // ── Timer & Stopwatch Logic ───────────────────────────────
     let timerInterval;
