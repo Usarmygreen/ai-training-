@@ -196,13 +196,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     pbCopy.addEventListener('click', () => {
       navigator.clipboard.writeText(pbText.textContent).then(() => {
-        const originalText = pbCopy.textContent;
-        pbCopy.textContent = '✓ Copied!';
+        const originalText = pbCopy.innerHTML;
+        pbCopy.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
         pbCopy.style.background = 'var(--green)';
         pbCopy.style.borderColor = 'var(--green)';
         pbCopy.style.color = '#fff';
         setTimeout(() => {
-          pbCopy.textContent = originalText;
+          pbCopy.innerHTML = originalText;
           pbCopy.style.background = '';
           pbCopy.style.borderColor = '';
           pbCopy.style.color = '';
@@ -377,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data === 'public') {
           pmBox.classList.add('verdict-approved');
           pmBox.innerHTML = `
-            <div class="verdict-icon">✅</div>
+            <div class="verdict-icon"><i class="fa-solid fa-circle-check" style="color:var(--green-light);"></i></div>
             <div>
               <div class="verdict-title">APPROVED (Atlassian Rovo)</div>
               <div class="verdict-desc">As a New L1 employee, you are approved to process public syntax questions, generic PowerShell inquiries, and sanitized error logs using <strong>Atlassian Rovo</strong>. Consumer AI (free ChatGPT/Claude) remains blocked for all work tasks.</div>
@@ -395,7 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           pmBox.classList.add('verdict-blocked');
           pmBox.innerHTML = `
-            <div class="verdict-icon">❌</div>
+            <div class="verdict-icon"><i class="fa-solid fa-circle-xmark" style="color:var(--red-light);"></i></div>
             <div>
               <div class="verdict-title">CRITICAL: INPUT BLOCKED</div>
               <div class="verdict-desc"><strong>DO NOT USE:</strong> Never input customer names, emails, credentials, private keys, contracts, or internal financials into any AI tool (including Rovo). If sensitive data is input accidentally, notify security immediately.</div>
@@ -407,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data === 'public') {
           pmBox.classList.add('verdict-approved');
           pmBox.innerHTML = `
-            <div class="verdict-icon">✅</div>
+            <div class="verdict-icon"><i class="fa-solid fa-circle-check" style="color:var(--green-light);"></i></div>
             <div>
               <div class="verdict-title">APPROVED (Any Tool)</div>
               <div class="verdict-desc">You are approved to use Rovo, Claude, or Gemini for general inquiries and public error logs. Ensure all generated cmdlets, routes, or configurations are vetted against official docs before deployment.</div>
@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           pmBox.classList.add('verdict-blocked');
           pmBox.innerHTML = `
-            <div class="verdict-icon">❌</div>
+            <div class="verdict-icon"><i class="fa-solid fa-circle-xmark" style="color:var(--red-light);"></i></div>
             <div>
               <div class="verdict-title">CRITICAL: INPUT BLOCKED</div>
               <div class="verdict-desc"><strong>DO NOT USE:</strong> Never input customer PII, client contract specifics, proprietary credentials, internal budgets, or trade secrets into consumer AI tools. Public cloud logs show these queries are leaked easily.</div>

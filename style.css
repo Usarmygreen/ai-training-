@@ -718,7 +718,8 @@ code { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
   position: relative; overflow: hidden;
 }
 .activity-card::before {
-  content: '🎯 GROUP ACTIVITY';
+  font-family: 'Font Awesome 6 Free'; font-weight: 900;
+  content: '\f140  GROUP ACTIVITY';
   position: absolute; top: 16px; right: 18px;
   font-size: 0.62rem; font-weight: 800; letter-spacing: 0.1em;
   color: var(--primary-light);
@@ -751,7 +752,12 @@ code { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
 .discussion-q p { font-size: 0.82rem; color: var(--accent-light); font-weight: 700; margin-bottom: 6px; }
 .discussion-q ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
 .discussion-q ul li { font-size: 0.8rem; color: var(--text-secondary); }
-.discussion-q ul li::before { content: '💬 '; }
+.discussion-q ul li::before {
+  font-family: 'Font Awesome 6 Free'; font-weight: 900;
+  content: '\f086  ';
+  color: var(--primary-light);
+  margin-right: 6px;
+}
 
 /* ── Callouts ────────────────────────────────────────────────── */
 .callout {
