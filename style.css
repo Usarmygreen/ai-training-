@@ -928,8 +928,16 @@ code { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
   font-size: 0.875rem; font-weight: 600; transition: var(--transition);
 }
 .accordion-trigger:hover { background: var(--bg-card-hover); }
-.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding: 0 20px; }
-.accordion-item.open .accordion-content { padding: 0 20px 16px; }
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+  padding: 0 20px;
+}
+.accordion-item.open .accordion-content {
+  max-height: 400px;
+  padding: 12px 20px 20px;
+}
 .accordion-arrow { transition: transform 0.3s ease; color: var(--text-muted); }
 .accordion-item.open .accordion-arrow { transform: rotate(180deg); }
 

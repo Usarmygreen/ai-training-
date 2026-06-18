@@ -138,31 +138,23 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const item = btn.closest('.accordion-item');
       if (!item) return;
-      const content = item.querySelector('.accordion-content');
-      if (!content) return;
       
       const isOpen = item.classList.contains('open');
       
       // Close all other items
       document.querySelectorAll('.accordion-item').forEach(i => {
-        if (i !== item) {
-          i.classList.remove('open');
-          const trigger = i.querySelector('.accordion-trigger');
-          if (trigger) trigger.setAttribute('aria-expanded', 'false');
-          const c = i.querySelector('.accordion-content');
-          if (c) c.style.maxHeight = '0px';
-        }
+        i.classList.remove('open');
+        const trigger = i.querySelector('.accordion-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
       });
       
       // Toggle current item
       if (isOpen) {
         item.classList.remove('open');
         btn.setAttribute('aria-expanded', 'false');
-        content.style.maxHeight = '0px';
       } else {
         item.classList.add('open');
         btn.setAttribute('aria-expanded', 'true');
-        content.style.maxHeight = content.scrollHeight + 'px';
       }
     });
   });
