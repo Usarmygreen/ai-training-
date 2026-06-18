@@ -45,6 +45,32 @@
     .ecosystem-card:hover { border-color: rgba(124,58,237,0.3); transform: translateY(-3px); background: var(--bg-card-hover); }
     .ecosystem-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
     .ecosystem-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .practice-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 16px;
+      transition: var(--transition-slow);
+      position: relative;
+    }
+    .practice-card:hover {
+      border-color: var(--border-bright);
+      transform: translateX(4px);
+      background: var(--bg-card-hover);
+    }
+    .practice-card-num {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: 1px solid currentColor;
+      flex-shrink: 0;
+    }
     @media (max-width: 768px) { .feature-trio { grid-template-columns: 1fr; } .ecosystem-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -163,56 +189,56 @@
           </div>
         </div>
 
-        <h3 style="margin:28px 0 14px;font-size:1.05rem;"><i class="fa-solid fa-list-check"></i> Best Practices &mdash; Click to Expand</h3>
-        <div id="bestPracticesAccordion">
+        <h3 style="margin:28px 0 16px;font-size:1.05rem;"><i class="fa-solid fa-list-check"></i> Core AI Best Practices &mdash; Rules of the Road</h3>
+        <div class="best-practices-list" style="display:flex; flex-direction:column; gap:12px; margin-bottom:28px;">
 
-          <div class="accordion-item">
-            <button type="button" class="accordion-trigger" aria-expanded="false">
-              <span>1&#65038; &nbsp;Never copy-paste AI output without review</span>
-              <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="accordion-content" role="region">
-              <p style="font-size:0.875rem;margin-top:0;">AI output is a <em>first draft</em>, not a final product. Always read through the response before using it anywhere. Check for factual errors, hallucinated links, incorrect syntax, and tone. A 30-second review can prevent a bad ticket, a broken script, or misinformation being forwarded to a client.</p>
+          <div class="practice-card" style="border-left:4px solid var(--primary);">
+            <div style="display:flex; gap:18px; align-items:flex-start;">
+              <div class="practice-card-num" style="color:var(--primary-light); background:rgba(252,238,10,0.08);">01</div>
+              <div>
+                <h4 style="font-size:0.95rem; color:var(--text-primary); margin:0 0 6px 0; font-family:'Outfit', sans-serif; font-weight:700;">Never copy-paste AI output without review</h4>
+                <p style="font-size:0.85rem; color:var(--text-secondary); margin:0; line-height:1.5;">AI output is a <em>first draft</em>, not a final product. Always read through the response before using it anywhere. Check for factual errors, hallucinated links, incorrect syntax, and tone. A 30-second review can prevent a bad ticket, a broken script, or misinformation being forwarded to a client.</p>
+              </div>
             </div>
           </div>
 
-          <div class="accordion-item">
-            <button type="button" class="accordion-trigger" aria-expanded="false">
-              <span>2&#65038; &nbsp;Cite when AI assisted in work product</span>
-              <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="accordion-content" role="region">
-              <p style="font-size:0.875rem;margin-top:0;">If AI substantially wrote, drafted, or structured something you are delivering as work product &mdash; a Confluence doc, an email, a runbook &mdash; note it. This builds trust, helps others understand what to verify, and keeps your team accountable to quality standards.</p>
+          <div class="practice-card" style="border-left:4px solid var(--secondary);">
+            <div style="display:flex; gap:18px; align-items:flex-start;">
+              <div class="practice-card-num" style="color:var(--secondary-light); background:rgba(0,240,255,0.08);">02</div>
+              <div>
+                <h4 style="font-size:0.95rem; color:var(--text-primary); margin:0 0 6px 0; font-family:'Outfit', sans-serif; font-weight:700;">Cite when AI assisted in work product</h4>
+                <p style="font-size:0.85rem; color:var(--text-secondary); margin:0; line-height:1.5;">If AI substantially wrote, drafted, or structured something you are delivering as work product &mdash; a Confluence doc, an email, a runbook &mdash; note it. This builds trust, helps others understand what to verify, and keeps your team accountable to quality standards.</p>
+              </div>
             </div>
           </div>
 
-          <div class="accordion-item">
-            <button type="button" class="accordion-trigger" aria-expanded="false">
-              <span>3&#65038; &nbsp;Verify all facts, links, and code before deploying</span>
-              <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="accordion-content" role="region">
-              <p style="font-size:0.875rem;margin-top:0;">AI models can hallucinate URLs, cmdlet names, API parameters, and dates. Before you paste a PowerShell script, check the syntax against <a href="https://docs.microsoft.com/en-us/powershell" target="_blank" rel="noopener">official Microsoft docs</a>. Before you reference a KB article number, confirm it exists. No exceptions.</p>
+          <div class="practice-card" style="border-left:4px solid var(--accent);">
+            <div style="display:flex; gap:18px; align-items:flex-start;">
+              <div class="practice-card-num" style="color:var(--accent-light); background:rgba(255,0,85,0.08);">03</div>
+              <div>
+                <h4 style="font-size:0.95rem; color:var(--text-primary); margin:0 0 6px 0; font-family:'Outfit', sans-serif; font-weight:700;">Verify all facts, links, and code before deploying</h4>
+                <p style="font-size:0.85rem; color:var(--text-secondary); margin:0; line-height:1.5;">AI models can hallucinate URLs, cmdlet names, API parameters, and dates. Before you paste a PowerShell script, check the syntax against <a href="https://docs.microsoft.com/en-us/powershell" target="_blank" rel="noopener">official Microsoft docs</a>. Before you reference a KB article number, confirm it exists. No exceptions.</p>
+              </div>
             </div>
           </div>
 
-          <div class="accordion-item">
-            <button type="button" class="accordion-trigger" aria-expanded="false">
-              <span>4&#65038; &nbsp;Use PCTF prompting for better, safer outputs</span>
-              <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="accordion-content" role="region">
-              <p style="font-size:0.875rem;margin-top:0;">Structure every prompt with <strong style="color:var(--primary-light);">P</strong>ersona, <strong style="color:var(--primary-light);">C</strong>ontext, <strong style="color:var(--primary-light);">T</strong>ask, and <strong style="color:var(--primary-light);">F</strong>ormat. This gives the AI enough information to produce a targeted, relevant response and reduces the chance it makes something up to fill gaps. Better prompts = better, safer outputs.</p>
+          <div class="practice-card" style="border-left:4px solid var(--green);">
+            <div style="display:flex; gap:18px; align-items:flex-start;">
+              <div class="practice-card-num" style="color:var(--green-light); background:rgba(0,255,102,0.08);">04</div>
+              <div>
+                <h4 style="font-size:0.95rem; color:var(--text-primary); margin:0 0 6px 0; font-family:'Outfit', sans-serif; font-weight:700;">Use PCTF prompting for better, safer outputs</h4>
+                <p style="font-size:0.85rem; color:var(--text-secondary); margin:0; line-height:1.5;">Structure every prompt with <strong style="color:var(--primary-light);">P</strong>ersona, <strong style="color:var(--primary-light);">C</strong>ontext, <strong style="color:var(--primary-light);">T</strong>ask, and <strong style="color:var(--primary-light);">F</strong>ormat. This gives the AI enough information to produce a targeted, relevant response and reduces the chance it makes something up to fill gaps. Better prompts = better, safer outputs.</p>
+              </div>
             </div>
           </div>
 
-          <div class="accordion-item">
-            <button type="button" class="accordion-trigger" aria-expanded="false">
-              <span>5&#65038; &nbsp;Report AI output that seems wrong or dangerous</span>
-              <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="accordion-content" role="region">
-              <p style="font-size:0.875rem;margin-top:0;">If Rovo or any AI gives you advice that feels off, risky, or plainly wrong &mdash; flag it. Tell your team lead. Document what happened. AI tools are still maturing, and collective feedback makes the whole team smarter. If you encounter a security-relevant AI response, escalate immediately.</p>
+          <div class="practice-card" style="border-left:4px solid var(--amber);">
+            <div style="display:flex; gap:18px; align-items:flex-start;">
+              <div class="practice-card-num" style="color:var(--amber-light); background:rgba(255,153,0,0.08);">05</div>
+              <div>
+                <h4 style="font-size:0.95rem; color:var(--text-primary); margin:0 0 6px 0; font-family:'Outfit', sans-serif; font-weight:700;">Report AI output that seems wrong or dangerous</h4>
+                <p style="font-size:0.85rem; color:var(--text-secondary); margin:0; line-height:1.5;">If Rovo or any AI gives you advice that feels off, risky, or plainly wrong &mdash; flag it. Tell your team lead. Document what happened. AI tools are still maturing, and collective feedback makes the whole team smarter. If you encounter a security-relevant AI response, escalate immediately.</p>
+              </div>
             </div>
           </div>
 

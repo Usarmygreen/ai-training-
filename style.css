@@ -918,24 +918,6 @@ code { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
 .pctf-card h5 { font-size: 0.82rem; margin-bottom: 5px; }
 .pctf-card p  { font-size: 0.73rem; color: var(--text-muted); }
 
-/* ── Accordion ───────────────────────────────────────────────── */
-.accordion-item { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 6px; overflow: hidden; background: var(--bg-card); }
-.accordion-trigger {
-  width: 100%; background: none; border: none;
-  padding: 16px 20px; text-align: left; cursor: pointer;
-  display: flex; justify-content: space-between; align-items: center;
-  color: var(--text-primary); font-family: 'Inter', sans-serif;
-  font-size: 0.875rem; font-weight: 600; transition: var(--transition);
-}
-.accordion-trigger:hover { background: var(--bg-card-hover); }
-.accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-in-out, padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
-  padding: 0 20px;
-}
-.accordion-arrow { transition: transform 0.3s ease; color: var(--text-muted); }
-.accordion-item.open .accordion-arrow { transform: rotate(180deg); }
 
 /* ── Cheat sheet table ───────────────────────────────────────── */
 .cheat-sheet {

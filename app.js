@@ -132,54 +132,6 @@ function init() {
     drawParticles();
   }
 
-  // ── Policy accordion ───────────────────────────────────────
-  document.querySelectorAll('.accordion-trigger').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const item = btn.closest('.accordion-item');
-      if (!item) return;
-      
-      const content = item.querySelector('.accordion-content');
-      if (!content) return;
-      
-      const arrow = btn.querySelector('.accordion-arrow');
-      const isOpen = item.classList.contains('open');
-      
-      // Close all other items
-      document.querySelectorAll('.accordion-item').forEach(i => {
-        i.classList.remove('open');
-        const trigger = i.querySelector('.accordion-trigger');
-        if (trigger) trigger.setAttribute('aria-expanded', 'false');
-        
-        const c = i.querySelector('.accordion-content');
-        if (c) {
-          c.style.maxHeight = '0px';
-          c.style.paddingTop = '0px';
-          c.style.paddingBottom = '0px';
-        }
-        
-        const a = i.querySelector('.accordion-arrow');
-        if (a) a.style.transform = 'rotate(0deg)';
-      });
-      
-      // Toggle current item
-      if (isOpen) {
-        item.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-        content.style.maxHeight = '0px';
-        content.style.paddingTop = '0px';
-        content.style.paddingBottom = '0px';
-        if (arrow) arrow.style.transform = 'rotate(0deg)';
-      } else {
-        item.classList.add('open');
-        btn.setAttribute('aria-expanded', 'true');
-        content.style.maxHeight = content.scrollHeight + 'px';
-        content.style.paddingTop = '12px';
-        content.style.paddingBottom = '20px';
-        if (arrow) arrow.style.transform = 'rotate(180deg)';
-      }
-    });
-  });
 
   // ── Card spotlight movement effect ────────────────────────
   const spotlightCards = document.querySelectorAll('.card, .level-card, .tool-card, .ecosystem-card, .case-study-card, .pb-output-box, .terminal');
