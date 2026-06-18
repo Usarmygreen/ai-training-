@@ -2,7 +2,7 @@
 // AI Training Hub — Shared JavaScript
 // ============================================================
 
-document.addEventListener('DOMContentLoaded', () => {
+function init() {
 
   // ── Navbar scroll effect ───────────────────────────────────
   const navbar = document.querySelector('.navbar');
@@ -449,7 +449,12 @@ document.addEventListener('DOMContentLoaded', () => {
     pmData.addEventListener('change', updateVerdict);
     updateVerdict(); // initialize
   }
+}
 
-});
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 
 
