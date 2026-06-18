@@ -1617,18 +1617,82 @@ code { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
 
 /* Cyber text glitch animation */
 @keyframes cyber-glitch {
-  0%, 100% { text-shadow: 2px 0 0 var(--secondary), -2px 0 0 var(--accent); }
-  5% { text-shadow: -2px 0 0 var(--secondary), 2px 0 0 var(--accent); }
-  10% { text-shadow: 2px 0 0 var(--secondary), -2px 0 0 var(--accent); }
-  15% { text-shadow: -2px 0 0 var(--secondary), 2px 0 0 var(--accent); }
-  20% { text-shadow: 0 0 0 var(--secondary), 0 0 0 var(--accent); }
-  90% { text-shadow: 0 0 0 var(--secondary), 0 0 0 var(--accent); }
-  95% { text-shadow: -3px -1px 0 var(--secondary), 3px 2px 0 var(--accent); transform: skew(2deg); }
-  98% { text-shadow: 3px 2px 0 var(--secondary), -3px -1px 0 var(--accent); transform: skew(-2deg); }
+  0%, 100% {
+    text-shadow: 2px 0 0 var(--secondary), -2px 0 0 var(--accent);
+    transform: skew(0deg);
+  }
+  2% {
+    text-shadow: -3px 2px 0 var(--secondary), 3px -2px 0 var(--accent);
+    transform: skew(3deg);
+  }
+  4% {
+    text-shadow: 2px -1px 0 var(--secondary), -2px 1px 0 var(--accent);
+    transform: skew(-2deg);
+  }
+  6% {
+    text-shadow: none;
+    transform: skew(0deg);
+  }
+  48% {
+    text-shadow: none;
+    transform: skew(0deg);
+  }
+  50% {
+    text-shadow: 3px 0px 0 var(--secondary), -3px 0px 0 var(--accent);
+    transform: skew(1.5deg);
+  }
+  52% {
+    text-shadow: -2px -2px 0 var(--secondary), 2px 2px 0 var(--accent);
+    transform: skew(-1.5deg);
+  }
+  54% {
+    text-shadow: none;
+    transform: skew(0deg);
+  }
+  92% {
+    text-shadow: none;
+    transform: skew(0deg);
+  }
+  94% {
+    text-shadow: 4px 1px 0 var(--secondary), -4px -1px 0 var(--accent);
+    transform: skew(2deg);
+  }
+  96% {
+    text-shadow: -4px 2px 0 var(--secondary), 4px -2px 0 var(--accent);
+    transform: skew(-3deg);
+  }
+  98% {
+    text-shadow: 2px -2px 0 var(--secondary), -2px 2px 0 var(--accent);
+    transform: skew(1deg);
+  }
 }
 
 .hero h1, .section-header h2 {
   animation: cyber-glitch 4s infinite linear alternate-reverse;
+}
+
+/* Hover and active element cyberpunk glitches */
+.btn-primary:hover, .btn-secondary:hover, .btn-outline:hover, .btn-atlassian:hover {
+  animation: btn-flicker 2s infinite;
+}
+
+@keyframes btn-flicker {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 4px var(--secondary-glow)); }
+  23% { opacity: 1; }
+  24% { opacity: 0.85; filter: drop-shadow(0 0 2px var(--secondary-glow)); }
+  26% { opacity: 0.95; }
+  27% { opacity: 1; filter: drop-shadow(0 0 5px var(--secondary-glow)); }
+  78% { opacity: 1; }
+  79% { opacity: 0.8; filter: drop-shadow(0 0 1px var(--secondary-glow)); }
+  81% { opacity: 0.95; }
+  82% { opacity: 1; }
+}
+
+/* Enhanced card hover effects with cyber tilt and neon shift */
+.card:hover, .level-card:hover, .tool-card:hover, .ecosystem-card:hover, .case-study-card:hover, .module:hover, .inst-panel:hover, .timer-widget:hover, .matrix-card:hover {
+  transform: translateY(-5px) skewX(-1.5deg) !important;
+  box-shadow: 0 10px 30px rgba(0, 240, 255, 0.18), 0 0 15px rgba(255, 0, 85, 0.12) !important;
+  border-color: var(--secondary) !important;
 }
 
 

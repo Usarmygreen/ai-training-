@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
               { text: '<span class="t-err">+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>', delay: 100 },
               { text: '<span class="t-err">    + CategoryInfo          : InvalidArgument: (:) [Get-ADUser], ArgumentException</span>', delay: 100 },
               { text: '<span class="t-err">    + FullyQualifiedErrorId : ActiveDirectoryCmdlet:Microsoft.ActiveDirectory.Management.Commands.GetADUser</span>', delay: 400 },
-              { text: '<span class="t-warn">⚠️ CRITICAL CRASH: Script halted. No accounts disabled.</span>', delay: 600 }
+              { text: '<span class="t-warn"><i class="fa-solid fa-triangle-exclamation"></i> CRITICAL CRASH: Script halted. No accounts disabled.</span>', delay: 600 }
             ];
           } else if (termId === 'act2-term') {
             script = [
@@ -386,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (data === 'restricted') {
           pmBox.classList.add('verdict-warn');
           pmBox.innerHTML = `
-            <div class="verdict-icon">⚠️</div>
+            <div class="verdict-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
             <div>
               <div class="verdict-title">SANETIZE & USE ROVO ONLY</div>
               <div class="verdict-desc">Approved for processing inside <strong>Atlassian Rovo</strong>. However, you must first sanitize the input. Replace internal server hostnames, specific subnet IDs, and paths with placeholders. Do not use external tools.</div>
@@ -416,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (data === 'restricted') {
           pmBox.classList.add('verdict-warn');
           pmBox.innerHTML = `
-            <div class="verdict-icon">⚠️</div>
+            <div class="verdict-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
             <div>
               <div class="verdict-title">SANETIZE FIRST & VET OUTPUT</div>
               <div class="verdict-desc">Approved for use on Claude, Gemini, or Rovo, but <strong>strict sanitization is required</strong>. Strip all specific network IPs, server hostnames, AD domains, and passwords. Verify PowerShell cmdlets on Microsoft Learn.</div>

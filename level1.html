@@ -6,6 +6,7 @@
   <title>Level 1: Foundations — AI Training Hub</title>
   <meta name="description" content="Level 1 AI Foundations — mindset, getting started with Atlassian Rovo, prompt engineering 101, and hands-on group activities." />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     /* Activity Card */
     .activity-card {
@@ -18,7 +19,7 @@
       overflow: hidden;
     }
     .activity-card::before {
-      content: '🎯 GROUP ACTIVITY';
+      content: '<i class="fa-solid fa-bullseye"></i> GROUP ACTIVITY';
       position: absolute;
       top: 14px; right: 16px;
       font-size: 0.65rem;
@@ -143,7 +144,7 @@
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <div class="nav-logo-icon">🤖</div>
+        <div class="nav-logo-icon"><i class="fa-solid fa-robot"></i></div>
         <span>AI Training Hub</span>
       </a>
       <ul class="nav-links" id="navLinks">
@@ -151,7 +152,7 @@
         <li><a href="level1.html">Level 1: Foundations <span class="nav-badge">L1</span></a></li>
         <li><a href="level2.html">Level 2: Application <span class="nav-badge" style="background:rgba(37,99,235,0.15);border-color:rgba(37,99,235,0.3);color:var(--secondary-light)">L2</span></a></li>
         <li><a href="policies.html">Policies</a></li>
-        <li><a href="activities.html">🎯 Activities</a></li>
+        <li><a href="activities.html"><i class="fa-solid fa-bullseye"></i> Activities</a></li>
         <li><a href="resources.html">Resources</a></li>
         <li><a href="schedule.html">Schedule</a></li>
       </ul>
@@ -204,7 +205,7 @@
         <h4 style="margin-bottom:14px;">📋 AI Fluency Cheat Sheet <span style="font-size:0.75rem;color:var(--text-muted);font-weight:400;">(Based on Anthropic Framework &amp; Foundations)</span></h4>
         <div class="cheat-sheet">
           <div class="cheat-row">
-            <div class="cheat-label">🤖 What is an LLM?</div>
+            <div class="cheat-label"><i class="fa-solid fa-robot"></i> What is an LLM?</div>
             <div class="cheat-value">A Large Language Model is a neural network trained on massive amounts of text. It predicts the most statistically likely next word — it does <em>not</em> "think" or "know." It patterns-matches from training data.</div>
           </div>
           <div class="cheat-row">
@@ -212,7 +213,7 @@
             <div class="cheat-value">Summarizing, drafting, brainstorming, reformatting, explaining concepts, generating options, writing first drafts, identifying patterns in text.</div>
           </div>
           <div class="cheat-row">
-            <div class="cheat-label">⚠️ What AI Struggles With</div>
+            <div class="cheat-label"><i class="fa-solid fa-triangle-exclamation"></i> What AI Struggles With</div>
             <div class="cheat-value">Real-time facts, precise math, current events (post training cutoff), niche proprietary info, and consistency across very long conversations.</div>
           </div>
           <div class="cheat-row">
@@ -220,18 +221,18 @@
             <div class="cheat-value">AI can confidently state incorrect information. This is not a bug — it's a fundamental trait. <strong style="color:#fcd34d;">Always verify facts, links, and citations.</strong> Never copy-paste directly without review.</div>
           </div>
           <div class="cheat-row">
-            <div class="cheat-label">🔐 Data Privacy Rule</div>
+            <div class="cheat-label"><i class="fa-solid fa-vault"></i> Data Privacy Rule</div>
             <div class="cheat-value"><strong style="color:#fca5a5;">Personal AI (consumer) ≠ Enterprise AI.</strong> Consumer tools (free ChatGPT, Claude.ai free) may use your input for training. <strong>Never input</strong> PII, client data, proprietary code, or internal financials into consumer-grade tools. Use Rovo for work.</div>
           </div>
           <div class="cheat-row">
-            <div class="cheat-label">🎯 The Golden Rule</div>
+            <div class="cheat-label"><i class="fa-solid fa-bullseye"></i> The Golden Rule</div>
             <div class="cheat-value">Treat AI as a brilliant first-drafter, not a final authority. <em>You</em> are the expert — AI is the accelerator. Vet every output with your professional judgment.</div>
           </div>
         </div>
 
         <!-- Key Objectives -->
         <div style="margin-top:24px;">
-          <h4 style="margin-bottom:12px;">🎯 Learning Objectives</h4>
+          <h4 style="margin-bottom:12px;"><i class="fa-solid fa-bullseye"></i> Learning Objectives</h4>
           <ul class="objectives">
             <li>Understand what a Large Language Model (LLM) is and how it generates responses</li>
             <li>Recognize AI capabilities vs. limitations — especially hallucinations</li>
@@ -245,7 +246,7 @@
           <h4>Activity 1.1 — "PowerShell Roulette" — Script Validation</h4>
           <div class="activity-meta">
             <span>👥 Small Groups (3–4)</span>
-            <span>⏱️ 12 Minutes</span>
+            <span><i class="fa-solid fa-stopwatch"></i> 12 Minutes</span>
             <span>🟦 Tool: Rovo</span>
             <span>💻 PowerShell Focus</span>
           </div>
@@ -309,7 +310,7 @@
           </p>
           <div class="grid-3" style="gap:14px;">
             <div style="background:rgba(0,82,204,0.12);border:1px solid rgba(87,157,255,0.15);border-radius:var(--radius-md);padding:16px;">
-              <div style="font-size:1.4rem;margin-bottom:8px;">🔐</div>
+              <div style="font-size:1.4rem;margin-bottom:8px;"><i class="fa-solid fa-vault"></i></div>
               <h5 style="font-size:0.85rem;margin-bottom:4px;">Enterprise Secure</h5>
               <p style="font-size:0.78rem;margin:0;">Data stays within your Atlassian organization — no consumer data sharing.</p>
             </div>
@@ -328,7 +329,7 @@
 
         <!-- Setup Steps -->
         <div style="margin-top:24px;">
-          <h4 style="margin-bottom:14px;">🚀 Getting Started — Setup Steps</h4>
+          <h4 style="margin-bottom:14px;"><i class="fa-solid fa-rocket"></i> Getting Started — Setup Steps</h4>
           <ul class="objectives">
             <li>Access Rovo via your Atlassian account at <strong>rovo.atlassian.com</strong> or within Jira/Confluence directly</li>
             <li>Confirm your account is linked to the organization workspace (check with your admin if unsure)</li>
@@ -360,7 +361,7 @@
           <h4>Activity 1.2 — "Platform Trap" — Mac vs. PC Troubleshooting</h4>
           <div class="activity-meta">
             <span>👥 Pairs or Groups of 3</span>
-            <span>⏱️ 15 Minutes</span>
+            <span><i class="fa-solid fa-stopwatch"></i> 15 Minutes</span>
             <span>🟦 Tool: Rovo</span>
             <span>🍎💻 Mac &amp; Windows Focus</span>
           </div>
@@ -479,7 +480,7 @@
         <!-- ── Prompt Builder Playground ──────────────────────────── -->
         <div class="prompt-builder-card" style="margin-top:40px;margin-bottom:20px;padding:28px;background:rgba(255,255,255,0.01);border-color:rgba(139,92,246,0.15);">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
-            <div style="font-size:1.6rem;">🎯</div>
+            <div style="font-size:1.6rem;"><i class="fa-solid fa-bullseye"></i></div>
             <div>
               <h4 style="margin:0;color:var(--text-primary);">Interactive Prompt Composer</h4>
               <p style="font-size:0.78rem;margin:0;color:var(--text-muted);">Adjust values to see the PCTF structure construct live.</p>
@@ -559,7 +560,7 @@
           <h4>Activity 1.3 — "Network Ghost" — IP &amp; DNS Hallucination Hunt</h4>
           <div class="activity-meta">
             <span>👥 Teams of 3–5</span>
-            <span>⏱️ 20 Minutes</span>
+            <span><i class="fa-solid fa-stopwatch"></i> 20 Minutes</span>
             <span>🟦 Tool: Rovo or any approved AI</span>
             <span>🌐 Networking Focus</span>
             <span>🏆 Competitive</span>
@@ -622,7 +623,7 @@
 
         <!-- Navigation forward -->
         <div style="display:flex;gap:14px;justify-content:flex-end;margin-top:32px;padding-top:24px;border-top:1px solid var(--border);">
-          <a href="activities.html" class="btn btn-secondary" id="btn-all-activities">🎯 All Group Activities</a>
+          <a href="activities.html" class="btn btn-secondary" id="btn-all-activities"><i class="fa-solid fa-bullseye"></i> All Group Activities</a>
           <a href="level2.html" class="btn btn-primary" id="btn-go-l2">Continue to Level 2 →</a>
         </div>
       </div>
@@ -636,7 +637,7 @@
       <div class="footer-inner">
         <div class="footer-brand">
           <div class="nav-logo" style="display:inline-flex;">
-            <div class="nav-logo-icon">🤖</div>
+            <div class="nav-logo-icon"><i class="fa-solid fa-robot"></i></div>
             <span>AI Training Hub</span>
           </div>
           <p>Internal AI training series — Level 1 Foundations.</p>

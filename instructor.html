@@ -6,6 +6,7 @@
   <title>Instructor Portal — AI Training Hub</title>
   <meta name="description" content="Secure portal containing the facilitation scripts, timing cues, and guides for the Lunch & Learn session." />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     /* Custom page adjustments */
     .locked-only { display: block; }
@@ -18,7 +19,7 @@
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <div class="nav-logo-icon">🤖</div>
+        <div class="nav-logo-icon"><i class="fa-solid fa-robot"></i></div>
         <span>AI Training Hub</span>
       </a>
       <ul class="nav-links" id="navLinks">
@@ -26,7 +27,7 @@
         <li><a href="level1.html">Level 1: Foundations <span class="nav-badge">L1</span></a></li>
         <li><a href="level2.html">Level 2: Application <span class="nav-badge" style="background:rgba(37,99,235,0.15);border-color:rgba(37,99,235,0.3);color:var(--secondary-light)">L2</span></a></li>
         <li><a href="policies.html">Policies</a></li>
-        <li><a href="activities.html">🎯 Activities</a></li>
+        <li><a href="activities.html"><i class="fa-solid fa-bullseye"></i> Activities</a></li>
         <li><a href="resources.html">Resources</a></li>
         <li><a href="schedule.html">Schedule</a></li>
       </ul>
@@ -43,7 +44,7 @@
     <div id="lockScreen" class="locked-only">
       <div class="vault-container">
         <div class="vault-card" id="vaultCard">
-          <div class="vault-icon">🔐</div>
+          <div class="vault-icon"><i class="fa-solid fa-vault"></i></div>
           <h2 class="vault-title">Instructor Portal</h2>
           <p class="vault-subtitle">Enter administrator passcode to access teaching scripts.</p>
           
@@ -135,7 +136,7 @@
               <div class="inst-agenda-item" id="seg3">
                 <div class="inst-agenda-time">12:13 PM – 12:20 PM (7 mins)</div>
                 <div class="inst-agenda-title">
-                  🔐 AI Policy Breakdown (Critical)
+                  <i class="fa-solid fa-vault"></i> AI Policy Breakdown (Critical)
                 </div>
                 <div class="inst-agenda-desc">Review the two-tier usage rule. Explain data boundaries and public sharing risk.</div>
                 <div class="inst-notes-box">
@@ -154,7 +155,7 @@
               <div class="inst-agenda-item" id="seg4">
                 <div class="inst-agenda-time">12:20 PM – 12:32 PM (12 mins)</div>
                 <div class="inst-agenda-title">
-                  🎯 Group Activity 1: PowerShell Roulette
+                  <i class="fa-solid fa-bullseye"></i> Group Activity 1: PowerShell Roulette
                 </div>
                 <div class="inst-agenda-desc">Groups audit an AI script disabling AD users. Run diagnostics in activities panel.</div>
                 <div class="inst-notes-box">
@@ -194,7 +195,7 @@
               <div class="inst-agenda-item" id="seg6">
                 <div class="inst-agenda-time">12:40 PM – 12:52 PM (12 mins)</div>
                 <div class="inst-agenda-title">
-                  🎯 Group Activity 2: Apple Silicon SMC Trap
+                  <i class="fa-solid fa-bullseye"></i> Group Activity 2: Apple Silicon SMC Trap
                 </div>
                 <div class="inst-agenda-desc">Pairs run the macOS M2 troubleshoot diagnostic. Highlight SMC platform errors.</div>
                 <div class="inst-notes-box">
@@ -237,7 +238,7 @@
             
             <!-- Timing stopwatch widget -->
             <div class="timer-widget">
-              <h4 style="margin:0;">⏱️ Session Timer</h4>
+              <h4 style="margin:0;"><i class="fa-solid fa-stopwatch"></i> Session Timer</h4>
               <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">Monitor the 60-minute duration live</p>
               <div class="timer-display" id="timerDisplay">60:00</div>
               <div class="timer-controls">

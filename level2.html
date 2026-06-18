@@ -6,6 +6,7 @@
   <title>Level 2: Professional Application — AI Training Hub</title>
   <meta name="description" content="Level 2 AI Professional Application — security, governance, enterprise tools, and advanced AI workflows for the RTP Service Desk team." />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     .accordion-item { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 8px; overflow: hidden; }
     .accordion-trigger { width: 100%; background: none; border: none; padding: 16px 20px; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
@@ -59,7 +60,7 @@
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <div class="nav-logo-icon">🤖</div>
+        <div class="nav-logo-icon"><i class="fa-solid fa-robot"></i></div>
         <span>AI Training Hub</span>
       </a>
       <ul class="nav-links" id="navLinks">
@@ -67,7 +68,7 @@
         <li><a href="level1.html">Level 1: Foundations <span class="nav-badge">L1</span></a></li>
         <li><a href="level2.html">Level 2: Application <span class="nav-badge" style="background:rgba(37,99,235,0.15);border-color:rgba(37,99,235,0.3);color:var(--secondary-light)">L2</span></a></li>
         <li><a href="policies.html">Policies</a></li>
-        <li><a href="activities.html">🎯 Activities</a></li>
+        <li><a href="activities.html"><i class="fa-solid fa-bullseye"></i> Activities</a></li>
         <li><a href="resources.html">Resources</a></li>
         <li><a href="schedule.html">Schedule</a></li>
       </ul>
@@ -86,7 +87,7 @@
           <span>Level 2: Application</span>
         </nav>
         <div class="level-badge level-badge-l2">
-          <span>&#9889;</span> Level 2 &mdash; Professional Application
+          <span><i class="fa-solid fa-bolt"></i></span> Level 2 &mdash; Professional Application
         </div>
         <h1>Moving from Personal Use<br>to <span class="gradient-text">Enterprise Workflows</span></h1>
         <p class="hero-subtitle" style="margin-top:16px;">
@@ -121,7 +122,7 @@
           <div class="tier-label tier-label-l1">&#128309; New L1 Employees</div>
           <h3 style="color:var(--atlassian-light);margin-bottom:12px;">USE ATLASSIAN ROVO ONLY</h3>
           <div class="tier-rule">
-            <span style="flex-shrink:0;margin-top:1px;">&#9989;</span>
+            <span style="flex-shrink:0;margin-top:1px;"><i class="fa-solid fa-circle-check"></i></span>
             <span><strong style="color:var(--text-primary);">Why Rovo?</strong> Enterprise-governed, data stays within the Atlassian ecosystem, auditable, and approved by IT. It is built into the tools you already use &mdash; Jira and Confluence.</span>
           </div>
           <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(0,82,204,0.25);">
@@ -134,10 +135,10 @@
         </div>
 
         <div class="policy-tier policy-tier-l2">
-          <div class="tier-label tier-label-l2">&#9889; Senior L1 / L2+ Employees</div>
+          <div class="tier-label tier-label-l2"><i class="fa-solid fa-bolt"></i> Senior L1 / L2+ Employees</div>
           <h3 style="color:var(--primary-light);margin-bottom:12px;">May Use Any AI Tool &mdash; With Full Responsibility</h3>
           <div class="tier-rule">
-            <span style="flex-shrink:0;margin-top:1px;">&#9989;</span>
+            <span style="flex-shrink:0;margin-top:1px;"><i class="fa-solid fa-circle-check"></i></span>
             <span>You have the experience to evaluate AI output critically. You may use Claude, ChatGPT, Gemini, or other tools &mdash; but the rules below are non-negotiable.</span>
           </div>
           <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(124,58,237,0.2);">
@@ -357,7 +358,7 @@
               <li><span>4.</span> Validate output against official PowerShell docs before running</li>
             </ul>
             <div class="prompt-block">
-              <div class="prompt-block-label">&#128161; Prompt Template</div>
+              <div class="prompt-block-label"><i class="fa-solid fa-lightbulb"></i> Prompt Template</div>
               "You are a senior PowerShell engineer. Review this script for errors, performance issues, and best practices. [PASTE SANITIZED SCRIPT]. Do not run it &mdash; explain what each section does and flag anything risky."
             </div>
           </div>
@@ -374,7 +375,7 @@
               <li><span>4.</span> Review the output and add it as a child page</li>
             </ul>
             <div class="prompt-block">
-              <div class="prompt-block-label">&#128161; Example Rovo Prompt</div>
+              <div class="prompt-block-label"><i class="fa-solid fa-lightbulb"></i> Example Rovo Prompt</div>
               "Summarize these meeting notes into: 1) Key decisions made, 2) Action items with owner and due date, 3) Open questions still pending. Format as a table where possible."
             </div>
           </div>
@@ -391,7 +392,7 @@
               <li><span>4.</span> Review output carefully and add real-world specifics</li>
             </ul>
             <div class="prompt-block">
-              <div class="prompt-block-label">&#128161; Example Prompt</div>
+              <div class="prompt-block-label"><i class="fa-solid fa-lightbulb"></i> Example Prompt</div>
               "You are an IT documentation specialist. Convert these bullet points into a professional incident report with sections: Summary, Timeline, Root Cause, Resolution, and Prevention. Bullets: [paste your notes]"
             </div>
           </div>
@@ -400,7 +401,7 @@
       </section>
 
       <div class="callout callout-info animate-on-scroll" style="margin:40px 0 0;">
-        <span class="callout-icon">&#128161;</span>
+        <span class="callout-icon"><i class="fa-solid fa-lightbulb"></i></span>
         <div>
           <strong>Remember:</strong> AI is a multiplier, not a replacement. The best outcomes come when you bring your domain knowledge and judgment to guide the AI &mdash; then verify its output before it goes anywhere near a client or production system.
         </div>
@@ -414,7 +415,7 @@
       <div class="footer-inner">
         <div class="footer-brand">
           <div class="nav-logo" style="display:inline-flex;">
-            <div class="nav-logo-icon">🤖</div>
+            <div class="nav-logo-icon"><i class="fa-solid fa-robot"></i></div>
             <span>AI Training Hub</span>
           </div>
           <p>Internal AI training series &mdash; Level 2 Professional Application. Training date: June 19, 2026.</p>
