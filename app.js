@@ -110,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dx: (Math.random() - 0.5) * 0.4,
         dy: (Math.random() - 0.5) * 0.4,
         alpha: Math.random() * 0.4 + 0.1,
+        color: Math.random() > 0.5 ? '252,238,10' : '0,240,255',
       });
     }
 
@@ -118,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
       particles.forEach(p => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(167,139,250,${p.alpha})`;
+        ctx.fillStyle = `rgba(${p.color},${p.alpha})`;
         ctx.fill();
         p.x += p.dx; p.y += p.dy;
         if (p.x < 0) p.x = canvas.width;
