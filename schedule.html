@@ -4,91 +4,154 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Schedule — AI Training Hub</title>
-  <meta name="description" content="Lunch & Learn session schedule — Level 1 Foundations and Level 2 Application tracks, starting June 19, 2026." />
+  <meta name="description" content="Lunch & Learn session agenda — June 19, 2026 — one 1-hour session covering L1 & L2 AI training." />
   <link rel="stylesheet" href="style.css" />
   <style>
-    .session-track {
-      margin-bottom: 56px;
+    /* ── Run of show timeline ─────────────────────────────── */
+    .agenda-wrap {
+      max-width: 780px;
+      margin: 0 auto;
     }
-    .track-header {
-      display: flex; align-items: center; gap: 16px;
-      padding: 20px 28px;
-      border-radius: var(--radius-lg);
-      margin-bottom: 20px;
-    }
-    .track-header.l1 { background: linear-gradient(135deg,rgba(124,58,237,0.15),rgba(124,58,237,0.05)); border: 1px solid rgba(124,58,237,0.25); }
-    .track-header.l2 { background: linear-gradient(135deg,rgba(37,99,235,0.15),rgba(6,182,212,0.05)); border: 1px solid rgba(37,99,235,0.25); }
-    .track-icon { font-size: 2rem; }
-    .track-meta h3 { margin-bottom: 2px; }
-    .track-meta p  { font-size: 0.85rem; margin: 0; }
 
-    .session-item {
-      display: grid;
-      grid-template-columns: 80px 1fr auto;
-      gap: 20px;
-      align-items: center;
+    .agenda-header {
+      background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(6,182,212,0.06));
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: var(--radius-xl);
+      padding: 36px 40px;
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .agenda-header::before {
+      content: '';
+      position: absolute; top: -20px; right: -20px;
+      width: 100px; height: 100px;
+      background: radial-gradient(circle, rgba(16,185,129,0.15), transparent 70%);
+      border-radius: 50%;
+    }
+    .agenda-header h2 { margin-bottom: 6px; }
+    .agenda-header .details {
+      display: flex; gap: 20px; flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .agenda-detail {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.875rem; color: var(--text-secondary);
+    }
+    .agenda-detail strong { color: var(--text-primary); }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 10px; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(124,58,237,0.5), rgba(6,182,212,0.2));
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -23px; top: 20px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 2px solid var(--bg-base);
+      z-index: 1;
+    }
+    .timeline-dot.green  { background: #10b981; }
+    .timeline-dot.blue   { background: var(--secondary); }
+    .timeline-dot.cyan   { background: var(--accent); }
+    .timeline-dot.amber  { background: #f59e0b; }
+    .timeline-dot.purple { background: var(--primary); }
+
+    .timeline-block {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 20px 24px;
-      margin-bottom: 12px;
       transition: var(--transition-slow);
     }
-    .session-item:hover { border-color: rgba(124,58,237,0.25); transform: translateX(4px); }
-    .session-item.next-up { border-color: rgba(124,58,237,0.4); background: linear-gradient(135deg,rgba(124,58,237,0.08),var(--bg-card)); }
-    .session-item.next-up-l2 { border-color: rgba(37,99,235,0.4); background: linear-gradient(135deg,rgba(37,99,235,0.08),var(--bg-card)); }
+    .timeline-block:hover { border-color: rgba(124,58,237,0.25); transform: translateX(4px); }
 
-    .session-date-block { text-align: center; }
-    .session-month { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
-    .session-day { font-family: 'Outfit', sans-serif; font-size: 2.4rem; font-weight: 900; line-height: 1; background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .session-dow { font-size: 0.65rem; color: var(--text-muted); }
-
-    .session-body h4 { margin-bottom: 4px; font-size: 0.95rem; }
-    .session-body p  { font-size: 0.82rem; margin: 0; }
-    .session-tags   { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-    .session-tag {
-      font-size: 0.68rem; font-weight: 600;
-      padding: 3px 10px; border-radius: 999px;
+    .timeline-block.highlight {
+      background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(124,58,237,0.04));
+      border-color: rgba(124,58,237,0.3);
     }
-    .tag-l1-sess  { background: rgba(124,58,237,0.15); color: var(--primary-light); }
-    .tag-l2-sess  { background: rgba(37,99,235,0.15); color: var(--secondary-light); }
-    .tag-time     { background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid var(--border); }
-    .tag-tomorrow { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.25); animation: pulse 2s infinite; }
-    .tag-activity { background: rgba(6,182,212,0.1); color: var(--accent-light); }
-
-    .session-status {
-      flex-shrink: 0;
-      font-size: 0.75rem; font-weight: 600;
-      padding: 6px 14px; border-radius: 999px;
-      text-align: center; white-space: nowrap;
+    .timeline-block.highlight-activity {
+      background: linear-gradient(135deg, rgba(6,182,212,0.08), rgba(6,182,212,0.03));
+      border-color: rgba(6,182,212,0.25);
     }
-    .status-tomorrow { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
-    .status-upcoming { background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid var(--border); }
 
-    .add-to-cal {
-      font-size: 0.72rem;
-      color: var(--primary-light);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      margin-top: 6px;
-      transition: var(--transition);
+    .timeline-time {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem; font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
     }
-    .add-to-cal:hover { color: var(--accent-light); }
+    .timeline-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .timeline-desc { font-size: 0.85rem; color: var(--text-secondary); margin: 0; }
 
-    .timeline-note {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+    .duration-pill {
+      font-size: 0.68rem; font-weight: 700;
+      padding: 2px 9px; border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .activity-pill {
+      font-size: 0.68rem; font-weight: 700;
+      padding: 2px 9px; border-radius: 999px;
+      background: rgba(6,182,212,0.12);
+      color: var(--accent-light);
+      border: 1px solid rgba(6,182,212,0.2);
+      white-space: nowrap;
+    }
+
+    .policy-pill {
+      font-size: 0.68rem; font-weight: 700;
+      padding: 2px 9px; border-radius: 999px;
+      background: rgba(239,68,68,0.1);
+      color: #fca5a5;
+      border: 1px solid rgba(239,68,68,0.2);
+    }
+
+    /* bullet points inside a block */
+    .block-points { list-style: none; margin: 8px 0 0; display: flex; flex-direction: column; gap: 5px; }
+    .block-points li { font-size: 0.8rem; color: var(--text-secondary); display: flex; gap: 8px; }
+    .block-points li::before { content: '·'; color: var(--primary-light); font-size: 14px; line-height: 1.3; }
+
+    /* Facilitator tips */
+    .facilitator-box {
+      background: rgba(245,158,11,0.07);
+      border: 1px solid rgba(245,158,11,0.2);
       border-radius: var(--radius-lg);
-      padding: 20px 24px;
-      display: flex; gap: 14px; align-items: flex-start;
-      margin-bottom: 40px;
+      padding: 24px 28px;
+      margin-top: 40px;
     }
+    .facilitator-box h4 { color: #fcd34d; margin-bottom: 12px; font-size: 0.95rem; }
+    .facilitator-box ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .facilitator-box ul li { font-size: 0.85rem; color: var(--text-secondary); display: flex; gap: 10px; }
+    .facilitator-box ul li::before { content: '⚡'; font-size: 12px; }
 
-    @media (max-width:768px) {
-      .session-item { grid-template-columns: 60px 1fr; }
-      .session-status { display: none; }
+    @media (max-width: 600px) {
+      .agenda-header { padding: 24px; }
+      .timeline { padding-left: 20px; }
+      .timeline-block { padding: 16px 18px; }
+      .agenda-header .details { gap: 12px; }
     }
   </style>
 </head>
@@ -120,10 +183,10 @@
     <div class="container">
       <div class="page-hero-content">
         <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Schedule</span></div>
-        <div class="level-badge level-badge-l1" style="background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.3);color:#6ee7b7;">📅 Session Schedule</div>
-        <h1>Training <span class="gradient-text">Schedule</span></h1>
-        <p style="font-size:1.05rem;color:var(--text-secondary);max-width:580px;">
-          Two tracks, eight sessions. Pick your level and attend the sessions that match your current skill. <strong style="color:#6ee7b7;">Session 1 is tomorrow — June 19, 2026.</strong>
+        <div class="level-badge" style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);color:#6ee7b7;">⚡ Tomorrow — June 19, 2026</div>
+        <h1>Session <span class="gradient-text">Agenda</span></h1>
+        <p style="font-size:1.05rem;color:var(--text-secondary);max-width:540px;">
+          One hour. Everything you need to go from zero to confident with AI at work — covering L1 foundations, AI policy, and two hands-on group activities.
         </p>
       </div>
     </div>
@@ -131,197 +194,205 @@
 
   <main>
     <div class="container" style="padding-top:60px;padding-bottom:80px;">
+      <div class="agenda-wrap">
 
-      <!-- Quick note -->
-      <div class="timeline-note animate-on-scroll">
-        <span style="font-size:1.5rem;">📌</span>
-        <div>
-          <h4 style="margin-bottom:4px;font-size:0.95rem;">How to Use This Schedule</h4>
-          <p style="font-size:0.85rem;margin:0;">Attend <strong style="color:var(--primary-light);">L1 sessions</strong> if you're new to AI or Atlassian Rovo. Move to <strong style="color:var(--secondary-light);">L2 sessions</strong> once you've completed the L1 track. Sessions are 45–60 min over lunch — bring your laptop and your appetite.</p>
+        <!-- Session header card -->
+        <div class="agenda-header animate-on-scroll">
+          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);border-radius:999px;padding:4px 14px;font-size:0.75rem;font-weight:700;color:#6ee7b7;margin-bottom:14px;">
+            ⚡ TOMORROW
+          </div>
+          <h2 style="margin-bottom:4px;">Lunch &amp; Learn: Proper AI Utilization</h2>
+          <p style="font-size:0.9rem;color:var(--text-secondary);margin:0;">Covering L1 Foundations + AI Policy Introduction</p>
+          <div class="details">
+            <div class="agenda-detail">📅 <strong>June 19, 2026</strong></div>
+            <div class="agenda-detail">⏰ <strong>12:00 PM – 1:00 PM</strong></div>
+            <div class="agenda-detail">⏱️ <strong>60 Minutes</strong></div>
+            <div class="agenda-detail">🟦 <strong>Tool: Atlassian Rovo (new L1) · Any AI (Senior L1/L2+)</strong></div>
+          </div>
         </div>
+
+        <!-- Timeline -->
+        <div class="timeline animate-on-scroll">
+
+          <!-- 12:00 -->
+          <div class="timeline-item">
+            <div class="timeline-dot green"></div>
+            <div class="timeline-block highlight">
+              <div class="timeline-time">12:00 PM</div>
+              <div class="timeline-title">
+                👋 Welcome &amp; Why AI, Why Now
+                <span class="duration-pill">5 min</span>
+              </div>
+              <p class="timeline-desc">Set the room. Explain the goal of the session — not to make everyone an AI expert, but to build enough fluency to use it safely and effectively at work.</p>
+              <ul class="block-points">
+                <li>Who is this session for? (everyone)</li>
+                <li>What we'll cover in 60 minutes</li>
+                <li>One rule: never copy-paste AI output without reviewing it</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 12:05 -->
+          <div class="timeline-item">
+            <div class="timeline-dot purple"></div>
+            <div class="timeline-block">
+              <div class="timeline-time">12:05 PM</div>
+              <div class="timeline-title">
+                🧠 What Is AI Actually Doing?
+                <span class="duration-pill">8 min</span>
+              </div>
+              <p class="timeline-desc">Plain-language explainer — no jargon. Walk through the AI Fluency cheat sheet on the Level 1 page.</p>
+              <ul class="block-points">
+                <li>LLMs predict the next word — they don't "know" things</li>
+                <li>Hallucinations: confident, wrong, dangerous if unchecked</li>
+                <li>What AI is great at vs. where it fails</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 12:13 -->
+          <div class="timeline-item">
+            <div class="timeline-dot amber"></div>
+            <div class="timeline-block" style="background:rgba(239,68,68,0.05);border-color:rgba(239,68,68,0.2);">
+              <div class="timeline-time">12:13 PM</div>
+              <div class="timeline-title">
+                🔐 AI Policy — Who Uses What
+                <span class="duration-pill">7 min</span>
+                <span class="policy-pill">Required</span>
+              </div>
+              <p class="timeline-desc">The non-negotiable rules before anyone uses AI on work tasks. Cover the two-tier policy clearly.</p>
+              <ul class="block-points">
+                <li><strong style="color:var(--atlassian-light);">New L1 employees → Atlassian Rovo only.</strong> Enterprise-governed. Data stays in Atlassian. No consumer AI for work.</li>
+                <li><strong style="color:var(--secondary-light);">Senior L1 / L2+ → any AI tool.</strong> Must vet all outputs. Never input PII, client data, proprietary code, or passwords into consumer tools.</li>
+                <li>Golden rule for everyone: AI is a co-pilot, not an authority — you are responsible for the output</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 12:20 — Activity 1 -->
+          <div class="timeline-item">
+            <div class="timeline-dot cyan"></div>
+            <div class="timeline-block highlight-activity">
+              <div class="timeline-time">12:20 PM</div>
+              <div class="timeline-title">
+                🎯 Group Activity 1 — "PowerShell Roulette"
+                <span class="duration-pill">12 min</span>
+                <span class="activity-pill">Hands-On</span>
+              </div>
+              <p class="timeline-desc">Groups of 3–4. Ask Rovo to write an AD script — then audit it for the 3 built-in errors before anyone runs it.</p>
+              <ul class="block-points">
+                <li>Prompt: <em style="color:var(--accent-light);">"Write a PowerShell script to disable AD users who haven't logged in for 30 days"</em></li>
+                <li>Groups find: wrong filter syntax · no -WhatIf · deprecated Send-MailMessage</li>
+                <li>→ <a href="activities.html#act1" style="color:var(--primary-light);">Full activity card on Activities page</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 12:32 -->
+          <div class="timeline-item">
+            <div class="timeline-dot purple"></div>
+            <div class="timeline-block">
+              <div class="timeline-time">12:32 PM</div>
+              <div class="timeline-title">
+                ✍️ Prompt Engineering — PCTF Framework
+                <span class="duration-pill">8 min</span>
+              </div>
+              <p class="timeline-desc">Teach the one framework that immediately improves everyone's prompts. Show a before/after example from the service desk context.</p>
+              <ul class="block-points">
+                <li><strong>P</strong>ersona · <strong>C</strong>ontext · <strong>T</strong>ask · <strong>F</strong>ormat</li>
+                <li>Bad prompt: <em style="color:#fca5a5;">"Fix this error"</em> → Good prompt: full PCTF with OS, error code, user type, output format</li>
+                <li>→ <a href="level1.html#prompting" style="color:var(--primary-light);">Full PCTF module on Level 1 page</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 12:40 — Activity 2 -->
+          <div class="timeline-item">
+            <div class="timeline-dot cyan"></div>
+            <div class="timeline-block highlight-activity">
+              <div class="timeline-time">12:40 PM</div>
+              <div class="timeline-title">
+                🎯 Group Activity 2 — "Platform Trap"
+                <span class="duration-pill">12 min</span>
+                <span class="activity-pill">Hands-On</span>
+              </div>
+              <p class="timeline-desc">Pairs. Submit a Mac M2 Bluetooth prompt — catch the AI recommending an SMC reset that doesn't exist on Apple Silicon.</p>
+              <ul class="block-points">
+                <li>Prompt A: M2 MacBook Bluetooth fix → AI gives Intel Mac SMC steps</li>
+                <li>Prompt B: Windows 11 BSOD 0xc000021a → AI says press F8 (doesn't work on Win11)</li>
+                <li>Groups find the wrong step, explain why, and write the correct fix</li>
+                <li>→ <a href="activities.html#act2" style="color:var(--primary-light);">Full activity card on Activities page</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 12:52 -->
+          <div class="timeline-item">
+            <div class="timeline-dot green"></div>
+            <div class="timeline-block">
+              <div class="timeline-time">12:52 PM</div>
+              <div class="timeline-title">
+                🗺️ Resources &amp; What's Next
+                <span class="duration-pill">5 min</span>
+              </div>
+              <p class="timeline-desc">Point everyone to the live training site. Walk through the key links they'll use beyond today.</p>
+              <ul class="block-points">
+                <li>🟦 <a href="https://community.atlassian.com/learning/team-training/course:15697742" target="_blank" rel="noopener" style="color:var(--atlassian-light);">Atlassian Team Training Course (course:15697742)</a> — required for L1</li>
+                <li>📚 <a href="level1.html" style="color:var(--primary-light);">Level 1 page</a> — full cheat sheet, Rovo setup, PCTF guide</li>
+                <li>🎯 <a href="activities.html" style="color:var(--primary-light);">Activities page</a> — all 6 group activities with bad output examples</li>
+                <li>🔐 <a href="level2.html#policy" style="color:var(--secondary-light);">Level 2 — AI Policy</a> — full governance guide for Senior L1 / L2+</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 12:57 -->
+          <div class="timeline-item">
+            <div class="timeline-dot green"></div>
+            <div class="timeline-block highlight">
+              <div class="timeline-time">12:57 PM</div>
+              <div class="timeline-title">
+                💬 Q&amp;A + Open Discussion
+                <span class="duration-pill">3 min</span>
+              </div>
+              <p class="timeline-desc">Open floor. What questions came up during the activities? What scenarios from your actual job are you unsure about?</p>
+            </div>
+          </div>
+
+          <!-- 1:00 -->
+          <div class="timeline-item">
+            <div class="timeline-dot green"></div>
+            <div class="timeline-block" style="background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.2);">
+              <div class="timeline-time">1:00 PM</div>
+              <div class="timeline-title" style="color:#6ee7b7;">
+                ✅ End of Session
+              </div>
+              <p class="timeline-desc">Thanks for attending. The training site stays live — bookmark it and share it with your team.</p>
+            </div>
+          </div>
+
+        </div>
+        <!-- end timeline -->
+
+        <!-- Facilitator tips -->
+        <div class="facilitator-box animate-on-scroll">
+          <h4>⚡ Facilitator Tips</h4>
+          <ul>
+            <li>Pull up <strong>activities.html</strong> on the projector before noon — everything is self-contained, no slides needed</li>
+            <li>For Activity 1: have groups submit the prompt to Rovo live, then reveal the built-in bad output — the contrast is the lesson</li>
+            <li>If Rovo isn't accessible for some attendees, the bad output examples are pre-loaded on the activity cards — they can still participate</li>
+            <li>The policy section (12:13) is the most important 7 minutes — don't skip or rush it</li>
+            <li>Keep a timer visible — Activity 1 tends to run long because groups get into it</li>
+            <li>If you finish early, run a quick round of Activity 6 (Prompt Olympics) as a bonus</li>
+          </ul>
+        </div>
+
+        <!-- Navigation -->
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px;">
+          <a href="level1.html" class="btn btn-secondary" id="btn-sched-l1">📖 Level 1 Content</a>
+          <a href="activities.html" class="btn btn-primary" id="btn-sched-acts">🎯 View All Activities</a>
+        </div>
+
       </div>
-
-      <!-- ── L1 Track ─────────────────────────────────────── -->
-      <div class="session-track animate-on-scroll">
-        <div class="track-header l1">
-          <div class="track-icon">🎓</div>
-          <div class="track-meta">
-            <h3>Level 1 Track — Foundations</h3>
-            <p>4 sessions · June – July 2026 · Open to all new L1 employees · Rovo required</p>
-          </div>
-        </div>
-
-        <!-- Session 1 — TOMORROW -->
-        <div class="session-item next-up">
-          <div class="session-date-block">
-            <div class="session-month">Jun</div>
-            <div class="session-day">19</div>
-            <div class="session-dow">Thu</div>
-          </div>
-          <div class="session-body">
-            <h4>Session 1 — AI Mindset &amp; Getting Started with Rovo</h4>
-            <p>What is an LLM? Hallucinations explained. Data privacy ground rules. First hands-on time with Atlassian Rovo in Jira.</p>
-            <div class="session-tags">
-              <span class="session-tag tag-tomorrow">⚡ Tomorrow</span>
-              <span class="session-tag tag-l1-sess">L1</span>
-              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
-              <span class="session-tag tag-activity">🎯 Group Activity: PowerShell Roulette</span>
-            </div>
-          </div>
-          <div class="session-status status-tomorrow">Tomorrow</div>
-        </div>
-
-        <!-- Session 2 -->
-        <div class="session-item">
-          <div class="session-date-block">
-            <div class="session-month">Jun</div>
-            <div class="session-day">26</div>
-            <div class="session-dow">Thu</div>
-          </div>
-          <div class="session-body">
-            <h4>Session 2 — Prompt Engineering 101 &amp; PCTF Framework</h4>
-            <p>The PCTF framework. Before &amp; after prompt examples. Hands-on iteration with real service desk scenarios.</p>
-            <div class="session-tags">
-              <span class="session-tag tag-l1-sess">L1</span>
-              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
-              <span class="session-tag tag-activity">🎯 Group Activity: Platform Trap (Mac/PC)</span>
-            </div>
-          </div>
-          <div class="session-status status-upcoming">Upcoming</div>
-        </div>
-
-        <!-- Session 3 -->
-        <div class="session-item">
-          <div class="session-date-block">
-            <div class="session-month">Jul</div>
-            <div class="session-day">10</div>
-            <div class="session-dow">Thu</div>
-          </div>
-          <div class="session-body">
-            <h4>Session 3 — Rovo Deep Dive &amp; Jira Ticket Workflows</h4>
-            <p>Using Rovo to triage, respond to, and close tickets faster. Confluence knowledge base + AI search. Real service desk use cases.</p>
-            <div class="session-tags">
-              <span class="session-tag tag-l1-sess">L1</span>
-              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
-              <span class="session-tag tag-activity">🎯 Group Activity: Ticket Triage + Network Ghost</span>
-            </div>
-          </div>
-          <div class="session-status status-upcoming">Upcoming</div>
-        </div>
-
-        <!-- Session 4 -->
-        <div class="session-item">
-          <div class="session-date-block">
-            <div class="session-month">Jul</div>
-            <div class="session-day">17</div>
-            <div class="session-dow">Thu</div>
-          </div>
-          <div class="session-body">
-            <h4>Session 4 — L1 Wrap-up: Prompt Olympics &amp; Graduation</h4>
-            <p>Full group activity session — Prompt Olympics competition. L1 completion criteria review. Transition briefing to L2 track.</p>
-            <div class="session-tags">
-              <span class="session-tag tag-l1-sess">L1 Graduation</span>
-              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
-              <span class="session-tag tag-activity">🏆 Activity: Prompt Olympics (Full Group)</span>
-            </div>
-          </div>
-          <div class="session-status status-upcoming">Upcoming</div>
-        </div>
-      </div>
-
-      <!-- ── L2 Track ─────────────────────────────────────── -->
-      <div class="session-track animate-on-scroll">
-        <div class="track-header l2">
-          <div class="track-icon">🔐</div>
-          <div class="track-meta">
-            <h3>Level 2 Track — Professional Application</h3>
-            <p>4 sessions · July – August 2026 · Senior L1 &amp; L2+ employees · Open AI choice with vetting</p>
-          </div>
-        </div>
-
-        <!-- Session 5 -->
-        <div class="session-item next-up-l2">
-          <div class="session-date-block">
-            <div class="session-month">Jul</div>
-            <div class="session-day">24</div>
-            <div class="session-dow">Thu</div>
-          </div>
-          <div class="session-body">
-            <h4>Session 5 — Security, Governance &amp; AI Policy Deep Dive</h4>
-            <p>Enterprise vs consumer AI. What never goes into an AI prompt. Approved tool policy walkthrough. Real breach scenario discussion.</p>
-            <div class="session-tags">
-              <span class="session-tag tag-l2-sess">L2</span>
-              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
-              <span class="session-tag tag-activity">🎯 Activity: Policy Scenario Roleplay</span>
-            </div>
-          </div>
-          <div class="session-status status-upcoming">Upcoming</div>
-        </div>
-
-        <!-- Session 6 -->
-        <div class="session-item">
-          <div class="session-date-block">
-            <div class="session-month">Aug</div>
-            <div class="session-day">07</div>
-            <div class="session-dow">Thu</div>
-          </div>
-          <div class="session-body">
-            <h4>Session 6 — Expanding the Ecosystem: Google &amp; Atlassian AI</h4>
-            <p>Gemini for Google Workspace (Docs, Gmail, Slides). Atlassian AI beyond Rovo. Google Skills Catalog — earning your AI credentials.</p>
-            <div class="session-tags">
-              <span class="session-tag tag-l2-sess">L2</span>
-              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
-              <span class="session-tag tag-activity">🎯 Activity: Tool Comparison Challenge</span>
-            </div>
-          </div>
-          <div class="session-status status-upcoming">Upcoming</div>
-        </div>
-
-        <!-- Session 7 -->
-        <div class="session-item">
-          <div class="session-date-block">
-            <div class="session-month">Aug</div>
-            <div class="session-day">14</div>
-            <div class="session-dow">Thu</div>
-          </div>
-          <div class="session-body">
-            <h4>Session 7 — Advanced Workflows: Automation &amp; Documentation</h4>
-            <p>Chaining AI prompts for multi-step tasks. Meeting summary automation with Rovo. Drafting runbooks and incident reports from bullets. Secure code review with AI.</p>
-            <div class="session-tags">
-              <span class="session-tag tag-l2-sess">L2</span>
-              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
-              <span class="session-tag tag-activity">🎯 Activity: Workflow Build Challenge</span>
-            </div>
-          </div>
-          <div class="session-status status-upcoming">Upcoming</div>
-        </div>
-
-        <!-- Session 8 -->
-        <div class="session-item">
-          <div class="session-date-block">
-            <div class="session-month">Aug</div>
-            <div class="session-day">21</div>
-            <div class="session-dow">Thu</div>
-          </div>
-          <div class="session-body">
-            <h4>Session 8 — L2 Graduation &amp; What's Next</h4>
-            <p>Full group showcase — teams present a real AI-assisted workflow they built. L2 completion. Discussion of continuous learning resources and next steps.</p>
-            <div class="session-tags">
-              <span class="session-tag tag-l2-sess">L2 Graduation</span>
-              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
-              <span class="session-tag tag-activity">🏆 Showcase: Real Workflow Demos</span>
-            </div>
-          </div>
-          <div class="session-status status-upcoming">Upcoming</div>
-        </div>
-      </div>
-
-      <!-- Quick reference -->
-      <div class="callout callout-info animate-on-scroll">
-        <span class="callout-icon">📋</span>
-        <span>Sessions run every <strong>other Thursday</strong> at noon. Bring your laptop. Each session is 45–60 minutes with ~15 minutes of group activity time. Questions? Reach out to your facilitator.</span>
-      </div>
-
     </div>
   </main>
 
@@ -331,24 +402,18 @@
       <div class="footer-inner">
         <div class="footer-brand">
           <div class="nav-logo" style="display:inline-flex;"><div class="nav-logo-icon">🤖</div><span>AI Training Hub</span></div>
-          <p>8 sessions across two skill tracks — June through August 2026.</p>
+          <p>One hour. Two activities. Everything you need to start using AI safely at work.</p>
         </div>
         <div class="footer-col">
-          <h5>L1 Sessions</h5>
+          <h5>Agenda</h5>
           <ul>
-            <li><a href="#">Jun 19 — Session 1 ⚡</a></li>
-            <li><a href="#">Jun 26 — Session 2</a></li>
-            <li><a href="#">Jul 10 — Session 3</a></li>
-            <li><a href="#">Jul 17 — Session 4</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h5>L2 Sessions</h5>
-          <ul>
-            <li><a href="#">Jul 24 — Session 5</a></li>
-            <li><a href="#">Aug 07 — Session 6</a></li>
-            <li><a href="#">Aug 14 — Session 7</a></li>
-            <li><a href="#">Aug 21 — Session 8</a></li>
+            <li><a href="#">12:00 — Welcome</a></li>
+            <li><a href="#">12:05 — What is AI?</a></li>
+            <li><a href="#">12:13 — Policy</a></li>
+            <li><a href="#">12:20 — Activity 1</a></li>
+            <li><a href="#">12:32 — PCTF</a></li>
+            <li><a href="#">12:40 — Activity 2</a></li>
+            <li><a href="#">12:52 — Resources</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -361,10 +426,18 @@
             <li><a href="resources.html">Resources</a></li>
           </ul>
         </div>
+        <div class="footer-col">
+          <h5>Key Links</h5>
+          <ul>
+            <li><a href="https://community.atlassian.com/learning/team-training/course:15697742" target="_blank" rel="noopener">Atlassian Course</a></li>
+            <li><a href="https://www.atlassian.com/rovo" target="_blank" rel="noopener">Atlassian Rovo</a></li>
+            <li><a href="level2.html#policy">AI Policy</a></li>
+          </ul>
+        </div>
       </div>
       <div class="footer-bottom">
         <span>Internal use only — Lunch &amp; Learn AI Training Series</span>
-        <span>Last updated: June 2026</span>
+        <span>June 19, 2026</span>
       </div>
     </div>
   </footer>
