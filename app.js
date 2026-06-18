@@ -43,10 +43,10 @@ function init() {
   }
 
   // ── Active nav link ────────────────────────────────────────
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const currentPath = window.location.pathname.replace(/^\/|\.html$/g, '') || 'index';
   document.querySelectorAll('.nav-links a').forEach(link => {
-    const href = link.getAttribute('href') || '';
-    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+    const href = (link.getAttribute('href') || '').replace(/^\/|\.html$/g, '') || 'index';
+    if (href === currentPath) {
       link.classList.add('active');
     }
   });
@@ -139,6 +139,10 @@ function init() {
       const item = btn.closest('.accordion-item');
       if (!item) return;
       
+      const content = item.querySelector('.accordion-content');
+      if (!content) return;
+      
+      const arrow = btn.querySelector('.accordion-arrow');
       const isOpen = item.classList.contains('open');
       
       // Close all other items
@@ -146,30 +150,50 @@ function init() {
         i.classList.remove('open');
         const trigger = i.querySelector('.accordion-trigger');
         if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        
+        const c = i.querySelector('.accordion-content');
+        if (c) {
+          c.style.maxHeight = '0px';
+          c.style.paddingTop = '0px';
+          c.style.paddingBottom = '0px';
+        }
+        
+        const a = i.querySelector('.accordion-arrow');
+        if (a) a.style.transform = 'rotate(0deg)';
       });
       
       // Toggle current item
       if (isOpen) {
         item.classList.remove('open');
         btn.setAttribute('aria-expanded', 'false');
+        content.style.maxHeight = '0px';
+        content.style.paddingTop = '0px';
+        content.style.paddingBottom = '0px';
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
       } else {
         item.classList.add('open');
         btn.setAttribute('aria-expanded', 'true');
+        content.style.maxHeight = content.scrollHeight + 'px';
+        content.style.paddingTop = '12px';
+        content.style.paddingBottom = '20px';
+        if (arrow) arrow.style.transform = 'rotate(180deg)';
       }
     });
   });
 
   // ── Card spotlight movement effect ────────────────────────
-  document.addEventListener('mousemove', e => {
-    const cards = document.querySelectorAll('.card, .level-card, .tool-card, .ecosystem-card, .case-study-card, .pb-output-box, .terminal');
-    cards.forEach(card => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
+  const spotlightCards = document.querySelectorAll('.card, .level-card, .tool-card, .ecosystem-card, .case-study-card, .pb-output-box, .terminal');
+  if (spotlightCards.length > 0) {
+    document.addEventListener('mousemove', e => {
+      spotlightCards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
     });
-  });
+  }
 
   // ── Prompt Builder composer ──────────────────────────────
   const pbPersona = document.getElementById('pbPersona');
