@@ -360,5 +360,85 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // ── Policy Matrix Validator ────────────────────────────────
+  const pmRole = document.getElementById('pmRole');
+  const pmData = document.getElementById('pmData');
+  const pmBox = document.getElementById('pmVerdictBox');
+
+  if (pmRole && pmData && pmBox) {
+    const updateVerdict = () => {
+      const role = pmRole.value;
+      const data = pmData.value;
+      
+      pmBox.className = 'verdict-box'; // reset
+      
+      if (role === 'l1') {
+        if (data === 'public') {
+          pmBox.classList.add('verdict-approved');
+          pmBox.innerHTML = `
+            <div class="verdict-icon">✅</div>
+            <div>
+              <div class="verdict-title">APPROVED (Atlassian Rovo)</div>
+              <div class="verdict-desc">As a New L1 employee, you are approved to process public syntax questions, generic PowerShell inquiries, and sanitized error logs using <strong>Atlassian Rovo</strong>. Consumer AI (free ChatGPT/Claude) remains blocked for all work tasks.</div>
+            </div>
+          `;
+        } else if (data === 'restricted') {
+          pmBox.classList.add('verdict-warn');
+          pmBox.innerHTML = `
+            <div class="verdict-icon">⚠️</div>
+            <div>
+              <div class="verdict-title">SANETIZE & USE ROVO ONLY</div>
+              <div class="verdict-desc">Approved for processing inside <strong>Atlassian Rovo</strong>. However, you must first sanitize the input. Replace internal server hostnames, specific subnet IDs, and paths with placeholders. Do not use external tools.</div>
+            </div>
+          `;
+        } else {
+          pmBox.classList.add('verdict-blocked');
+          pmBox.innerHTML = `
+            <div class="verdict-icon">❌</div>
+            <div>
+              <div class="verdict-title">CRITICAL: INPUT BLOCKED</div>
+              <div class="verdict-desc"><strong>DO NOT USE:</strong> Never input customer names, emails, credentials, private keys, contracts, or internal financials into any AI tool (including Rovo). If sensitive data is input accidentally, notify security immediately.</div>
+            </div>
+          `;
+        }
+      } else {
+        // Senior L1 / L2+
+        if (data === 'public') {
+          pmBox.classList.add('verdict-approved');
+          pmBox.innerHTML = `
+            <div class="verdict-icon">✅</div>
+            <div>
+              <div class="verdict-title">APPROVED (Any Tool)</div>
+              <div class="verdict-desc">You are approved to use Rovo, Claude, or Gemini for general inquiries and public error logs. Ensure all generated cmdlets, routes, or configurations are vetted against official docs before deployment.</div>
+            </div>
+          `;
+        } else if (data === 'restricted') {
+          pmBox.classList.add('verdict-warn');
+          pmBox.innerHTML = `
+            <div class="verdict-icon">⚠️</div>
+            <div>
+              <div class="verdict-title">SANETIZE FIRST & VET OUTPUT</div>
+              <div class="verdict-desc">Approved for use on Claude, Gemini, or Rovo, but <strong>strict sanitization is required</strong>. Strip all specific network IPs, server hostnames, AD domains, and passwords. Verify PowerShell cmdlets on Microsoft Learn.</div>
+            </div>
+          `;
+        } else {
+          pmBox.classList.add('verdict-blocked');
+          pmBox.innerHTML = `
+            <div class="verdict-icon">❌</div>
+            <div>
+              <div class="verdict-title">CRITICAL: INPUT BLOCKED</div>
+              <div class="verdict-desc"><strong>DO NOT USE:</strong> Never input customer PII, client contract specifics, proprietary credentials, internal budgets, or trade secrets into consumer AI tools. Public cloud logs show these queries are leaked easily.</div>
+            </div>
+          `;
+        }
+      }
+    };
+
+    pmRole.addEventListener('change', updateVerdict);
+    pmData.addEventListener('change', updateVerdict);
+    updateVerdict(); // initialize
+  }
+
 });
+
 

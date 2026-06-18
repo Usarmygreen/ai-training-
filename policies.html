@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Policies &amp; Best Practices — AI Training Hub</title>
+  <meta name="description" content="Company AI usage policies, compliance matrices, data security classifications, and vetting guides for the RTP Service Desk." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .classification-box {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+    .classification-header {
+      padding: 16px 20px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .class-safe { background: rgba(16,185,129,0.1); border-bottom: 1px solid rgba(16,185,129,0.2); color: var(--green-light); }
+    .class-restricted { background: rgba(245,158,11,0.1); border-bottom: 1px solid rgba(245,158,11,0.2); color: var(--amber-light); }
+    .class-forbidden { background: rgba(239,68,68,0.1); border-bottom: 1px solid rgba(239,68,68,0.2); color: var(--red-light); }
+    
+    .classification-body {
+      padding: 24px;
+      background: rgba(255,255,255,0.015);
+    }
+    .classification-body ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .classification-body ul li {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .classification-body ul li::before {
+      content: '•';
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1;
+    }
+    .class-safe-li::before { color: var(--green-light) !important; }
+    .class-restricted-li::before { color: var(--amber-light) !important; }
+    .class-forbidden-li::before { color: var(--red-light) !important; }
+
+    @media (max-width: 600px) {
+      .classification-body ul { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">🤖</div>
+        <span>AI Training Hub</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="level1.html">Level 1: Foundations <span class="nav-badge">L1</span></a></li>
+        <li><a href="level2.html">Level 2: Application <span class="nav-badge" style="background:rgba(37,99,235,0.15);border-color:rgba(37,99,235,0.3);color:var(--secondary-light)">L2</span></a></li>
+        <li><a href="policies.html">Policies</a></li>
+        <li><a href="activities.html">🎯 Activities</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-content">
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span>›</span>
+          <span>Policies</span>
+        </div>
+        <div class="level-badge" style="background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.25); color:var(--red-light);">⚠️ AI Usage Policy &amp; Compliance</div>
+        <h1>Policies &amp; <span class="gradient-text">Best Practices</span></h1>
+        <p style="font-size:1.05rem;color:var(--text-secondary);max-width:620px;">
+          The non-negotiable rules governing generative AI usage at the RTP Service Desk. Understand your boundaries, check compliance, and audit scripts correctly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container" style="padding-top:60px;padding-bottom:80px;">
+
+      <!-- ── Policy Validator Matrix ────────────────────────── -->
+      <section class="animate-on-scroll" id="validator">
+        <div class="matrix-card">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+            <div style="font-size:2rem;">🛡️</div>
+            <div>
+              <h3 style="margin:0;">Interactive <span class="gradient-text">Policy Compliance Validator</span></h3>
+              <p style="font-size:0.82rem;margin:0;color:var(--text-muted);">Select your organizational role and target data type to review your compliance instructions.</p>
+            </div>
+          </div>
+
+          <div class="pb-grid">
+            <div class="pb-group">
+              <label for="pmRole">1. Your Role</label>
+              <select id="pmRole" class="pb-select">
+                <option value="l1">New L1 Employee</option>
+                <option value="l2">Senior L1 / L2+ Staff</option>
+              </select>
+            </div>
+
+            <div class="pb-group">
+              <label for="pmData">2. Target Data Type</label>
+              <select id="pmData" class="pb-select">
+                <option value="public">Public Syntax / Sanitized error logs (Safe)</option>
+                <option value="restricted">Internal configurations / hostnames (Restricted)</option>
+                <option value="forbidden">Customer PII / credentials / trade secrets (Forbidden)</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="pmVerdictBox" class="verdict-box">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Data Security Classification Tables ────────────── -->
+      <section class="animate-on-scroll" id="classifications" style="margin-top:60px;">
+        <h2 style="margin-bottom:12px;">📊 Data Security Classification Guidelines</h2>
+        <p style="font-size:0.9rem;margin-bottom:28px;">All company information is categorized into three compliance classifications when communicating with LLM systems.</p>
+
+        <!-- SAFE -->
+        <div class="classification-box">
+          <div class="classification-header class-safe">
+            <span>🟢 CLASS A: PUBLIC &amp; GENERAL (SAFE)</span>
+          </div>
+          <div class="classification-body">
+            <p style="font-size:0.85rem;margin-bottom:14px;color:var(--text-primary);">Approved for processing across Rovo, Claude, or Gemini. Focuses on logic and syntax helper commands.</p>
+            <ul>
+              <li class="class-safe-li">Generic programming syntax (e.g. loops, arrays)</li>
+              <li class="class-safe-li">Regular expression formatting questions</li>
+              <li class="class-safe-li">Sanitized event logs (with server IPs removed)</li>
+              <li class="class-safe-li">Public API endpoint parameters &amp; parameters help</li>
+              <li class="class-safe-li">Standard Windows/macOS shell commands</li>
+              <li class="class-safe-li">Basic documentation formatting (Markdown tags)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- RESTRICTED -->
+        <div class="classification-box">
+          <div class="classification-header class-restricted">
+            <span>🟡 CLASS B: INTERNAL &amp; CONFIGURATION (RESTRICTED)</span>
+          </div>
+          <div class="classification-body">
+            <p style="font-size:0.85rem;margin-bottom:14px;color:var(--text-primary);">Must be thoroughly sanitized before inputting. Stripping all specific context indicators is required.</p>
+            <ul>
+              <li class="class-restricted-li">Internal Active Directory domain structures</li>
+              <li class="class-restricted-li">Private subnet ranges (e.g. 10.0.0.0/8)</li>
+              <li class="class-restricted-li">Specific server hostnames (e.g. DC-01.corp)</li>
+              <li class="class-restricted-li">Sanitized custom PowerShell automation scripts</li>
+              <li class="class-restricted-li">Software installation path directories</li>
+              <li class="class-restricted-li">Non-public internal ticketing log headers</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- FORBIDDEN -->
+        <div class="classification-box">
+          <div class="classification-header class-forbidden">
+            <span>🔴 CLASS C: CONFIDENTIAL &amp; PROPRIETARY (FORBIDDEN)</span>
+          </div>
+          <div class="classification-body">
+            <p style="font-size:0.85rem;margin-bottom:14px;color:var(--text-primary);"><strong style="color:#fca5a5;">DO NOT UNDER ANY CIRCUMSTANCES INPUT INTO PUBLIC CHATBOTS.</strong> Serious security incident risk.</p>
+            <ul>
+              <li class="class-forbidden-li">Customer Personally Identifiable Information (PII)</li>
+              <li class="class-forbidden-li">Passwords, access tokens, API credentials</li>
+              <li class="class-forbidden-li">Internal financial records and team budgets</li>
+              <li class="class-forbidden-li">Client contracts, SLAs, or proprietary codebases</li>
+              <li class="class-forbidden-li">Active security exploit traces or threat logs</li>
+              <li class="class-forbidden-li">Corporate email communications text</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Vetting Checklist ─────────────────────────────── -->
+      <section class="animate-on-scroll" id="checklist" style="margin-top:60px;">
+        <h2 style="margin-bottom:12px;">✅ Code Vetting Checklist</h2>
+        <p style="font-size:0.9rem;margin-bottom:24px;">Always verify AI-generated scripts or commands against this checklist before executing them in production or testing environments.</p>
+
+        <div class="card" style="padding:32px;">
+          <ul class="objectives" style="gap:14px;margin:0;">
+            <li>
+              <div>
+                <strong style="color:var(--text-primary);">1. Parameter check:</strong> Verify every parameter in the cmdlets or shell script. Look up unfamiliar parameters in the <a href="https://docs.microsoft.com/en-us/powershell" target="_blank" rel="noopener">PowerShell Docs</a>.
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong style="color:var(--text-primary);">2. Dry Run (-WhatIf flag):</strong> If the cmdlet makes changes (e.g. disabling, deleting, writing configurations), ensure a <code>-WhatIf</code> or <code>-Confirm</code> argument is piped first.
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong style="color:var(--text-primary);">3. Deprecation audit:</strong> AI training data may skew older. Confirm cmdlets (like <code>Send-MailMessage</code>) are not deprecated and match modern secure standards.
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong style="color:var(--text-primary);">4. Interface alias mismatch:</strong> Check hardware-specific names (e.g. InterfaceAlias Wi-Fi vs Ethernet). Ensure instructions are applicable to the user's specific system (Windows 11 vs Apple Silicon).
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong style="color:var(--text-primary);">5. IP Verification:</strong> Ensure all DNS IPs or gateway addresses are cross-referenced with internal documentation, rather than using model-generated ghost IPs.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Report compliance -->
+      <div class="callout callout-danger animate-on-scroll" style="margin-top:60px;">
+        <span class="callout-icon">🚨</span>
+        <div>
+          <strong>Compliance Incident?</strong> If you accidentally input Forbidden (Class C) data into a public consumer AI chatbot, do not try to delete the chat (which doesn't purge logs from corporate databases). Note down the timestamp, the prompt input, and report the incident immediately to your security lead.
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo" style="display:inline-flex;">
+            <div class="nav-logo-icon">🤖</div>
+            <span>AI Training Hub</span>
+          </div>
+          <p>Internal AI training series — Policies &amp; Best Practices. Training date: June 19, 2026.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Sections</h5>
+          <ul>
+            <li><a href="#validator">Compliance Matrix</a></li>
+            <li><a href="#classifications">Data Classifications</a></li>
+            <li><a href="#checklist">Vetting Checklist</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Navigation</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="level1.html">Level 1</a></li>
+            <li><a href="level2.html">Level 2</a></li>
+            <li><a href="activities.html">Activities</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="instructor.html" style="color:rgba(139,92,246,0.8);"><span style="margin-right:4px;">🔒</span>Instructor Portal</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Reference</h5>
+          <ul>
+            <li><a href="https://docs.microsoft.com/en-us/powershell" target="_blank" rel="noopener">PowerShell Docs</a></li>
+            <li><a href="level2.html#policy">AI Policy Overview</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Internal use only — Lunch &amp; Learn AI Training · RTP Service Desk</span>
+        <span>June 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
