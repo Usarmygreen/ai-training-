@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instructor Portal — AI Training Hub</title>
+  <meta name="description" content="Secure portal containing the facilitation scripts, timing cues, and guides for the Lunch & Learn session." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Custom page adjustments */
+    .locked-only { display: block; }
+    .auth-only { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────────────── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">🤖</div>
+        <span>AI Training Hub</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="level1.html">Level 1: Foundations <span class="nav-badge">L1</span></a></li>
+        <li><a href="level2.html">Level 2: Application <span class="nav-badge" style="background:rgba(37,99,235,0.15);border-color:rgba(37,99,235,0.3);color:var(--secondary-light)">L2</span></a></li>
+        <li><a href="activities.html">🎯 Activities</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── MAIN CONTENT ───────────────────────────────────────── -->
+  <main style="min-height: 80vh;">
+
+    <!-- 🔒 LOCK SCREEN PORTAL -->
+    <div id="lockScreen" class="locked-only">
+      <div class="vault-container">
+        <div class="vault-card" id="vaultCard">
+          <div class="vault-icon">🔐</div>
+          <h2 class="vault-title">Instructor Portal</h2>
+          <p class="vault-subtitle">Enter administrator passcode to access teaching scripts.</p>
+          
+          <div style="margin-bottom:20px;">
+            <input type="password" id="vaultPass" class="pb-input" style="width:100%; text-align:center; letter-spacing:0.1em; font-weight:700;" placeholder="••••••••••••" autofocus />
+          </div>
+
+          <div class="passcode-dots" id="dotsContainer" style="display:none;">
+            <span class="passcode-dot"></span>
+            <span class="passcode-dot"></span>
+            <span class="passcode-dot"></span>
+            <span class="passcode-dot"></span>
+          </div>
+
+          <button id="btnUnlock" class="btn btn-primary" style="width:100%; justify-content:center; padding:14px;">Verify Credentials</button>
+          
+          <div class="vault-error-msg" id="vaultError">Incorrect Passcode. Lockout active in 3 attempts.</div>
+          
+          <div style="margin-top:24px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.04); font-size:0.75rem; color:var(--text-muted);">
+            🔑 Admin default: <code style="color:var(--primary-light);">rtp-admin-2026</code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔓 INSTRUCTOR DASHBOARD -->
+    <div id="instructorDashboard" class="auth-only" style="padding-top:120px; padding-bottom:80px;">
+      <div class="container">
+        
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:32px;">
+          <div>
+            <div class="level-badge" style="background:rgba(124,58,237,0.12); border:1px solid rgba(124,58,237,0.3); color:var(--primary-light); margin-bottom:10px;">
+              🔒 Secure Administrator Control Panel
+            </div>
+            <h1 style="margin:0;">Instructor <span class="gradient-text">Dashboard</span></h1>
+            <p style="margin:6px 0 0; font-size:0.95rem;">Facilitation scripts, timing logs, and answer keys for tomorrow's Lunch &amp; Learn.</p>
+          </div>
+          <button id="btnLogout" class="btn-logout">Logout &amp; Lock</button>
+        </div>
+
+        <div class="inst-grid">
+          
+          <!-- Facilitation Timeline (Left) -->
+          <div class="inst-panel">
+            <h3 style="border-bottom:1px solid var(--border-subtle); padding-bottom:12px; margin-bottom:24px;">📝 Session Run-of-Show Script</h3>
+            
+            <div class="inst-agenda-list">
+              
+              <!-- Segment 1 -->
+              <div class="inst-agenda-item active" id="seg1">
+                <div class="inst-agenda-time">12:00 PM – 12:05 PM (5 mins)</div>
+                <div class="inst-agenda-title">
+                  👋 Welcome &amp; Setup Check
+                </div>
+                <div class="inst-agenda-desc">Set target goals, confirm screen share, and check Rovo login credentials.</div>
+                <div class="inst-notes-box">
+                  <div class="inst-notes-title">🎙️ Facilitator Script</div>
+                  <div class="inst-notes-content">
+                    <p>"Welcome everyone to our AI training session. Today, our goal is to build fluency in using Large Language Models safely, securely, and efficiently within the RTP Service Desk context. Over the next hour, we'll cover key AI concepts, walk through company usage policies, and complete two group scripting audits. Let's make sure everyone can access Atlassian Rovo at this time before we proceed."</p>
+                    <ul>
+                      <li>Verify screen sharing works for remote employees.</li>
+                      <li>Instruct new L1s to open <strong>rovo.atlassian.com</strong>.</li>
+                      <li>Highlight the main rule: <strong>Never copy-paste AI code blindly.</strong></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Segment 2 -->
+              <div class="inst-agenda-item" id="seg2">
+                <div class="inst-agenda-time">12:05 PM – 12:13 PM (8 mins)</div>
+                <div class="inst-agenda-title">
+                  🧠 What Is AI Actually Doing?
+                </div>
+                <div class="inst-agenda-desc">Plain language explanation of next-word prediction and hallucination patterns.</div>
+                <div class="inst-notes-box">
+                  <div class="inst-notes-title">🎙️ Facilitator Script</div>
+                  <div class="inst-notes-content">
+                    <p>"AI doesn't 'think' or understand facts. It is trained to predict the next most probable word based on massive patterns. This means AI will generate syntactically perfect code or IP addresses that are completely fabricated — a phenomenon called 'hallucinating.' This is why we verify, always."</p>
+                    <ul>
+                      <li>Ask: "Has anyone run into an AI hallucination yet? What did it make up?"</li>
+                      <li>Point to the <strong>Fluency Cheat Sheet</strong> on the Level 1 page for their quick reference.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Segment 3 -->
+              <div class="inst-agenda-item" id="seg3">
+                <div class="inst-agenda-time">12:13 PM – 12:20 PM (7 mins)</div>
+                <div class="inst-agenda-title">
+                  🔐 AI Policy Breakdown (Critical)
+                </div>
+                <div class="inst-agenda-desc">Review the two-tier usage rule. Explain data boundaries and public sharing risk.</div>
+                <div class="inst-notes-box">
+                  <div class="inst-notes-title">🎙️ Facilitator Script</div>
+                  <div class="inst-notes-content">
+                    <p>"We enforce a strict two-tier policy: New L1 employees use <strong>Atlassian Rovo only</strong> for work tasks. Rovo is enterprise-governed, data stays internal, and it is native to Jira. Senior L1 and L2+ staff may use external AIs (like Claude or Gemini) but must manually strip PII, credentials, or proprietary source code before pasting. You are fully responsible for what you deploy."</p>
+                    <ul>
+                      <li>Walk through the <strong>Enterprise vs. Consumer comparison table</strong> on Level 2 page.</li>
+                      <li>Flag: inputting client credentials into a consumer chat is a compliance violation.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Segment 4 -->
+              <div class="inst-agenda-item" id="seg4">
+                <div class="inst-agenda-time">12:20 PM – 12:32 PM (12 mins)</div>
+                <div class="inst-agenda-title">
+                  🎯 Group Activity 1: PowerShell Roulette
+                </div>
+                <div class="inst-agenda-desc">Groups audit an AI script disabling AD users. Run diagnostics in activities panel.</div>
+                <div class="inst-notes-box">
+                  <div class="inst-notes-title">🎙️ Facilitator Script &amp; Answer Key</div>
+                  <div class="inst-notes-content">
+                    <p>"Let's open our first group exercise: PowerShell Roulette. We asked the AI to disable stale AD accounts. Split into groups of 3 and take 5 minutes to audit the AI's script. What errors can you find?"</p>
+                    <p><strong>Answer Key — 3 Critical Bugs:</strong></p>
+                    <ul>
+                      <li><strong>Query Filter Failure:</strong> The AD Active Directory module cannot evaluate <code>LastLogonDate</code> inside the <code>-Filter</code> query. The cmdlet throws a fatal parser exception.</li>
+                      <li><strong>Safety Flag Missing:</strong> There is no <code>-WhatIf</code> flag. Running this would immediately write state changes to the active domain controllers, risking accidental system lockout.</li>
+                      <li><strong>Deprecated cmdlet:</strong> <code>Send-MailMessage</code> is officially deprecated and insecure (lacks modern TLS).</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Segment 5 -->
+              <div class="inst-agenda-item" id="seg5">
+                <div class="inst-agenda-time">12:32 PM – 12:40 PM (8 mins)</div>
+                <div class="inst-agenda-title">
+                  ✍️ Prompt Engineering &amp; PCTF
+                </div>
+                <div class="inst-agenda-desc">Introduce the PCTF framework. Demonstrate the interactive Prompt Composer.</div>
+                <div class="inst-notes-box">
+                  <div class="inst-notes-title">🎙️ Facilitator Script</div>
+                  <div class="inst-notes-content">
+                    <p>"Vague prompts yield generic, hallucination-prone results. Using the **PCTF framework** (Persona, Context, Task, Format) grounds the model. Let's look at the **Interactive Prompt Playground** on the homepage to demonstrate how we structure these fields for system admins."</p>
+                    <ul>
+                      <li>Show them how tweaking the 'Format' dropdown dynamically forces the output structure.</li>
+                      <li>Emphasize utilizing 'Custom Details' to input specific OS versions (e.g. Windows 11 vs Windows 7).</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Segment 6 -->
+              <div class="inst-agenda-item" id="seg6">
+                <div class="inst-agenda-time">12:40 PM – 12:52 PM (12 mins)</div>
+                <div class="inst-agenda-title">
+                  🎯 Group Activity 2: Apple Silicon SMC Trap
+                </div>
+                <div class="inst-agenda-desc">Pairs run the macOS M2 troubleshoot diagnostic. Highlight SMC platform errors.</div>
+                <div class="inst-notes-box">
+                  <div class="inst-notes-title">🎙️ Facilitator Script &amp; Answer Key</div>
+                  <div class="inst-notes-content">
+                    <p>"Let's look at Activity 2: The Apple Silicon platform trap. The prompt describes a Bluetooth issue on an M2 Mac. AI suggests holding Shift-Control-Option-Power to reset the SMC chip."</p>
+                    <p><strong>Answer Key — SMC does not exist:</strong></p>
+                    <ul>
+                      <li>SMC (System Management Controller) was an Intel-based chip. Apple M-chips manage these functions directly. The instructions waste user time and diminish service desk credibility.</li>
+                      <li>Have them click "Run Intel SMC command" to show the failure. Show the "Apple Silicon Bluetooth Fix" terminal to illustrate configuration cleanups.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Segment 7 -->
+              <div class="inst-agenda-item" id="seg7">
+                <div class="inst-agenda-time">12:52 PM – 1:00 PM (8 mins)</div>
+                <div class="inst-agenda-title">
+                  🗺️ Wrap-up, Toolkit, &amp; Open Q&amp;A
+                </div>
+                <div class="inst-agenda-desc">Walk through the Resource toolkit, answer final questions, and close.</div>
+                <div class="inst-notes-box">
+                  <div class="inst-notes-title">🎙️ Facilitator Script</div>
+                  <div class="inst-notes-content">
+                    <p>"To wrap up, please bookmark our Resources &amp; Toolkit page. New L1s, you are required to complete the Atlassian Course linked there in your first two weeks. Everyone else: use Microsoft Learn and PowerShell documentation links to verify scripts before running them. Any final questions?"</p>
+                    <ul>
+                      <li>Instruct attendees to join the internal AI discussion channel for updates.</li>
+                      <li>Thank them and conclude the session.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Controls panel (Right) -->
+          <div>
+            
+            <!-- Timing stopwatch widget -->
+            <div class="timer-widget">
+              <h4 style="margin:0;">⏱️ Session Timer</h4>
+              <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">Monitor the 60-minute duration live</p>
+              <div class="timer-display" id="timerDisplay">60:00</div>
+              <div class="timer-controls">
+                <button class="timer-btn" id="btnStart">Start</button>
+                <button class="timer-btn" id="btnPause">Pause</button>
+                <button class="timer-btn" id="btnReset">Reset</button>
+              </div>
+              <div style="font-size:0.75rem; color:var(--text-secondary); line-height:1.4;">
+                Active Segment: <strong id="activeSegment" style="color:var(--primary-light);">1. Welcome (00-05)</strong>
+              </div>
+            </div>
+
+            <!-- Quick Copy Scripts -->
+            <div class="inst-quick-links">
+              <h4>📋 Facilitator Quick Copies</h4>
+              <ul>
+                <li>
+                  <a href="#" class="copy-script-btn" data-script="Welcome team! Please confirm you have rovo.atlassian.com open and ready to follow along today.">
+                    <span>💬 Welcome Chat Notice</span>
+                    <span>📋</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="copy-script-btn" data-script="Group Activity 1: Open activities.html and audit the PowerShell AD script in Activity 1. Find all 3 critical errors. You have 5 minutes.">
+                    <span>💻 Activity 1 Launch Script</span>
+                    <span>📋</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="copy-script-btn" data-script="Here is the Atlassian Course link for L1 completion: https://community.atlassian.com/learning/team-training/course:15697742">
+                    <span>🟦 Atlassian course link</span>
+                    <span>📋</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Segment Selector -->
+            <div class="inst-quick-links" style="margin-top:20px;">
+              <h4>🧭 Jump to Segment</h4>
+              <ul style="gap:4px;">
+                <li><button class="timer-btn" style="width:100%; text-align:left;" onclick="setSegment(1)">1. Welcome &amp; Setup (5m)</button></li>
+                <li><button class="timer-btn" style="width:100%; text-align:left;" onclick="setSegment(2)">2. What is AI? (8m)</button></li>
+                <li><button class="timer-btn" style="width:100%; text-align:left;" onclick="setSegment(3)">3. Security Policy (7m)</button></li>
+                <li><button class="timer-btn" style="width:100%; text-align:left;" onclick="setSegment(4)">4. Activity 1 (12m)</button></li>
+                <li><button class="timer-btn" style="width:100%; text-align:left;" onclick="setSegment(5)">5. PCTF Prompts (8m)</button></li>
+                <li><button class="timer-btn" style="width:100%; text-align:left;" onclick="setSegment(6)">6. Activity 2 (12m)</button></li>
+                <li><button class="timer-btn" style="width:100%; text-align:left;" onclick="setSegment(7)">7. Wrap-up &amp; Q&amp;A (8m)</button></li>
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>Internal use only — Lunch &amp; Learn AI Training Series &middot; Instructor Portal</span>
+        <span>June 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── SCRIPTS ────────────────────────────────────────────── -->
+  <script src="app.js"></script>
+  <script>
+    // SHA-256 hash of "rtp-admin-2026"
+    const AUTH_HASH = "c61879fc0c6c4c44acd3748ad50d4510ace7a3073c38e8abba5e2897466c731b";
+
+    const lockScreen = document.getElementById('lockScreen');
+    const dashboard = document.getElementById('instructorDashboard');
+    const vaultPass = document.getElementById('vaultPass');
+    const vaultError = document.getElementById('vaultError');
+    const btnUnlock = document.getElementById('btnUnlock');
+    const btnLogout = document.getElementById('btnLogout');
+    const vaultCard = document.getElementById('vaultCard');
+
+    // Cryptographic hashing using Web Crypto API
+    async function hashPassword(str) {
+      const utf8 = new TextEncoder().encode(str);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      return hashHex;
+    }
+
+    async function attemptUnlock() {
+      const password = vaultPass.value;
+      const hashed = await hashPassword(password);
+      
+      if (hashed === AUTH_HASH) {
+        sessionStorage.setItem('inst_logged_in', 'true');
+        showDashboard();
+      } else {
+        vaultPass.value = '';
+        vaultCard.classList.add('shake');
+        vaultError.classList.add('visible');
+        setTimeout(() => {
+          vaultCard.classList.remove('shake');
+        }, 500);
+      }
+    }
+
+    function showDashboard() {
+      lockScreen.style.display = 'none';
+      dashboard.style.display = 'block';
+      initializeTimer();
+    }
+
+    function showLockScreen() {
+      sessionStorage.removeItem('inst_logged_in');
+      lockScreen.style.display = 'block';
+      dashboard.style.display = 'none';
+      clearInterval(timerInterval);
+    }
+
+    // Auto login check on load
+    if (sessionStorage.getItem('inst_logged_in') === 'true') {
+      showDashboard();
+    }
+
+    btnUnlock.addEventListener('click', attemptUnlock);
+    vaultPass.addEventListener('keypress', e => {
+      if (e.key === 'Enter') attemptUnlock();
+    });
+    btnLogout.addEventListener('click', showLockScreen);
+
+    // ── Timer & Stopwatch Logic ───────────────────────────────
+    let timerInterval;
+    let timeRemaining = 60 * 60; // 60 minutes in seconds
+    let isRunning = false;
+
+    const timerDisplay = document.getElementById('timerDisplay');
+    const btnStart = document.getElementById('btnStart');
+    const btnPause = document.getElementById('btnPause');
+    const btnReset = document.getElementById('btnReset');
+    const activeSegmentLabel = document.getElementById('activeSegment');
+
+    function updateTimerUI() {
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      
+      // Auto highlight active segment based on time elapsed
+      const timeElapsed = (60 * 60) - timeRemaining;
+      const minsElapsed = timeElapsed / 60;
+
+      if (minsElapsed < 5) {
+        setSegmentHighlight(1, "1. Welcome & Setup (00-05 mins)");
+      } else if (minsElapsed < 13) {
+        setSegmentHighlight(2, "2. What is AI? (05-13 mins)");
+      } else if (minsElapsed < 20) {
+        setSegmentHighlight(3, "3. Security Policy (13-20 mins)");
+      } else if (minsElapsed < 32) {
+        setSegmentHighlight(4, "4. Activity 1: AD Script (20-32 mins)");
+      } else if (minsElapsed < 40) {
+        setSegmentHighlight(5, "5. PCTF Prompts (32-40 mins)");
+      } else if (minsElapsed < 52) {
+        setSegmentHighlight(6, "6. Activity 2: SMC Trap (40-52 mins)");
+      } else {
+        setSegmentHighlight(7, "7. Wrap-up & Q&A (52-60 mins)");
+      }
+    }
+
+    function setSegmentHighlight(num, text) {
+      activeSegmentLabel.textContent = text;
+      
+      // Update visual active classes
+      document.querySelectorAll('.inst-agenda-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      const currentItem = document.getElementById(`seg${num}`);
+      if (currentItem) {
+        currentItem.classList.add('active');
+        currentItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function setSegment(num) {
+      clearInterval(timerInterval);
+      isRunning = false;
+      btnStart.classList.remove('active');
+      btnPause.classList.add('active');
+
+      let targetTime = 60 * 60;
+      switch(num) {
+        case 1: targetTime = 60 * 60; break;
+        case 2: targetTime = 55 * 60; break;
+        case 3: targetTime = 47 * 60; break;
+        case 4: targetTime = 40 * 60; break;
+        case 5: targetTime = 28 * 60; break;
+        case 6: targetTime = 20 * 60; break;
+        case 7: targetTime = 8 * 60; break;
+      }
+      timeRemaining = targetTime;
+      updateTimerUI();
+    }
+
+    function initializeTimer() {
+      updateTimerUI();
+    }
+
+    btnStart.addEventListener('click', () => {
+      if (!isRunning) {
+        isRunning = true;
+        btnStart.classList.add('active');
+        btnPause.classList.remove('active');
+        timerInterval = setInterval(() => {
+          if (timeRemaining > 0) {
+            timeRemaining--;
+            updateTimerUI();
+          } else {
+            clearInterval(timerInterval);
+            isRunning = false;
+          }
+        }, 1000);
+      }
+    });
+
+    btnPause.addEventListener('click', () => {
+      clearInterval(timerInterval);
+      isRunning = false;
+      btnStart.classList.remove('active');
+      btnPause.classList.add('active');
+    });
+
+    btnReset.addEventListener('click', () => {
+      clearInterval(timerInterval);
+      isRunning = false;
+      timeRemaining = 60 * 60;
+      btnStart.classList.remove('active');
+      btnPause.classList.remove('active');
+      updateTimerUI();
+    });
+
+    // ── Quick Copy Buttons ──────────────────────────────────────
+    document.querySelectorAll('.copy-script-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const textToCopy = btn.dataset.script;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          const originalText = btn.innerHTML;
+          btn.innerHTML = '<span>✓ Copied to clipboard!</span>';
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+          }, 2000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

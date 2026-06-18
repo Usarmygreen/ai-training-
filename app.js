@@ -148,4 +148,217 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ── Card spotlight movement effect ────────────────────────
+  document.addEventListener('mousemove', e => {
+    const cards = document.querySelectorAll('.card, .level-card, .tool-card, .ecosystem-card, .case-study-card, .pb-output-box, .terminal');
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+
+  // ── Prompt Builder composer ──────────────────────────────
+  const pbPersona = document.getElementById('pbPersona');
+  const pbContext = document.getElementById('pbContext');
+  const pbTask = document.getElementById('pbTask');
+  const pbFormat = document.getElementById('pbFormat');
+  const pbDetails = document.getElementById('pbDetails');
+  const pbText = document.getElementById('pbText');
+  const pbCopy = document.getElementById('pbCopy');
+
+  if (pbPersona && pbContext && pbTask && pbFormat && pbText && pbCopy) {
+    const updatePrompt = () => {
+      const p = pbPersona.value;
+      const c = pbContext.value;
+      const t = pbTask.value;
+      const f = pbFormat.value;
+      const d = pbDetails.value.trim();
+
+      let prompt = `Act as ${p}.\n\n`;
+      prompt += `Context: ${c}.`;
+      if (d) {
+        prompt += ` Additional details: ${d}`;
+      }
+      prompt += `\n\nTask: ${t}.\n\n`;
+      prompt += `Response Format: ${f}.`;
+
+      pbText.textContent = prompt;
+    };
+
+    [pbPersona, pbContext, pbTask, pbFormat, pbDetails].forEach(el => {
+      el.addEventListener('change', updatePrompt);
+      el.addEventListener('input', updatePrompt);
+    });
+
+    pbCopy.addEventListener('click', () => {
+      navigator.clipboard.writeText(pbText.textContent).then(() => {
+        const originalText = pbCopy.textContent;
+        pbCopy.textContent = '✓ Copied!';
+        pbCopy.style.background = 'var(--green)';
+        pbCopy.style.borderColor = 'var(--green)';
+        pbCopy.style.color = '#fff';
+        setTimeout(() => {
+          pbCopy.textContent = originalText;
+          pbCopy.style.background = '';
+          pbCopy.style.borderColor = '';
+          pbCopy.style.color = '';
+        }, 2000);
+      });
+    });
+
+    updatePrompt(); // initialize
+  }
+
+  // ── Terminal Simulator typing effect ────────────────────────
+  document.querySelectorAll('.terminal').forEach(term => {
+    const diagBtn = term.querySelector('.term-btn-diag');
+    const fixBtn = term.querySelector('.term-btn-fix');
+    const termBody = term.querySelector('.terminal-body');
+
+    if (termBody) {
+      const runTerminalAnimation = async (lines, isFix) => {
+        termBody.innerHTML = '';
+        termBody.classList.add('term-typing');
+        
+        if (diagBtn) diagBtn.disabled = true;
+        if (fixBtn) fixBtn.disabled = true;
+
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          const div = document.createElement('div');
+          div.className = 'term-line ' + (line.className || '');
+          termBody.appendChild(div);
+
+          if (line.isCmd) {
+            const promptSpan = document.createElement('span');
+            promptSpan.className = 't-prompt';
+            promptSpan.textContent = 'PS C:\\> ';
+            div.appendChild(promptSpan);
+
+            const cmdSpan = document.createElement('span');
+            cmdSpan.className = 't-cmd';
+            div.appendChild(cmdSpan);
+
+            await typeText(cmdSpan, line.text, 35);
+          } else {
+            div.innerHTML = line.text;
+          }
+          await sleep(line.delay || 250);
+        }
+
+        termBody.classList.remove('term-typing');
+        if (diagBtn) diagBtn.disabled = false;
+        if (fixBtn) fixBtn.disabled = false;
+      };
+
+      const typeText = (element, text, speed) => {
+        return new Promise(resolve => {
+          let i = 0;
+          const typing = setInterval(() => {
+            if (i < text.length) {
+              element.textContent += text.charAt(i);
+              i++;
+            } else {
+              clearInterval(typing);
+              resolve();
+            }
+          }, speed);
+        });
+      };
+
+      const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+      if (diagBtn) {
+        diagBtn.addEventListener('click', () => {
+          const termId = term.id;
+          let script = [];
+          if (termId === 'act1-term') {
+            script = [
+              { isCmd: true, text: 'Get-ADUser -Filter {LastLogonDate -lt (Get-Date).AddDays(-30)} -Properties LastLogonDate | Disable-ADAccount', delay: 400 },
+              { text: '<span class="t-err">Get-ADUser : Error parsing query: \'LastLogonDate -lt ...\' Error Message: \'Property \'LastLogonDate\' is not filterable.\'</span>', delay: 300 },
+              { text: '<span class="t-err">At line:1 char:1</span>', delay: 100 },
+              { text: '<span class="t-err">+ Get-ADUser -Filter {LastLogonDate -lt (Get-Date).AddDays(-30)} ...</span>', delay: 100 },
+              { text: '<span class="t-err">+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>', delay: 100 },
+              { text: '<span class="t-err">    + CategoryInfo          : InvalidArgument: (:) [Get-ADUser], ArgumentException</span>', delay: 100 },
+              { text: '<span class="t-err">    + FullyQualifiedErrorId : ActiveDirectoryCmdlet:Microsoft.ActiveDirectory.Management.Commands.GetADUser</span>', delay: 400 },
+              { text: '<span class="t-warn">⚠️ CRITICAL CRASH: Script halted. No accounts disabled.</span>', delay: 600 }
+            ];
+          } else if (termId === 'act2-term') {
+            script = [
+              { isCmd: true, text: 'sudo nvram -c ; sudo pmset -c smc', delay: 500 },
+              { text: '<span class="t-comment">Password: **********</span>', delay: 400 },
+              { text: '<span class="t-err">nvram: Error resetting variables: (iokit/common) not permitted</span>', delay: 300 },
+              { text: '<span class="t-err">pmset: SMC reset command not recognized on Apple Silicon platforms.</span>', delay: 300 },
+              { text: '<span class="t-comment">Checking hardware identifier...</span>', delay: 400 },
+              { text: '<span class="t-warn">Apple M2 MacBook Pro detected. SMC/NVRAM resets are deprecated on Apple Silicon.</span>', delay: 600 }
+            ];
+          } else if (termId === 'act3-term') {
+            script = [
+              { isCmd: true, text: 'bcdedit /set {default} safeboot minimal', delay: 450 },
+              { text: '<span class="t-err">An error occurred while attempting to reference the specified entry.</span>', delay: 300 },
+              { text: '<span class="t-err">The system cannot find the file specified.</span>', delay: 200 },
+              { text: '<span class="t-comment">Checking BCD store...</span>', delay: 400 },
+              { text: '<span class="t-warn">Warning: UEFI secure boot enabled. Fast startup bypasses F8 sequence.</span>', delay: 500 },
+              { text: '<span class="t-err">Safe Mode sequence failed. PC booted in Normal mode.</span>', delay: 600 }
+            ];
+          } else if (termId === 'act4-term') {
+            script = [
+              { isCmd: true, text: 'Resolve-DnsName -Name internalserver.corp -Server 157.58.0.0', delay: 450 },
+              { text: '<span class="t-comment">Resolving internalserver.corp via DNS resolver 157.58.0.0...</span>', delay: 600 },
+              { text: '<span class="t-err">Resolve-DnsName : internalserver.corp : DNS server failure</span>', delay: 300 },
+              { text: '<span class="t-err">Error: DNS query timed out (157.58.0.0 is unreachable on Port 53).</span>', delay: 400 }
+            ];
+          }
+          runTerminalAnimation(script, false);
+        });
+      }
+
+      if (fixBtn) {
+        fixBtn.addEventListener('click', () => {
+          const termId = term.id;
+          let script = [];
+          if (termId === 'act1-term') {
+            script = [
+              { isCmd: true, text: '$cutoff = (Get-Date).AddDays(-30); Get-ADUser -Filter {Enabled -eq $true} -Properties LastLogonDate | Where-Object {$_.LastLogonDate -lt $cutoff -and $_.LastLogonDate -ne $null} | Disable-ADAccount -WhatIf', delay: 500 },
+              { text: '<span class="t-good">WhatIf: Performing operation "Disable-ADAccount" on target "CN=John Doe,OU=Users,DC=company,DC=com".</span>', delay: 200 },
+              { text: '<span class="t-good">WhatIf: Performing operation "Disable-ADAccount" on target "CN=Test Account,OU=Users,DC=company,DC=com".</span>', delay: 200 },
+              { text: '<span class="t-good">WhatIf: Performing operation "Disable-ADAccount" on target "CN=Stale Service,OU=ServiceAccounts,DC=company,DC=com".</span>', delay: 200 },
+              { text: '<span class="t-good">Audit complete: 3 accounts identified for disabling. No changes applied (WhatIf enabled).</span>', delay: 500 }
+            ];
+          } else if (termId === 'act2-term') {
+            script = [
+              { isCmd: true, text: 'rm -f ~/Library/Preferences/com.apple.Bluetooth.plist ; sudo killall -9 bluetoothd', delay: 400 },
+              { text: '<span class="t-comment">Removing Bluetooth system configuration file...</span>', delay: 300 },
+              { text: '<span class="t-comment">Restarting bluetooth daemon...</span>', delay: 300 },
+              { text: '<span class="t-good">Bluetooth daemon restarted successfully. plist file regenerated.</span>', delay: 300 },
+              { text: '<span class="t-good">Bluetooth adapter online. Paired devices re-registered.</span>', delay: 500 }
+            ];
+          } else if (termId === 'act3-term') {
+            script = [
+              { isCmd: true, text: 'shutdown /r /o /f /t 00', delay: 400 },
+              { text: '<span class="t-comment">Initiating system shutdown for Recovery Options boot menu...</span>', delay: 300 },
+              { text: '<span class="t-good">PowerState: RESTART_RECOVERY_ENGAGED</span>', delay: 350 },
+              { text: '<span class="t-good">System rebooting to Windows Recovery Environment (WinRE)...</span>', delay: 500 }
+            ];
+          } else if (termId === 'act4-term') {
+            script = [
+              { isCmd: true, text: '$adapter = Get-NetAdapter | Where-Object {$_.Status -eq "Up"}; Get-DnsClientServerAddress -InterfaceIndex $adapter.InterfaceIndex', delay: 400 },
+              { text: '<span class="t-comment">InterfaceIndex  InterfaceAlias  AddressFamily  ServerAddresses</span>', delay: 150 },
+              { text: '12              Ethernet        IPv4           {10.0.0.10, 10.0.0.11}', delay: 200 },
+              { isCmd: true, text: 'Resolve-DnsName -Name internalserver.corp -Server 10.0.0.10', delay: 400 },
+              { text: '<span class="t-comment">Name                  Type   TTL   Section    IPAddress</span>', delay: 100 },
+              { text: 'internalserver.corp   A      3600  Answer     10.0.0.55', delay: 200 },
+              { text: '<span class="t-good">DNS name resolved successfully. Connection verified on port 53.</span>', delay: 500 }
+            ];
+          }
+          runTerminalAnimation(script, true);
+        });
+      }
+    }
+  });
+
 });
+

@@ -375,6 +375,80 @@
 
   <div class="divider"></div>
 
+  <!-- ── Prompt Builder Playground ──────────────────────────── -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="prompt-builder-card animate-on-scroll">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+          <div style="font-size:2rem;line-height:1;">🎯</div>
+          <div>
+            <h3 style="margin:0;">Interactive <span class="gradient-text">PCTF Prompt Playground</span></h3>
+            <p style="font-size:0.82rem;margin:0;color:var(--text-muted);">Construct enterprise-grade prompts for Rovo, Claude, or Gemini instantly.</p>
+          </div>
+        </div>
+
+        <div class="pb-grid">
+          <div class="pb-group">
+            <label for="pbPersona">P — Persona</label>
+            <select id="pbPersona" class="pb-select">
+              <option value="a Senior IT Support Engineer with 10 years experience">Senior IT Support Engineer</option>
+              <option value="a Senior PowerShell Developer specializing in Active Directory automation">PowerShell Specialist</option>
+              <option value="a macOS Security Administrator specializing in Apple Silicon">macOS Specialist</option>
+              <option value="a Network Infrastructure Specialist troubleshooting routing and DNS">Networking Analyst</option>
+              <option value="an IT Communications Specialist writing customer notices">IT Comms Specialist</option>
+            </select>
+          </div>
+
+          <div class="pb-group">
+            <label for="pbContext">C — Context</label>
+            <select id="pbContext" class="pb-select">
+              <option value="we are troubleshooting a critical VPN disconnect affecting remote users after an OS update">Remote VPN Disconnect</option>
+              <option value="we are auditing our active directory structure to clean up stale and disabled users safely">Active Directory Cleanup</option>
+              <option value="a VIP executive is unable to pair Bluetooth devices on an Apple M2 machine">Apple Silicon Bluetooth Issue</option>
+              <option value="we had a 2-hour email server outage affecting 300 users and must write a status review">IT Outage Comms</option>
+              <option value="triage a user ticket complaining of slow networks and popups after clicking a suspicious link">Phishing Triage & Network Slowness</option>
+            </select>
+          </div>
+
+          <div class="pb-group">
+            <label for="pbTask">T — Task</label>
+            <select id="pbTask" class="pb-select">
+              <option value="draft a step-by-step diagnostic and resolution guide highlighting common platform traps">Create Troubleshooting Guide</option>
+              <option value="write a safe PowerShell automation script including WhatIf flags and verification commands">Write Safe PowerShell Script</option>
+              <option value="write an empathetic, professional email communicating the post-incident summary">Draft Incident Email</option>
+              <option value="perform a security containment analysis and priority-based list of isolation steps">Triage Security Incident</option>
+            </select>
+          </div>
+
+          <div class="pb-group">
+            <label for="pbFormat">F — Format</label>
+            <select id="pbFormat" class="pb-select">
+              <option value="use a numbered list for steps. Highlight warning indicators in bold. Limit to 200 words">Numbered list with bold warnings</option>
+              <option value="provide clean, commented code blocks. Document cmdlet deprecations and alternatives">Commented Code Blocks</option>
+              <option value="a professional email structure (Subject, Greeting, Body, Sign-off). Under 150 words">Professional Email format</option>
+              <option value="a priority table (Issue, Severity, Action). Use Markdown syntax">Markdown Priority Table</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="pb-group" style="margin-bottom:24px;">
+          <label for="pbDetails">Custom Details / Specific Codes (Optional)</label>
+          <input type="text" id="pbDetails" class="pb-input" placeholder="e.g. OS version Windows 11, error code 0xc000021a, specific server subnet 10.0.0.0/24..." />
+        </div>
+
+        <div class="pb-output-box">
+          <div class="pb-output-header">
+            <div class="pb-output-title">Compiled Output (Ready to copy-paste to Rovo or Claude)</div>
+            <button id="pbCopy" class="pb-btn-copy">Copy Prompt</button>
+          </div>
+          <div id="pbText" class="pb-output-text"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
   <!-- ── Activities Preview ─────────────────────────────────── -->
   <section class="section">
     <div class="container">
@@ -466,6 +540,7 @@
             <li><a href="level1.html#prompting">PCTF Guide</a></li>
             <li><a href="activities.html#act1">PowerShell Activity</a></li>
             <li><a href="schedule.html">Tomorrow's Agenda</a></li>
+            <li><a href="instructor.html" style="color:rgba(139,92,246,0.8);"><span style="margin-right:4px;">🔒</span>Instructor Portal</a></li>
           </ul>
         </div>
       </div>

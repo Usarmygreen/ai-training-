@@ -297,12 +297,22 @@
           "Write me a PowerShell script to find all Active Directory users who have not logged in for more than 30 days and disable their accounts. Then email me a list of who was disabled."
         </div>
 
-        <div class="bad-output-label">❌ Typical Bad AI Output</div>
-        <div class="bad-output">
-Get-ADUser -Filter {LastLogonDate -lt (Get-Date).AddDays(-30)} -Properties LastLogonDate |<br>
-&nbsp;&nbsp;Disable-ADAccount<br><br>
-Send-MailMessage -To "admin@company.com" -From "script@company.com" `<br>
-&nbsp;&nbsp;-SmtpServer "smtp.company.com" -Subject "Disabled Users" -Body $disabledUsers
+        <div class="terminal-sim">
+          <div class="terminal" id="act1-term">
+            <div class="terminal-titlebar">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+              <span class="terminal-label">powershell-roulette.ps1 — Simulated Active Directory Audit</span>
+            </div>
+            <div class="term-controls">
+              <button class="term-btn term-btn-diag">Run Bad AI Script (Diagnostic)</button>
+              <button class="term-btn term-btn-fix">Run Corrected Script (Safe Version)</button>
+            </div>
+            <div class="terminal-body" style="font-size:0.78rem;padding:18px 22px;min-height:220px;">
+              <span class="t-comment"># Click one of the options above to simulate execution and audit the results...</span>
+            </div>
+          </div>
         </div>
 
         <div class="why-wrong">
@@ -314,16 +324,8 @@ Send-MailMessage -To "admin@company.com" -From "script@company.com" `<br>
           </ul>
         </div>
 
-        <div class="correct-label">✅ Corrected Script (Safe Version)</div>
-        <div class="correct-output">
-# Get all users, filter in PowerShell (not in AD filter)<br>
-$cutoff = (Get-Date).AddDays(-30)<br>
-$staleUsers = Get-ADUser -Filter {Enabled -eq $true} -Properties LastLogonDate |<br>
-&nbsp;&nbsp;Where-Object { $_.LastLogonDate -lt $cutoff -and $_.LastLogonDate -ne $null }<br><br>
-# REVIEW before disabling — use -WhatIf first!<br>
-$staleUsers | Disable-ADAccount -WhatIf<br><br>
-# After review, remove -WhatIf to execute:<br>
-# $staleUsers | Disable-ADAccount
+        <div style="margin-top:18px;">
+          <p style="font-size:0.8rem;color:var(--text-muted);"><em>Tip: Click <strong>"Run Corrected Script (Safe Version)"</strong> in the console emulator above to see how the corrected script behaves with <code>-WhatIf</code> enabled.</em></p>
         </div>
 
         <div class="debrief">
@@ -363,12 +365,22 @@ $staleUsers | Disable-ADAccount -WhatIf<br><br>
           PROMPT B: "How do I reset the NVRAM on a 2023 MacBook Pro?"
         </div>
 
-        <div class="bad-output-label">❌ Bad AI Output — Prompt A</div>
-        <div class="bad-output">
-          "Step 1: Restart your Mac and test Bluetooth again.<br>
-          Step 2: Remove device pairings from Bluetooth settings.<br>
-          Step 3: Reset the SMC (System Management Controller). Shut down your Mac completely. Hold <strong>Shift + Control + Option</strong> on the left keyboard, then simultaneously press the <strong>Power button</strong> for 10 seconds. Release all keys, then power on normally. This resets Bluetooth hardware state.<br>
-          Step 4: Reset NVRAM by holding <strong>⌘ + ⌥ + P + R</strong> at startup for 20 seconds."
+        <div class="terminal-sim">
+          <div class="terminal" id="act2-term">
+            <div class="terminal-titlebar">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+              <span class="terminal-label">macos-triage.sh — Apple Silicon Platform Audit</span>
+            </div>
+            <div class="term-controls">
+              <button class="term-btn term-btn-diag">Run Intel SMC command on M2 Mac</button>
+              <button class="term-btn term-btn-fix">Run Apple Silicon Bluetooth Fix</button>
+            </div>
+            <div class="terminal-body" style="font-size:0.78rem;padding:18px 22px;min-height:180px;">
+              <span class="t-comment"># Click one of the buttons above to simulate execution and audit the commands...</span>
+            </div>
+          </div>
         </div>
 
         <div class="why-wrong">
@@ -380,13 +392,8 @@ $staleUsers | Disable-ADAccount -WhatIf<br><br>
           </ul>
         </div>
 
-        <div class="correct-label">✅ Correct Steps for Apple Silicon Macs</div>
-        <div class="correct-output">
-          1. Option + click Bluetooth icon in menu bar → "Reset the Bluetooth module"<br>
-          2. If still failing: System Settings → Bluetooth → turn off, wait 10s, turn on<br>
-          3. Remove & re-pair the affected device<br>
-          4. If persistent: delete ~/Library/Preferences/com.apple.Bluetooth.plist → reboot<br>
-          5. Last resort: Safe Mode boot (hold Power until "Loading startup options") to test
+        <div style="margin-top:18px;">
+          <p style="font-size:0.8rem;color:var(--text-muted);"><em>Tip: Click <strong>"Run Apple Silicon Bluetooth Fix"</strong> in the console emulator above to see the output of resetting plist configurations.</em></p>
         </div>
 
         <div class="debrief">
@@ -424,15 +431,22 @@ $staleUsers | Disable-ADAccount -WhatIf<br><br>
           PROMPT B: "How do I boot a Windows 11 machine into Safe Mode?"
         </div>
 
-        <div class="bad-output-label">❌ Bad AI Output — Both Prompts Combined</div>
-        <div class="bad-output">
-          "To fix 0xc000021a:<br>
-          Step 1: Press F8 immediately during startup to access Safe Mode options.<br>
-          Step 2: Select 'Safe Mode with Command Prompt'.<br>
-          Step 3: Run: <strong>sfc /scannow</strong><br>
-          Step 4: Run: <strong>chkdsk C: /f /r</strong> — press Y to schedule on reboot.<br>
-          Step 5: Restart and the issue should be resolved.<br><br>
-          To boot into Safe Mode on Windows 11: press F8 at startup."
+        <div class="terminal-sim">
+          <div class="terminal" id="act3-term">
+            <div class="terminal-titlebar">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+              <span class="terminal-label">windows-safemode.ps1 — BCD Boot Configuration Manager</span>
+            </div>
+            <div class="term-controls">
+              <button class="term-btn term-btn-diag">Run Legacy F8 safe-mode command</button>
+              <button class="term-btn term-btn-fix">Run Windows 11 Reboot to Recovery</button>
+            </div>
+            <div class="terminal-body" style="font-size:0.78rem;padding:18px 22px;min-height:180px;">
+              <span class="t-comment"># Click one of the buttons above to simulate execution and audit the commands...</span>
+            </div>
+          </div>
         </div>
 
         <div class="why-wrong">
@@ -444,12 +458,8 @@ $staleUsers | Disable-ADAccount -WhatIf<br><br>
           </ul>
         </div>
 
-        <div class="correct-label">✅ Correct Windows 11 Safe Mode Entry</div>
-        <div class="correct-output">
-          Option 1 (if Windows loads): Settings → System → Recovery → Advanced Startup → Restart Now<br>
-          Option 2 (from login screen): Shift + click Restart → Troubleshoot → Advanced Options → Startup Settings<br>
-          Option 3 (PowerShell, elevated): shutdown /r /o /f /t 00<br>
-          Option 4 (if fully unbootable): Boot from Win11 USB → Troubleshoot → Advanced Options → Startup Settings
+        <div style="margin-top:18px;">
+          <p style="font-size:0.8rem;color:var(--text-muted);"><em>Tip: Click <strong>"Run Windows 11 Reboot to Recovery"</strong> in the console emulator above to see the correct modern command execution.</em></p>
         </div>
 
         <div class="debrief">
@@ -488,16 +498,22 @@ $staleUsers | Disable-ADAccount -WhatIf<br><br>
           PROMPT B: "Give me the PowerShell command to set a static IP of 192.168.1.50, subnet 255.255.255.0, gateway 192.168.1.1, and primary DNS 8.8.8.8 on a Windows 11 PC."
         </div>
 
-        <div class="bad-output-label">❌ Bad AI Output — Prompt A (DNS Triage)</div>
-        <div class="bad-output">
-          ipconfig /flushdns<br><br>
-          # Check current DNS:<br>
-          nslookup internalserver.corp 157.58.0.0<br><br>
-          # Set Microsoft's enterprise DNS fallback:<br>
-          Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `<br>
-          &nbsp;&nbsp;-ServerAddresses ("157.58.0.0","157.58.0.1")<br><br>
-          # Test resolution:<br>
-          Resolve-DnsName -Name internalserver.corp -Type A
+        <div class="terminal-sim">
+          <div class="terminal" id="act4-term">
+            <div class="terminal-titlebar">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+              <span class="terminal-label">dns-resolver.ps1 — Active Directory Network Triage</span>
+            </div>
+            <div class="term-controls">
+              <button class="term-btn term-btn-diag">Run DNS query on fabricated IP (157.58.0.0)</button>
+              <button class="term-btn term-btn-fix">Run local AD DNS resolution check</button>
+            </div>
+            <div class="terminal-body" style="font-size:0.78rem;padding:18px 22px;min-height:200px;">
+              <span class="t-comment"># Click one of the buttons above to simulate execution and audit the commands...</span>
+            </div>
+          </div>
         </div>
 
         <div class="why-wrong">
@@ -525,16 +541,8 @@ $staleUsers | Disable-ADAccount -WhatIf<br><br>
           </ul>
         </div>
 
-        <div class="correct-label">✅ Safe DNS Triage Flow (PowerShell)</div>
-        <div class="correct-output">
-          # Step 1: See current adapter names<br>
-          Get-NetAdapter | Select-Object Name, Status<br><br>
-          # Step 2: Check assigned DNS servers<br>
-          Get-DnsClientServerAddress -AddressFamily IPv4<br><br>
-          # Step 3: Test connectivity to YOUR internal DNS server<br>
-          Test-NetConnection -ComputerName 10.0.0.10 -Port 53<br><br>
-          # Step 4: Query internal name against internal DNS<br>
-          Resolve-DnsName -Name internalserver.corp -Server 10.0.0.10
+        <div style="margin-top:18px;">
+          <p style="font-size:0.8rem;color:var(--text-muted);"><em>Tip: Click <strong>"Run local AD DNS resolution check"</strong> in the console emulator above to see the correct PowerShell lookup routing.</em></p>
         </div>
 
         <div class="debrief">
@@ -693,6 +701,7 @@ $staleUsers | Disable-ADAccount -WhatIf<br><br>
             <li><a href="level1.html">Level 1</a></li>
             <li><a href="level2.html">Level 2</a></li>
             <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="instructor.html" style="color:rgba(139,92,246,0.8);"><span style="margin-right:4px;">🔒</span>Instructor Portal</a></li>
           </ul>
         </div>
         <div class="footer-col">
