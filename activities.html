@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Group Activities — AI Training Hub</title>
+  <meta name="description" content="Hands-on prompting group activities for the RTP Service Desk: PowerShell, Mac/PC troubleshooting, networking — with real bad AI outputs and explanations." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .activity-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-slow);
+    }
+    .activity-card:hover { border-color: rgba(124,58,237,0.2); }
+
+    .activity-number {
+      position: absolute;
+      top: 28px; right: 28px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 4.5rem; font-weight: 900;
+      opacity: 0.04; line-height: 1;
+    }
+
+    .activity-header { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 20px; }
+    .activity-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; flex-shrink: 0;
+    }
+
+    .activity-meta {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      margin: 12px 0 18px;
+    }
+    .activity-meta span {
+      font-size: 0.72rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .activity-meta .meta-highlight {
+      background: rgba(124,58,237,0.12);
+      color: var(--primary-light);
+      border-color: rgba(124,58,237,0.2);
+    }
+
+    .steps-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+    .steps-list li { display: flex; gap: 12px; align-items: flex-start; }
+    .step-bubble {
+      flex-shrink: 0;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: rgba(124,58,237,0.2);
+      color: var(--primary-light);
+      font-size: 0.72rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+    }
+    .steps-list li p { font-size: 0.875rem; color: var(--text-secondary); margin: 0; }
+
+    .prompt-box {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-left: 3px solid var(--primary-light);
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      color: var(--accent-light);
+      margin: 14px 0;
+      line-height: 1.7;
+    }
+
+    .bad-output-label {
+      font-size: 0.7rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #fca5a5;
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.2);
+      padding: 4px 12px; border-radius: 999px;
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-bottom: 10px; margin-top: 18px;
+    }
+
+    .bad-output {
+      background: rgba(239,68,68,0.05);
+      border: 1px solid rgba(239,68,68,0.15);
+      border-left: 3px solid #fca5a5;
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      color: #fca5a5;
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .why-wrong {
+      background: rgba(239,68,68,0.06);
+      border: 1px solid rgba(239,68,68,0.18);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+    }
+    .why-wrong-title {
+      font-size: 0.78rem; font-weight: 700;
+      color: #fca5a5; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .why-wrong ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .why-wrong ul li {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .err-num {
+      flex-shrink: 0;
+      font-weight: 700; color: #fca5a5;
+      font-size: 0.85rem;
+    }
+    .why-wrong code { color: #fcd34d; font-family: 'Courier New', monospace; font-size: 0.8rem; }
+
+    .correct-label {
+      font-size: 0.7rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #6ee7b7;
+      background: rgba(16,185,129,0.1);
+      border: 1px solid rgba(16,185,129,0.2);
+      padding: 4px 12px; border-radius: 999px;
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-bottom: 10px; margin-top: 14px;
+    }
+
+    .correct-output {
+      background: rgba(16,185,129,0.05);
+      border: 1px solid rgba(16,185,129,0.15);
+      border-left: 3px solid #6ee7b7;
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      color: #6ee7b7;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .debrief {
+      background: rgba(6,182,212,0.06);
+      border: 1px solid rgba(6,182,212,0.2);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-top: 16px;
+    }
+    .debrief-title { font-size: 0.8rem; font-weight: 700; color: var(--accent-light); margin-bottom: 8px; }
+    .debrief ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .debrief ul li { font-size: 0.82rem; color: var(--text-secondary); }
+    .debrief ul li::before { content: '💬 '; }
+
+    /* Filter tabs */
+    .filter-tabs {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .filter-tab {
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 0.8rem; font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      cursor: pointer; transition: var(--transition);
+    }
+    .filter-tab:hover, .filter-tab.active {
+      background: rgba(124,58,237,0.15);
+      border-color: rgba(124,58,237,0.3);
+      color: var(--primary-light);
+    }
+
+    /* Scoreboard */
+    .scoreboard {
+      background: linear-gradient(135deg,rgba(124,58,237,0.1),rgba(6,182,212,0.05));
+      border: 1px solid rgba(124,58,237,0.2);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 40px;
+    }
+    .score-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 16px; }
+    .score-item { text-align: center; }
+    .score-value { font-family:'Outfit',sans-serif; font-size:1.8rem; font-weight:800; background:var(--gradient-text); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .score-label { font-size:0.72rem; color:var(--text-muted); }
+
+    @media (max-width:768px) {
+      .score-grid { grid-template-columns: repeat(2,1fr); }
+      .activity-card { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────────────── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">🤖</div>
+        <span>AI Training Hub</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="level1.html">Level 1: Foundations <span class="nav-badge">L1</span></a></li>
+        <li><a href="level2.html">Level 2: Application <span class="nav-badge" style="background:rgba(37,99,235,0.15);border-color:rgba(37,99,235,0.3);color:var(--secondary-light)">L2</span></a></li>
+        <li><a href="activities.html">🎯 Activities</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Page Hero ──────────────────────────────────────────── -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-content">
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span>›</span>
+          <span>Group Activities</span>
+        </div>
+        <div class="level-badge level-badge-l1">🎯 Hands-On Group Activities</div>
+        <h1>Prompting <span class="gradient-text">Activities</span></h1>
+        <p style="font-size:1.05rem;color:var(--text-secondary);max-width:620px;">
+          Real service desk scenarios — PowerShell, Mac & PC troubleshooting, and networking. Every activity includes <strong style="color:#fca5a5;">intentionally wrong AI outputs</strong> with detailed breakdowns of exactly what went wrong and why.
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;">
+          <span class="phase-pill active"><span class="dot"></span> 6 Activities · All Levels</span>
+          <span style="font-size:0.8rem;color:var(--text-muted);display:flex;align-items:center;">🟦 Optimized for Atlassian Rovo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container" style="padding-top:60px;padding-bottom:80px;">
+
+      <!-- Scoreboard / Stats -->
+      <div class="scoreboard animate-on-scroll">
+        <h4 style="margin-bottom:4px;">📊 Activity Overview</h4>
+        <p style="font-size:0.85rem;margin:0;">Use these across Sessions 1–4. Mix and match based on your group's skill level.</p>
+        <div class="score-grid">
+          <div class="score-item"><div class="score-value">6</div><div class="score-label">Total Activities</div></div>
+          <div class="score-item"><div class="score-value">4</div><div class="score-label">Bad Output Examples</div></div>
+          <div class="score-item"><div class="score-value">~75</div><div class="score-label">Total Minutes</div></div>
+          <div class="score-item"><div class="score-value">3</div><div class="score-label">Topic Areas</div></div>
+        </div>
+      </div>
+
+      <!-- Filter tabs (visual only — all activities always shown) -->
+      <div class="filter-tabs animate-on-scroll">
+        <span class="filter-tab active">All Activities</span>
+        <span class="filter-tab">💻 PowerShell</span>
+        <span class="filter-tab">🍎 Mac Troubleshooting</span>
+        <span class="filter-tab">🪟 Windows/PC</span>
+        <span class="filter-tab">🌐 Networking</span>
+        <span class="filter-tab">✍️ Prompt Craft</span>
+      </div>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- ACTIVITY 1: PowerShell Script Audit        -->
+      <!-- ═══════════════════════════════════════════ -->
+      <div class="activity-card animate-on-scroll" id="act1">
+        <div class="activity-number">01</div>
+        <div class="activity-header">
+          <div class="activity-icon card-icon-purple">💻</div>
+          <div>
+            <div class="module-tag tag-purple" style="margin-bottom:6px;">PowerShell · L1</div>
+            <h3 style="margin-bottom:4px;">"PowerShell Roulette" — Script Audit</h3>
+            <p style="font-size:0.875rem;margin:0;">Ask AI to write an AD automation script, then find the bugs before they hit production.</p>
+          </div>
+        </div>
+        <div class="activity-meta">
+          <span>👥 Groups of 3–4</span>
+          <span>⏱️ 12 min</span>
+          <span class="meta-highlight">🟦 Rovo</span>
+          <span>🎫 Service Desk</span>
+          <span>⭐ Beginner Friendly</span>
+        </div>
+
+        <div class="prompt-box">
+          "Write me a PowerShell script to find all Active Directory users who have not logged in for more than 30 days and disable their accounts. Then email me a list of who was disabled."
+        </div>
+
+        <div class="bad-output-label">❌ Typical Bad AI Output</div>
+        <div class="bad-output">
+Get-ADUser -Filter {LastLogonDate -lt (Get-Date).AddDays(-30)} -Properties LastLogonDate |<br>
+&nbsp;&nbsp;Disable-ADAccount<br><br>
+Send-MailMessage -To "admin@company.com" -From "script@company.com" `<br>
+&nbsp;&nbsp;-SmtpServer "smtp.company.com" -Subject "Disabled Users" -Body $disabledUsers
+        </div>
+
+        <div class="why-wrong">
+          <div class="why-wrong-title">🔍 Why This Is Wrong — 3 Critical Errors</div>
+          <ul>
+            <li><span class="err-num">①</span><div><strong style="color:var(--text-primary);">LastLogonDate is NOT usable inside -Filter:</strong> The AD <code>-Filter</code> parameter uses a limited query language that cannot evaluate date comparisons using <code>LastLogonDate</code>. The script will throw an error or silently return 0 users. The correct approach: <code>Get-ADUser -Filter * -Properties LastLogonDate | Where-Object { $_.LastLogonDate -lt (Get-Date).AddDays(-30) }</code></div></li>
+            <li><span class="err-num">②</span><div><strong style="color:var(--text-primary);">No -WhatIf flag — this WILL disable accounts immediately:</strong> In a real environment with hundreds of users, this script would disable service accounts, shared mailboxes, and admin accounts with zero warning. Always add <code>-WhatIf</code> and pipe to a review step first.</div></li>
+            <li><span class="err-num">③</span><div><strong style="color:var(--text-primary);">Send-MailMessage is officially deprecated (since PowerShell 7.1):</strong> It has no TLS 1.2/1.3 support and is flagged as a security risk. Modern replacement: <code>Send-MgUserMail</code> via the Microsoft Graph SDK, or route through an approved SMTP relay with explicit TLS settings.</div></li>
+          </ul>
+        </div>
+
+        <div class="correct-label">✅ Corrected Script (Safe Version)</div>
+        <div class="correct-output">
+# Get all users, filter in PowerShell (not in AD filter)<br>
+$cutoff = (Get-Date).AddDays(-30)<br>
+$staleUsers = Get-ADUser -Filter {Enabled -eq $true} -Properties LastLogonDate |<br>
+&nbsp;&nbsp;Where-Object { $_.LastLogonDate -lt $cutoff -and $_.LastLogonDate -ne $null }<br><br>
+# REVIEW before disabling — use -WhatIf first!<br>
+$staleUsers | Disable-ADAccount -WhatIf<br><br>
+# After review, remove -WhatIf to execute:<br>
+# $staleUsers | Disable-ADAccount
+        </div>
+
+        <div class="debrief">
+          <div class="debrief-title">💬 Group Debrief Questions</div>
+          <ul>
+            <li>Was the bad script syntactically convincing? Would you have run it?</li>
+            <li>What's the worst-case outcome if this ran against your real AD environment?</li>
+            <li>What approval process should gate any AI-generated script that modifies user accounts?</li>
+            <li>How would you rewrite the prompt to get a safer script from the start?</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- ACTIVITY 2: Mac Apple Silicon Trap         -->
+      <!-- ═══════════════════════════════════════════ -->
+      <div class="activity-card animate-on-scroll" id="act2">
+        <div class="activity-number">02</div>
+        <div class="activity-header">
+          <div class="activity-icon card-icon-amber">🍎</div>
+          <div>
+            <div class="module-tag tag-atl" style="margin-bottom:6px;">Mac Troubleshooting · L1</div>
+            <h3 style="margin-bottom:4px;">"The Apple Silicon Trap" — Hardware Platform Mismatch</h3>
+            <p style="font-size:0.875rem;margin:0;">AI constantly applies Intel Mac fixes to Apple Silicon (M-chip) Macs. Catch it before the user wastes 20 minutes.</p>
+          </div>
+        </div>
+        <div class="activity-meta">
+          <span>👥 Pairs</span>
+          <span>⏱️ 10 min</span>
+          <span class="meta-highlight">🟦 Rovo</span>
+          <span>🍎 Mac Focus</span>
+          <span>⭐ Common Real-World Scenario</span>
+        </div>
+
+        <div class="prompt-box">
+          PROMPT A: "A user has an Apple M2 MacBook Pro running macOS Sonoma. Bluetooth is not detecting any devices. Walk me through the complete fix step by step."<br><br>
+          PROMPT B: "How do I reset the NVRAM on a 2023 MacBook Pro?"
+        </div>
+
+        <div class="bad-output-label">❌ Bad AI Output — Prompt A</div>
+        <div class="bad-output">
+          "Step 1: Restart your Mac and test Bluetooth again.<br>
+          Step 2: Remove device pairings from Bluetooth settings.<br>
+          Step 3: Reset the SMC (System Management Controller). Shut down your Mac completely. Hold <strong>Shift + Control + Option</strong> on the left keyboard, then simultaneously press the <strong>Power button</strong> for 10 seconds. Release all keys, then power on normally. This resets Bluetooth hardware state.<br>
+          Step 4: Reset NVRAM by holding <strong>⌘ + ⌥ + P + R</strong> at startup for 20 seconds."
+        </div>
+
+        <div class="why-wrong">
+          <div class="why-wrong-title">🔍 Why This Is Wrong — 3 Errors</div>
+          <ul>
+            <li><span class="err-num">①</span><div><strong style="color:var(--text-primary);">SMC does NOT exist on Apple Silicon Macs (M1/M2/M3/M4):</strong> The System Management Controller was a physical chip on Intel Macs. It simply does not exist on any M-series Mac. Performing this key combo does absolutely nothing and wastes the user's time. Sending this to a user erodes their trust in you.</div></li>
+            <li><span class="err-num">②</span><div><strong style="color:var(--text-primary);">NVRAM reset via ⌘+⌥+P+R does NOT work the same on Apple Silicon:</strong> On M-chip Macs, NVRAM is reset automatically on every boot as part of the secure boot process. The key combination has no equivalent effect. Apple's official documentation confirms this.</div></li>
+            <li><span class="err-num">③</span><div><strong style="color:var(--text-primary);">The correct M2 Bluetooth fix was never mentioned:</strong> The actual fix is: Option+click the Bluetooth menu bar icon → "Reset the Bluetooth module" (macOS Ventura/Sonoma). Or: delete <code>~/Library/Preferences/com.apple.Bluetooth.plist</code> and reboot. These are the documented Apple Silicon steps.</div></li>
+          </ul>
+        </div>
+
+        <div class="correct-label">✅ Correct Steps for Apple Silicon Macs</div>
+        <div class="correct-output">
+          1. Option + click Bluetooth icon in menu bar → "Reset the Bluetooth module"<br>
+          2. If still failing: System Settings → Bluetooth → turn off, wait 10s, turn on<br>
+          3. Remove & re-pair the affected device<br>
+          4. If persistent: delete ~/Library/Preferences/com.apple.Bluetooth.plist → reboot<br>
+          5. Last resort: Safe Mode boot (hold Power until "Loading startup options") to test
+        </div>
+
+        <div class="debrief">
+          <div class="debrief-title">💬 Group Debrief Questions</div>
+          <ul>
+            <li>If you sent the bad instructions to a user, how long would they spend on Step 3 before realizing it did nothing?</li>
+            <li>What prompt addition forces AI to specify which Mac generation it's giving instructions for?</li>
+            <li>What's your verification step before sending any Mac troubleshooting guide to a user?</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- ACTIVITY 3: Windows 11 Legacy Commands      -->
+      <!-- ═══════════════════════════════════════════ -->
+      <div class="activity-card animate-on-scroll" id="act3">
+        <div class="activity-number">03</div>
+        <div class="activity-header">
+          <div class="activity-icon card-icon-blue">🪟</div>
+          <div>
+            <div class="module-tag tag-blue" style="margin-bottom:6px;">Windows Troubleshooting · L1</div>
+            <h3 style="margin-bottom:4px;">"Legacy Command Trap" — Windows 7 Advice on Windows 11</h3>
+            <p style="font-size:0.875rem;margin:0;">AI training data skews toward older Windows versions. Catch outdated commands before they confuse users or fail silently.</p>
+          </div>
+        </div>
+        <div class="activity-meta">
+          <span>👥 Groups of 3</span>
+          <span>⏱️ 12 min</span>
+          <span class="meta-highlight">🟦 Rovo</span>
+          <span>🪟 Windows 11 Focus</span>
+        </div>
+
+        <div class="prompt-box">
+          PROMPT A: "A Windows 11 user's PC shows BSOD error 0xc000021a and won't boot. Give me the step-by-step fix."<br><br>
+          PROMPT B: "How do I boot a Windows 11 machine into Safe Mode?"
+        </div>
+
+        <div class="bad-output-label">❌ Bad AI Output — Both Prompts Combined</div>
+        <div class="bad-output">
+          "To fix 0xc000021a:<br>
+          Step 1: Press F8 immediately during startup to access Safe Mode options.<br>
+          Step 2: Select 'Safe Mode with Command Prompt'.<br>
+          Step 3: Run: <strong>sfc /scannow</strong><br>
+          Step 4: Run: <strong>chkdsk C: /f /r</strong> — press Y to schedule on reboot.<br>
+          Step 5: Restart and the issue should be resolved.<br><br>
+          To boot into Safe Mode on Windows 11: press F8 at startup."
+        </div>
+
+        <div class="why-wrong">
+          <div class="why-wrong-title">🔍 Why This Is Wrong — 3 Errors</div>
+          <ul>
+            <li><span class="err-num">①</span><div><strong style="color:var(--text-primary);">F8 at startup is DISABLED by default on Windows 10/11:</strong> Fast Startup + UEFI boot makes Windows boot too fast for F8 to register. This will fail for the vast majority of users. Correct methods: Shift+Restart → Troubleshoot → Advanced → Startup Settings, or <code>bcdedit /set {default} safeboot minimal</code> from an elevated CMD (if Windows still loads).</div></li>
+            <li><span class="err-num">②</span><div><strong style="color:var(--text-primary);">0xc000021a is a critical process death — sfc/scannow alone won't fix it:</strong> This BSOD means a critical user-mode process (winlogon.exe or csrss.exe) crashed fatally. SFC fixes corrupt system files, not crashed processes. The correct path: Boot from Windows 11 installation media → Startup Repair, or <code>DISM /Image:C:\ /Cleanup-Image /RestoreHealth</code> from WinPE.</div></li>
+            <li><span class="err-num">③</span><div><strong style="color:var(--text-primary);">chkdsk /r can take hours and may not be relevant:</strong> Running a full drive scan before ruling out other causes (driver corruption, recent update) wastes hours. Always check Event Viewer (via WinPE) for the specific process that crashed before prescribing disk repairs.</div></li>
+          </ul>
+        </div>
+
+        <div class="correct-label">✅ Correct Windows 11 Safe Mode Entry</div>
+        <div class="correct-output">
+          Option 1 (if Windows loads): Settings → System → Recovery → Advanced Startup → Restart Now<br>
+          Option 2 (from login screen): Shift + click Restart → Troubleshoot → Advanced Options → Startup Settings<br>
+          Option 3 (PowerShell, elevated): shutdown /r /o /f /t 00<br>
+          Option 4 (if fully unbootable): Boot from Win11 USB → Troubleshoot → Advanced Options → Startup Settings
+        </div>
+
+        <div class="debrief">
+          <div class="debrief-title">💬 Group Debrief Questions</div>
+          <ul>
+            <li>A user follows the F8 instructions for 10 minutes and can't get Safe Mode. What's the support call like?</li>
+            <li>How do you prompt AI to always specify OS version compatibility for its instructions?</li>
+            <li>What's your internal verification resource for Windows troubleshooting? (Hint: docs.microsoft.com)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- ACTIVITY 4: DNS Hallucination               -->
+      <!-- ═══════════════════════════════════════════ -->
+      <div class="activity-card animate-on-scroll" id="act4">
+        <div class="activity-number">04</div>
+        <div class="activity-header">
+          <div class="activity-icon card-icon-cyan">🌐</div>
+          <div>
+            <div class="module-tag tag-cyan" style="margin-bottom:6px;">Networking · L1–L2</div>
+            <h3 style="margin-bottom:4px;">"Network Ghost" — Fabricated IPs & DNS Hallucinations</h3>
+            <p style="font-size:0.875rem;margin:0;">AI will confidently invent IP addresses and DNS server IPs. Deploy them and you break production. Find them first.</p>
+          </div>
+        </div>
+        <div class="activity-meta">
+          <span>👥 Teams of 3–5</span>
+          <span>⏱️ 20 min</span>
+          <span class="meta-highlight">🟦 Rovo</span>
+          <span>🌐 Networking</span>
+          <span>🏆 Competitive — find all 4 errors first</span>
+        </div>
+
+        <div class="prompt-box">
+          PROMPT A: "A Windows 11 user cannot resolve internal hostnames but can ping external sites by IP address. Walk me through the PowerShell diagnosis and fix for the DNS issue."<br><br>
+          PROMPT B: "Give me the PowerShell command to set a static IP of 192.168.1.50, subnet 255.255.255.0, gateway 192.168.1.1, and primary DNS 8.8.8.8 on a Windows 11 PC."
+        </div>
+
+        <div class="bad-output-label">❌ Bad AI Output — Prompt A (DNS Triage)</div>
+        <div class="bad-output">
+          ipconfig /flushdns<br><br>
+          # Check current DNS:<br>
+          nslookup internalserver.corp 157.58.0.0<br><br>
+          # Set Microsoft's enterprise DNS fallback:<br>
+          Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `<br>
+          &nbsp;&nbsp;-ServerAddresses ("157.58.0.0","157.58.0.1")<br><br>
+          # Test resolution:<br>
+          Resolve-DnsName -Name internalserver.corp -Type A
+        </div>
+
+        <div class="why-wrong">
+          <div class="why-wrong-title">🔍 Why This Is Wrong — 3 Errors</div>
+          <ul>
+            <li><span class="err-num">①</span><div><strong style="color:var(--text-primary);">157.58.0.0 is a FABRICATED IP — not a Microsoft DNS server:</strong> This address does not exist as a public Microsoft resolver. Configuring production machines with this address causes complete DNS failure. Microsoft's actual resolver (Azure DNS) is at 168.63.129.16 — and that's only reachable from within Azure VNets. Always verify DNS IPs against official Microsoft documentation or your own AD DNS servers.</div></li>
+            <li><span class="err-num">②</span><div><strong style="color:var(--text-primary);">Using Google 8.8.8.8 or external DNS for internal hostname resolution is wrong:</strong> Internal hostnames (like <code>internalserver.corp</code>) only resolve via your internal AD/DNS infrastructure. External DNS servers have no knowledge of your internal zones. This makes the problem worse, not better.</div></li>
+            <li><span class="err-num">③</span><div><strong style="color:var(--text-primary);">Missing the actual first steps of DNS triage:</strong> The real flow is: <code>ipconfig /all</code> → verify which DNS servers are assigned → <code>Test-NetConnection -ComputerName [your-DNS-server] -Port 53</code> → then <code>nslookup</code> against your known-good internal resolver.</div></li>
+          </ul>
+        </div>
+
+        <div class="bad-output-label">❌ Bad AI Output — Prompt B (Static IP)</div>
+        <div class="bad-output">
+          New-NetIPAddress -InterfaceAlias "Local Area Connection" `<br>
+          &nbsp;&nbsp;-IPAddress 192.168.1.50 -PrefixLength 24 `<br>
+          &nbsp;&nbsp;-DefaultGateway 192.168.1.1<br><br>
+          Set-DnsClientServerAddress -InterfaceAlias "Local Area Connection" `<br>
+          &nbsp;&nbsp;-ServerAddresses "8.8.8.8"
+        </div>
+
+        <div class="why-wrong">
+          <div class="why-wrong-title">🔍 Why This Is Wrong — 1 Critical Error</div>
+          <ul>
+            <li><span class="err-num">①</span><div><strong style="color:var(--text-primary);">"Local Area Connection" is a Windows 7/Vista-era interface name:</strong> Windows 10 and 11 name interfaces "Ethernet", "Ethernet 2", "Wi-Fi", etc. This command will fail with a silent error ("interface not found") or throw an exception. Before setting any IP config, always run <code>Get-NetAdapter</code> to get the actual interface alias name on this specific machine.</div></li>
+          </ul>
+        </div>
+
+        <div class="correct-label">✅ Safe DNS Triage Flow (PowerShell)</div>
+        <div class="correct-output">
+          # Step 1: See current adapter names<br>
+          Get-NetAdapter | Select-Object Name, Status<br><br>
+          # Step 2: Check assigned DNS servers<br>
+          Get-DnsClientServerAddress -AddressFamily IPv4<br><br>
+          # Step 3: Test connectivity to YOUR internal DNS server<br>
+          Test-NetConnection -ComputerName 10.0.0.10 -Port 53<br><br>
+          # Step 4: Query internal name against internal DNS<br>
+          Resolve-DnsName -Name internalserver.corp -Server 10.0.0.10
+        </div>
+
+        <div class="debrief">
+          <div class="debrief-title">💬 Group Debrief Questions</div>
+          <ul>
+            <li>If you pushed 157.58.0.0 as the DNS server to 50 workstations via GPO, what breaks and how fast?</li>
+            <li>What's your team's policy for verifying any IP address an AI gives you?</li>
+            <li>How do you prompt AI to always ask for your actual interface name before giving netsh/PowerShell commands?</li>
+            <li>What internal documentation source do you use to verify Windows networking commands?</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- ACTIVITY 5: Ticket Triage with Rovo        -->
+      <!-- ═══════════════════════════════════════════ -->
+      <div class="activity-card animate-on-scroll" id="act5">
+        <div class="activity-number">05</div>
+        <div class="activity-header">
+          <div class="activity-icon card-icon-atl">🎫</div>
+          <div>
+            <div class="module-tag tag-atl" style="margin-bottom:6px;">Rovo / Jira · L1</div>
+            <h3 style="margin-bottom:4px;">"Ticket Triage" — Rovo for the Service Desk</h3>
+            <p style="font-size:0.875rem;margin:0;">Use Rovo inside Jira to summarize, respond to, and prioritize a realistic service desk ticket.</p>
+          </div>
+        </div>
+        <div class="activity-meta">
+          <span>👥 Pairs</span>
+          <span>⏱️ 15 min</span>
+          <span class="meta-highlight">🟦 Rovo — Required</span>
+          <span>🎫 RTP Service Desk</span>
+          <span>⭐ L1 Core Skill</span>
+        </div>
+
+        <div style="background:rgba(0,82,204,0.08);border:1px solid rgba(87,157,255,0.2);border-radius:var(--radius-md);padding:18px 20px;margin-bottom:16px;">
+          <h4 style="font-size:0.9rem;color:var(--atlassian-light);margin-bottom:8px;">🎫 Mock Ticket — User Submitted</h4>
+          <p style="font-size:0.85rem;color:var(--text-secondary);margin:0;font-style:italic;">"Hi, my laptop is really slow lately and I can't get to my email. Also I think I clicked something weird in an email yesterday and now I have a bunch of popups. The wifi keeps disconnecting too. I need this fixed ASAP — I have a presentation at 2pm."</p>
+        </div>
+
+        <div class="prompt-box">
+          Step 1: "Summarize this ticket in 2 sentences for a team lead status update."<br><br>
+          Step 2: "This ticket describes 3 separate issues. List them individually and suggest a priority (P1–P4) for each."<br><br>
+          Step 3: "Draft a professional, empathetic first-response to this user. Acknowledge urgency, list what we'll investigate, and give one immediate self-service step. Keep it under 120 words."<br><br>
+          Step 4 (bonus): "Based on the phishing indicator mentioned, what immediate containment steps should the service desk take before troubleshooting anything else?"
+        </div>
+
+        <div class="why-wrong" style="background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.2);">
+          <div class="why-wrong-title" style="color:#fcd34d;">⚠️ Common Bad AI Behavior to Watch For</div>
+          <ul>
+            <li><span class="err-num" style="color:#fcd34d;">①</span><div><strong style="color:var(--text-primary);">AI may bury the phishing indicator:</strong> The "I clicked something weird in an email" with popups is a potential security incident. AI often treats this as a performance issue. In a real ticket, this is a P1 isolation scenario — not a P3 performance ticket. Watch if Rovo catches this.</div></li>
+            <li><span class="err-num" style="color:#fcd34d;">②</span><div><strong style="color:var(--text-primary);">AI may give a generic response that ignores the 2pm deadline:</strong> Users told you there's a hard deadline. A good AI-assisted response acknowledges it. Check if the draft reflects urgency or uses boilerplate language.</div></li>
+            <li><span class="err-num" style="color:#fcd34d;">③</span><div><strong style="color:var(--text-primary);">AI may not separate the 3 issues properly:</strong> Slow laptop + possible malware + WiFi disconnects are three different ticket types. If Rovo combines them into one vague response, you've lost triage clarity.</div></li>
+          </ul>
+        </div>
+
+        <div class="debrief">
+          <div class="debrief-title">💬 Group Debrief Questions</div>
+          <ul>
+            <li>Did Rovo flag the phishing risk as a priority? Should it have?</li>
+            <li>How much did you have to edit the AI's draft response to make it sound like you?</li>
+            <li>Would you have triaged these as one ticket or three? What did Rovo suggest?</li>
+            <li>What's the ROI in time saved — and what's the risk if you don't review the output?</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- ACTIVITY 6: Prompt Olympics                -->
+      <!-- ═══════════════════════════════════════════ -->
+      <div class="activity-card animate-on-scroll" id="act6">
+        <div class="activity-number">06</div>
+        <div class="activity-header">
+          <div class="activity-icon card-icon-green">🏆</div>
+          <div>
+            <div class="module-tag tag-cyan" style="margin-bottom:6px;">Prompt Crafting · All Levels</div>
+            <h3 style="margin-bottom:4px;">"The Prompt Olympics" — Iteration & PCTF Challenge</h3>
+            <p style="font-size:0.875rem;margin:0;">Teams compete to get the best output using the PCTF framework. 3 rounds, one scenario, one winner.</p>
+          </div>
+        </div>
+        <div class="activity-meta">
+          <span>👥 Teams of 3–5</span>
+          <span>⏱️ 20 min</span>
+          <span class="meta-highlight">🟦 Rovo or any AI</span>
+          <span>🏆 Competitive</span>
+          <span>All Levels</span>
+        </div>
+
+        <div style="background:rgba(6,182,212,0.06);border:1px solid rgba(6,182,212,0.15);border-radius:var(--radius-md);padding:18px 20px;margin-bottom:16px;">
+          <h4 style="font-size:0.9rem;color:var(--accent-light);margin-bottom:8px;">📋 PCTF Reminder</h4>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px;">
+            <div style="text-align:center;"><span style="font-size:1.5rem;font-weight:900;color:var(--accent-light);">P</span><p style="font-size:0.75rem;margin:0;color:var(--text-muted);">Persona — who should AI act as?</p></div>
+            <div style="text-align:center;"><span style="font-size:1.5rem;font-weight:900;color:var(--accent-light);">C</span><p style="font-size:0.75rem;margin:0;color:var(--text-muted);">Context — what background?</p></div>
+            <div style="text-align:center;"><span style="font-size:1.5rem;font-weight:900;color:var(--accent-light);">T</span><p style="font-size:0.75rem;margin:0;color:var(--text-muted);">Task — what do you need?</p></div>
+            <div style="text-align:center;"><span style="font-size:1.5rem;font-weight:900;color:var(--accent-light);">F</span><p style="font-size:0.75rem;margin:0;color:var(--text-muted);">Format — how to respond?</p></div>
+          </div>
+        </div>
+
+        <div class="prompt-box">
+          🎯 SCENARIO (same for all teams):<br>
+          "A VIP executive's Windows 11 laptop cannot connect to the corporate VPN after a Windows Update ran last night. They have a board call in 45 minutes. Write a troubleshooting guide for the Tier 1 agent responding to this ticket."
+        </div>
+
+        <ul class="steps-list" style="margin-top:16px;">
+          <li><span class="step-bubble">1</span><p><strong>Round 1 (4 min):</strong> Submit your instinct prompt with NO preparation. Record the output verbatim.</p></li>
+          <li><span class="step-bubble">2</span><p><strong>Round 2 (6 min):</strong> Apply the full PCTF framework. Rewrite and resubmit. How much better is it?</p></li>
+          <li><span class="step-bubble">3</span><p><strong>Round 3 (5 min):</strong> Add one specific constraint (e.g., "the user is non-technical," "give steps that take under 5 minutes," "flag any step that requires admin rights"). Resubmit.</p></li>
+          <li><span class="step-bubble">4</span><p><strong>Share-out (5 min):</strong> Each team reads their Round 3 output. Group votes: whose response would you actually send to a Tier 1 agent right now?</p></li>
+        </ul>
+
+        <div class="debrief">
+          <div class="debrief-title">💬 Group Debrief Questions</div>
+          <ul>
+            <li>What single change between Round 1 and Round 2 made the biggest difference in quality?</li>
+            <li>Which PCTF element (Persona, Context, Task, or Format) had the most impact for this scenario?</li>
+            <li>Did any team's Round 3 prompt produce a result you'd actually use without editing? Why or why not?</li>
+            <li>What's one prompting habit you're taking back to your desk tomorrow?</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div style="display:flex;gap:14px;justify-content:space-between;flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--border);">
+        <a href="level1.html" class="btn btn-secondary" id="btn-back-l1">← Back to Level 1</a>
+        <a href="level2.html" class="btn btn-primary" id="btn-to-l2">Continue to Level 2 →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo" style="display:inline-flex;">
+            <div class="nav-logo-icon">🤖</div>
+            <span>AI Training Hub</span>
+          </div>
+          <p>Group activities for the RTP Service Desk — real scenarios, real errors, real learning.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Activities</h5>
+          <ul>
+            <li><a href="#act1">1 — PowerShell Roulette</a></li>
+            <li><a href="#act2">2 — Apple Silicon Trap</a></li>
+            <li><a href="#act3">3 — Legacy Command Trap</a></li>
+            <li><a href="#act4">4 — Network Ghost</a></li>
+            <li><a href="#act5">5 — Ticket Triage</a></li>
+            <li><a href="#act6">6 — Prompt Olympics</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Navigation</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="level1.html">Level 1</a></li>
+            <li><a href="level2.html">Level 2</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Tools</h5>
+          <ul>
+            <li><a href="https://community.atlassian.com/learning/team-training/course:15697742" target="_blank" rel="noopener">Atlassian Course</a></li>
+            <li><a href="https://www.atlassian.com/rovo" target="_blank" rel="noopener">Atlassian Rovo</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Internal use only — Lunch &amp; Learn AI Training Series</span>
+        <span>Last updated: June 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lunch & Learn: Proper AI Utilization (L1–L2)</title>
+  <meta name="description" content="Internal AI training hub — from personal AI fluency to enterprise-grade workflows. Powered by Atlassian Rovo and best-practice governance." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Home-specific styles ─────────────────────────────── */
+    .tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .tool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      text-align: center;
+      transition: var(--transition-slow);
+      position: relative;
+      overflow: hidden;
+    }
+    .tool-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .tool-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.12); }
+    .tool-card:hover::after { opacity: 1; }
+    .tool-card.rovo::after    { background: linear-gradient(90deg,#0052cc,#579dff); }
+    .tool-card.claude::after  { background: linear-gradient(90deg,#d4a373,#f4a261); }
+    .tool-card.google::after  { background: linear-gradient(90deg,#4285f4,#34a853); }
+    .tool-logo {
+      width: 64px; height: 64px;
+      border-radius: 16px;
+      margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 30px;
+    }
+    .tool-logo.rovo   { background: linear-gradient(135deg,rgba(0,82,204,0.25),rgba(87,157,255,0.15)); border: 1px solid rgba(0,82,204,0.3); }
+    .tool-logo.claude { background: linear-gradient(135deg,rgba(212,163,115,0.25),rgba(244,162,97,0.1)); border: 1px solid rgba(212,163,115,0.3); }
+    .tool-logo.google { background: linear-gradient(135deg,rgba(66,133,244,0.2),rgba(52,168,83,0.1)); border: 1px solid rgba(66,133,244,0.3); }
+    .tool-card h4 { margin-bottom: 8px; }
+    .tool-card p  { font-size: 0.83rem; margin-bottom: 14px; }
+    .tool-who {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 999px;
+      display: inline-block;
+    }
+    .who-l1       { background: rgba(124,58,237,0.15); color: var(--primary-light); }
+    .who-senior   { background: rgba(37,99,235,0.12); color: var(--secondary-light); }
+    .who-all      { background: rgba(6,182,212,0.12); color: var(--accent-light); }
+
+    /* CTA Banner */
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(124,58,237,0.18) 0%, rgba(37,99,235,0.12) 100%);
+      border: 1px solid rgba(124,58,237,0.25);
+      border-radius: var(--radius-xl);
+      padding: 60px 40px;
+      text-align: center;
+    }
+    .cta-banner h2 { margin-bottom: 12px; }
+    .cta-banner p  { margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+    /* Level overview cards */
+    .level-overview {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+    .level-card {
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      border: 1px solid;
+      transition: var(--transition-slow);
+      position: relative;
+      overflow: hidden;
+    }
+    .level-card:hover { transform: translateY(-4px); }
+    .level-card.l1 {
+      background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(124,58,237,0.04) 100%);
+      border-color: rgba(124,58,237,0.25);
+    }
+    .level-card.l2 {
+      background: linear-gradient(135deg, rgba(37,99,235,0.1) 0%, rgba(6,182,212,0.04) 100%);
+      border-color: rgba(37,99,235,0.25);
+    }
+    .level-card-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 5rem;
+      font-weight: 900;
+      line-height: 1;
+      position: absolute;
+      top: 20px; right: 24px;
+      opacity: 0.06;
+    }
+    .level-card h3 { font-size: 1.3rem; margin-bottom: 8px; }
+    .level-card .goal-tag {
+      font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 3px 10px; border-radius: 999px;
+      display: inline-block; margin-bottom: 16px;
+    }
+    .l1 .goal-tag { background: rgba(124,58,237,0.2); color: var(--primary-light); }
+    .l2 .goal-tag { background: rgba(37,99,235,0.2); color: var(--secondary-light); }
+    .level-card ul { list-style: none; margin: 16px 0 24px; display: flex; flex-direction: column; gap: 8px; }
+    .level-card ul li { font-size: 0.875rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
+    .level-card ul li::before { content: '→'; color: var(--primary-light); font-size: 11px; }
+    .l2 ul li::before { color: var(--secondary-light); }
+
+    @media (max-width: 768px) {
+      .tool-grid { grid-template-columns: 1fr; }
+      .level-overview { grid-template-columns: 1fr; }
+      .cta-banner { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────────────── -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Home">
+        <div class="nav-logo-icon">🤖</div>
+        <span>AI Training Hub</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" id="nav-home">Home</a></li>
+        <li><a href="level1.html" id="nav-l1">Level 1: Foundations <span class="nav-badge">L1</span></a></li>
+        <li><a href="level2.html" id="nav-l2">Level 2: Application <span class="nav-badge" style="background:rgba(37,99,235,0.15);border-color:rgba(37,99,235,0.3);color:var(--secondary-light)">L2</span></a></li>
+        <li><a href="activities.html" id="nav-act">🎯 Activities</a></li>
+        <li><a href="resources.html" id="nav-res">Resources</a></li>
+        <li><a href="schedule.html" id="nav-sched">Schedule</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Hero ────────────────────────────────────────────────── -->
+  <section class="hero" id="hero">
+    <canvas id="particles" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.6;pointer-events:none;z-index:0;"></canvas>
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Left -->
+        <div>
+          <div class="hero-eyebrow">🚀 Internal AI Training Series</div>
+          <h1>Lunch &amp; Learn:<br><span class="gradient-text">Proper AI Utilization</span></h1>
+          <p class="hero-subtitle">From curious to capable. Learn to leverage generative AI safely and effectively — moving from personal productivity to enterprise team workflows.</p>
+
+          <div class="hero-intro">
+            Welcome to our internal AI training hub. This series is designed to take you from a basic understanding of AI to advanced, secure implementation in your daily work. We are currently in the <strong style="color:var(--primary-light)">Personal Adoption (L1)</strong> phase before transitioning to <strong style="color:var(--secondary-light)">Professional Integration (L2)</strong>. Start your journey below.
+          </div>
+
+          <div class="hero-phases">
+            <span class="phase-pill active"><span class="dot"></span> L1 Active — Rovo Onboarding</span>
+            <span class="phase-pill upcoming"><span class="dot"></span> L2 Upcoming — Enterprise Workflows</span>
+          </div>
+
+          <div class="hero-ctas" style="margin-top:24px;">
+            <a href="level1.html" class="btn btn-primary" id="btn-start-l1">🎯 Start with Level 1</a>
+            <a href="schedule.html" class="btn btn-secondary" id="btn-schedule">📅 View Schedule</a>
+          </div>
+        </div>
+
+        <!-- Right visual -->
+        <div class="hero-visual">
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <div class="hero-card-icon icon-atl">🟦</div>
+              <div>
+                <div class="hero-card-title">Atlassian Rovo</div>
+                <div class="hero-card-sub">Standard L1 Tool · RTP Service Desk</div>
+              </div>
+            </div>
+            <p>The enterprise-approved AI for all new L1 employees. Integrated directly into Jira &amp; Confluence — your data never leaves the Atlassian ecosystem.</p>
+            <div class="progress-bar"><div class="progress-bar-fill progress-l1"></div></div>
+            <div style="font-size:0.72rem;color:var(--text-muted);margin-top:6px;">L1 Onboarding Progress</div>
+          </div>
+
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <div class="hero-card-icon icon-l2">🔐</div>
+              <div>
+                <div class="hero-card-title">Senior L1 / L2+ Policy</div>
+                <div class="hero-card-sub">Open Choice · Vetting Required</div>
+              </div>
+            </div>
+            <p>Senior L1 and L2+ staff may use any AI tool — provided all outputs are vetted and best-practice governance guidelines are followed.</p>
+            <div class="progress-bar"><div class="progress-bar-fill progress-l2"></div></div>
+            <div style="font-size:0.72rem;color:var(--text-muted);margin-top:6px;">L2 Track — Launching Soon</div>
+          </div>
+
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <div class="hero-card-icon icon-l1">📅</div>
+              <div>
+                <div class="hero-card-title">Next Session</div>
+                <div class="hero-card-sub">June 19, 2026 · Lunch &amp; Learn S1</div>
+              </div>
+            </div>
+            <p>L1 Foundations — AI Mindset &amp; Getting Started with Rovo. Open to all new L1 employees.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Stats ───────────────────────────────────────────────── -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="stats-row animate-on-scroll">
+        <div class="stat-item">
+          <span class="stat-number" data-count="2" data-suffix="">2</span>
+          <span class="stat-label">Skill Levels</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-count="5" data-suffix="">5</span>
+          <span class="stat-label">Core Modules</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-count="3" data-suffix="">3</span>
+          <span class="stat-label">AI Platforms</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-count="8" data-suffix="">8</span>
+          <span class="stat-label">Sessions Planned</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── Level Overview ─────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <div class="section-eyebrow">📚 Learning Tracks</div>
+        <h2>Two Levels, One Journey</h2>
+        <p>Whether you're brand new to AI or ready to integrate it into complex workflows, there's a track for you.</p>
+      </div>
+
+      <div class="level-overview animate-on-scroll">
+        <!-- L1 -->
+        <div class="level-card l1">
+          <div class="level-card-num">L1</div>
+          <span class="goal-tag">Foundations</span>
+          <h3>Personal Fluency</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:0;">Build personal comfort, understand the technology, and develop basic prompting skills using <strong style="color:var(--primary-light)">Atlassian Rovo</strong> — your enterprise-standard L1 tool.</p>
+          <ul>
+            <li>What is an LLM and how does it work?</li>
+            <li>Capabilities vs. limitations (hallucinations)</li>
+            <li>Data privacy: personal vs. company data</li>
+            <li>Getting started with Atlassian Rovo</li>
+            <li>Prompt Engineering 101</li>
+          </ul>
+          <a href="level1.html" class="btn btn-outline btn-sm" id="btn-l1-overview">Start L1 →</a>
+        </div>
+
+        <!-- L2 -->
+        <div class="level-card l2">
+          <div class="level-card-num">L2</div>
+          <span class="goal-tag" style="background:rgba(37,99,235,0.2);color:var(--secondary-light);">Application</span>
+          <h3>Professional Integration</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:0;">Move from personal use to work application, enterprise tooling, and strict security standards. Senior L1 and L2+ staff may use any vetted AI platform.</p>
+          <ul>
+            <li>Security &amp; governance — enterprise policy</li>
+            <li>Expanding the AI ecosystem</li>
+            <li>Google Workspace AI (Gemini)</li>
+            <li>Atlassian Jira / Confluence AI workflows</li>
+            <li>Advanced workflow automation</li>
+          </ul>
+          <a href="level2.html" class="btn btn-sm" id="btn-l2-overview" style="background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.3);color:var(--secondary-light);border-radius:var(--radius-md);display:inline-flex;align-items:center;gap:6px;padding:8px 16px;font-size:0.8rem;font-weight:600;transition:var(--transition);text-decoration:none;">Explore L2 →</a>
+        </div>
+      </div>
+
+      <!-- ── Tool Spotlight ──────────────────────────────────── -->
+      <div class="section-header animate-on-scroll">
+        <div class="section-eyebrow">🛠️ Your AI Toolkit</div>
+        <h2>Approved Tools by Role</h2>
+        <p>Know which tool to use based on your level and responsibilities.</p>
+      </div>
+
+      <div class="tool-grid stagger animate-on-scroll">
+
+        <!-- Rovo -->
+        <div class="tool-card rovo">
+          <div class="tool-logo rovo">🟦</div>
+          <h4>Atlassian Rovo</h4>
+          <p>Enterprise AI built into Jira &amp; Confluence. The designated standard tool for all new L1 employees — especially critical for the RTP Service Desk team.</p>
+          <span class="tool-who who-l1">New L1 Standard</span>
+        </div>
+
+        <!-- Claude -->
+        <div class="tool-card claude">
+          <div class="tool-logo claude">🟠</div>
+          <h4>Anthropic Claude</h4>
+          <p>Powerful general-purpose AI for brainstorming, drafting, and analysis. Available to Senior L1 &amp; L2+ staff who have completed vetting training.</p>
+          <span class="tool-who who-senior">Senior L1 / L2+ Only</span>
+        </div>
+
+        <!-- Google -->
+        <div class="tool-card google">
+          <div class="tool-logo google">🔵</div>
+          <h4>Google Gemini</h4>
+          <p>AI integrated into Google Workspace (Docs, Gmail, Slides). Explore via the Google Skills Catalog for Gemini for Workspace badges.</p>
+          <span class="tool-who who-senior">Senior L1 / L2+ Only</span>
+        </div>
+
+      </div>
+
+      <div class="callout callout-info animate-on-scroll" style="margin-top:24px;max-width:800px;margin-left:auto;margin-right:auto;">
+        <span class="callout-icon">ℹ️</span>
+        <span><strong>Senior L1 / L2+ Note:</strong> You may use any AI tool of your choice. All AI-generated outputs <strong>must be vetted</strong> before use. Never input PII, proprietary code, client data, or confidential information into consumer AI tools. See the <a href="level2.html#policy">full policy in Level 2</a>.</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── CTA Banner ─────────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner animate-on-scroll">
+        <div class="section-eyebrow" style="justify-content:center;">🎯 Get Started Today</div>
+        <h2>Ready to build your <span class="gradient-text">AI fluency?</span></h2>
+        <p>Training Session 1 is happening <strong style="color:var(--primary-light)">tomorrow — June 19, 2026</strong>. Start with Level 1 fundamentals or check the schedule for all upcoming sessions.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+          <a href="level1.html" class="btn btn-primary btn-lg" id="btn-cta-l1">🚀 Begin Level 1</a>
+          <a href="schedule.html" class="btn btn-secondary btn-lg" id="btn-cta-schedule">📅 Full Schedule</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo" style="display:inline-flex;">
+            <div class="nav-logo-icon">🤖</div>
+            <span>AI Training Hub</span>
+          </div>
+          <p>Internal AI training series — from personal fluency to enterprise-grade workflows. Proper AI utilization, L1 through L2.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Navigation</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="level1.html">Level 1: Foundations</a></li>
+            <li><a href="level2.html">Level 2: Application</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Tools</h5>
+          <ul>
+            <li><a href="https://www.atlassian.com/rovo" target="_blank" rel="noopener">Atlassian Rovo</a></li>
+            <li><a href="https://community.atlassian.com/learning/team-training/course:15697742" target="_blank" rel="noopener">Atlassian Course</a></li>
+            <li><a href="https://www.anthropic.com/learn/claude-for-you" target="_blank" rel="noopener">Claude</a></li>
+            <li><a href="https://www.skills.google/catalog" target="_blank" rel="noopener">Google Skills</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Resources</h5>
+          <ul>
+            <li><a href="resources.html">Toolkit</a></li>
+            <li><a href="level2.html#policy">AI Policy</a></li>
+            <li><a href="level1.html#prompting">Prompt Guide</a></li>
+            <li><a href="schedule.html">Next Session</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Internal use only — Lunch &amp; Learn AI Training Series</span>
+        <span>Last updated: June 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

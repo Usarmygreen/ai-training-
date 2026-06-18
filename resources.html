@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resources &amp; Toolkit — AI Training Hub</title>
+  <meta name="description" content="Curated AI resource toolkit for the RTP Service Desk — Atlassian Rovo, Anthropic Claude, Google Gemini, Microsoft docs, and quick policy references." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .resource-section { margin-bottom: 52px; }
+    .resource-section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+    .resource-section-icon { font-size: 28px; }
+    .resource-section-title { font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 700; }
+    .resource-section-sub { font-size: 0.82rem; color: var(--text-muted); margin-top: 2px; }
+    .resource-link-icon.icon-atl    { background: rgba(0,82,204,0.15); border: 1px solid rgba(0,82,204,0.2); }
+    .resource-link-icon.icon-claude  { background: rgba(212,163,115,0.12); border: 1px solid rgba(212,163,115,0.2); }
+    .resource-link-icon.icon-google  { background: rgba(66,133,244,0.12); border: 1px solid rgba(66,133,244,0.2); }
+    .resource-link-icon.icon-ms      { background: rgba(0,120,212,0.12); border: 1px solid rgba(0,120,212,0.2); }
+    .resource-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; padding: 2px 8px;
+      border-radius: 999px; margin-left: 8px; vertical-align: middle;
+    }
+    .badge-required { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; }
+    .badge-l1       { background: rgba(0,82,204,0.15); border: 1px solid rgba(0,82,204,0.3); color: var(--atlassian-light); }
+    .badge-senior   { background: rgba(124,58,237,0.15); border: 1px solid rgba(124,58,237,0.3); color: var(--primary-light); }
+    .resource-link-url { font-size: 0.72rem; color: var(--text-muted); margin-top: 1px; font-family: 'Courier New', monospace; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">🤖</div>
+        <span>AI Training Hub</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="level1.html">Level 1: Foundations <span class="nav-badge">L1</span></a></li>
+        <li><a href="level2.html">Level 2: Application <span class="nav-badge" style="background:rgba(37,99,235,0.15);border-color:rgba(37,99,235,0.3);color:var(--secondary-light)">L2</span></a></li>
+        <li><a href="activities.html">🎯 Activities</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span>&rsaquo;</span>
+          <span>Resources &amp; Toolkit</span>
+        </nav>
+        <div class="level-badge" style="background:rgba(6,182,212,0.12);border:1px solid rgba(6,182,212,0.3);color:var(--accent-light);">
+          &#128218; All Levels &mdash; Curated Toolkit
+        </div>
+        <h1>Resources &amp; <span class="gradient-text">Toolkit</span></h1>
+        <p class="hero-subtitle" style="margin-top:16px;">
+          Every external link you need for the Lunch &amp; Learn &mdash; organized by platform, audience, and purpose. Bookmark this page for ongoing reference after the session.
+        </p>
+        <div class="callout callout-warning" style="margin-top:28px;max-width:620px;">
+          <span class="callout-icon">&#9888;&#65039;</span>
+          <div>
+            <strong>Quick Policy Reminder:</strong> New L1 employees &mdash; <strong>Rovo only</strong> for work tasks. Senior L1 / L2+ &mdash; any AI, vet everything, never input sensitive data into consumer tools.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container" style="padding-top:48px;padding-bottom:80px;">
+
+      <!-- ── Atlassian FEATURED ─────────────────────────────── -->
+      <div class="resource-section animate-on-scroll">
+        <div class="resource-section-header">
+          <span class="resource-section-icon">&#128309;</span>
+          <div>
+            <div class="resource-section-title">Atlassian &mdash; Enterprise Standard</div>
+            <div class="resource-section-sub">Required for all L1 employees &middot; The primary AI tool for the RTP Service Desk</div>
+          </div>
+        </div>
+
+        <div class="atlassian-spotlight">
+          <div class="atlassian-spotlight-badge">&#11088; RTP Service Desk Essential &middot; Required Tool</div>
+          <h2 style="color:var(--atlassian-light);margin-bottom:10px;">Atlassian Team AI Training Course</h2>
+          <p style="max-width:660px;margin-bottom:8px;">
+            This course is the foundational AI training for the RTP Service Desk. It covers how to use Rovo effectively inside Jira and Confluence &mdash; the tools you use every day. All L1 employees should complete this course within their first two weeks.
+          </p>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:24px;">
+            Senior L1 and L2+ staff: revisit this course to discover new Rovo capabilities you may not have explored yet.
+          </p>
+          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:8px;">
+            <a href="https://community.atlassian.com/learning/team-training/course:15697742" target="_blank" rel="noopener" class="btn btn-atlassian btn-lg">
+              &#127891; Open the Atlassian AI Course &rarr;
+            </a>
+            <span style="font-size:0.78rem;color:var(--text-muted);">community.atlassian.com &middot; Free &middot; No account required to browse</span>
+          </div>
+        </div>
+
+        <a href="https://www.atlassian.com/rovo" target="_blank" rel="noopener" class="resource-link">
+          <div class="resource-link-icon icon-atl">&#129302;</div>
+          <div class="resource-link-body">
+            <div class="resource-link-title">Atlassian Rovo <span class="resource-badge badge-l1">L1 Tool</span></div>
+            <div class="resource-link-desc">The enterprise AI assistant built into Jira and Confluence. Your primary AI tool as a new L1 employee &mdash; learn what it can do, how to search your team's knowledge, and how to use Rovo Chat.</div>
+            <div class="resource-link-url">atlassian.com/rovo</div>
+          </div>
+          <span class="resource-link-arrow">&#8594;</span>
+        </a>
+
+        <a href="https://university.atlassian.com" target="_blank" rel="noopener" class="resource-link">
+          <div class="resource-link-icon icon-atl">&#127891;</div>
+          <div class="resource-link-body">
+            <div class="resource-link-title">Atlassian University</div>
+            <div class="resource-link-desc">The full Atlassian learning platform &mdash; courses, certifications, and learning paths for Jira, Confluence, and the Atlassian product suite. Earn credentials recognized across IT orgs.</div>
+            <div class="resource-link-url">university.atlassian.com</div>
+          </div>
+          <span class="resource-link-arrow">&#8594;</span>
+        </a>
+      </div>
+
+      <!-- ── Anthropic / Claude ─────────────────────────────── -->
+      <div class="resource-section animate-on-scroll">
+        <div class="resource-section-header">
+          <span class="resource-section-icon">&#127825;</span>
+          <div>
+            <div class="resource-section-title">Anthropic / Claude Resources</div>
+            <div class="resource-section-sub">For Senior L1 / L2+ personal skill development &mdash; not for new L1 work tasks</div>
+          </div>
+        </div>
+
+        <a href="https://www.anthropic.com/learn" target="_blank" rel="noopener" class="resource-link">
+          <div class="resource-link-icon icon-claude">&#128483;</div>
+          <div class="resource-link-body">
+            <div class="resource-link-title">Claude for You <span class="resource-badge badge-senior">Senior L1 / L2+</span></div>
+            <div class="resource-link-desc">Guides for personal use and professional accounts. Covers how to get the most out of Claude for research, writing, analysis, and problem-solving. A strong reference for Senior L1 and L2+ staff developing their AI fluency.</div>
+            <div class="resource-link-url">anthropic.com/learn</div>
+          </div>
+          <span class="resource-link-arrow">&#8594;</span>
+        </a>
+
+        <a href="https://www.anthropic.com/learn" target="_blank" rel="noopener" class="resource-link">
+          <div class="resource-link-icon icon-claude">&#129504;</div>
+          <div class="resource-link-body">
+            <div class="resource-link-title">AI Fluency Course &mdash; Anthropic</div>
+            <div class="resource-link-desc">Frameworks and foundations for understanding how large language models (LLMs) work. Covers reasoning, hallucination, prompt engineering theory, and responsible AI use. Excellent conceptual grounding for the whole team.</div>
+            <div class="resource-link-url">anthropic.com/learn</div>
+          </div>
+          <span class="resource-link-arrow">&#8594;</span>
+        </a>
+
+        <a href="https://www.anthropic.com/learn" target="_blank" rel="noopener" class="resource-link">
+          <div class="resource-link-icon icon-claude">&#128203;</div>
+          <div class="resource-link-body">
+            <div class="resource-link-title">Anthropic Prompt Library</div>
+            <div class="resource-link-desc">Real prompting examples across categories &mdash; summarization, coding, analysis, writing, and more. A great reference when you are stuck on how to frame a prompt. Browse for inspiration and adapt patterns to your IT service desk context.</div>
+            <div class="resource-link-url">anthropic.com/learn</div>
+          </div>
+          <span class="resource-link-arrow">&#8594;</span>
+        </a>
+      </div>
+
+      <!-- ── Google Ecosystem ──────────────────────────────── -->
+      <div class="resource-section animate-on-scroll">
+        <div class="resource-section-header">
+          <span class="resource-section-icon">&#128309;</span>
+          <div>
+            <div class="resource-section-title">Google Ecosystem</div>
+            <div class="resource-section-sub">Gemini for Workspace, Google Cloud AI, and Google Skills credentials</div>
+          </div>
+        </div>
+
+        <a href="https://www.skills.google/catalog" target="_blank" rel="noopener" class="resource-link">
+          <div class="resource-link-icon icon-google">&#127823;</div>
+          <div class="resource-link-body">
+            <div class="resource-link-title">Google Skills Catalog</div>
+            <div class="resource-link-desc">Explore how AI is integrated into Google Workspace &mdash; Gemini for Docs, Gmail, and Slides. Focus on <strong>Duet AI / Gemini for Workspace</strong> badges. Recommended for anyone using Google Workspace tools as part of their daily workflow. Free badges available.</div>
+            <div class="resource-link-url">skills.google/catalog</div>
+          </div>
+          <span class="resource-link-arrow">&#8594;</span>
+        </a>
+      </div>
+
+      <!-- ── Microsoft Documentation ───────────────────────── -->
+      <div class="resource-section animate-on-scroll">
+        <div class="resource-section-header">
+          <span class="resource-section-icon">&#128218;</span>
+          <div>
+            <div class="resource-section-title">Microsoft Documentation &mdash; Verification Resources</div>
+            <div class="resource-section-sub">Always verify AI-generated Windows and PowerShell content against official Microsoft docs before applying</div>
+          </div>
+        </div>
+
+        <div class="callout callout-warning" style="margin-bottom:20px;">
+          <span class="callout-icon">&#9888;&#65039;</span>
+          <div style="font-size:0.875rem;">
+            <strong>Verification Rule:</strong> AI can and does hallucinate PowerShell cmdlets, Windows paths, and registry keys. Before applying ANY AI-generated Windows troubleshooting steps to a user machine or server, cross-check against official Microsoft documentation below.
+          </div>
+        </div>
+
+        <a href="https://docs.microsoft.com/en-us/windows" target="_blank" rel="noopener" class="resource-link">
+          <div class="resource-link-icon icon-ms">&#129695;</div>
+          <div class="resource-link-body">
+            <div class="resource-link-title">Windows Documentation &mdash; Microsoft Learn</div>
+            <div class="resource-link-desc">Use this to verify any Windows troubleshooting steps AI gives you before applying them to user machines. Covers Windows 10/11, Windows Server, Group Policy, registry, and more. The authoritative reference for IT support.</div>
+            <div class="resource-link-url">docs.microsoft.com/en-us/windows</div>
+          </div>
+          <span class="resource-link-arrow">&#8594;</span>
+        </a>
+
+        <a href="https://docs.microsoft.com/en-us/powershell" target="_blank" rel="noopener" class="resource-link">
+          <div class="resource-link-icon icon-ms">&#128187;</div>
+          <div class="resource-link-body">
+            <div class="resource-link-title">PowerShell Documentation &mdash; Microsoft Learn</div>
+            <div class="resource-link-desc">Always verify PowerShell cmdlet syntax here. Do not run AI-generated scripts without checking against official docs. AI frequently invents cmdlet names or parameter flags that do not exist. This reference covers PowerShell 5.1, 7.x, and PowerShell Core.</div>
+            <div class="resource-link-url">docs.microsoft.com/en-us/powershell</div>
+          </div>
+          <span class="resource-link-arrow">&#8594;</span>
+        </a>
+      </div>
+
+      <!-- ── Quick Policy Reference ────────────────────────── -->
+      <div class="resource-section animate-on-scroll">
+        <div class="resource-section-header">
+          <span class="resource-section-icon">&#9889;</span>
+          <div>
+            <div class="resource-section-title">Quick Policy Reference</div>
+            <div class="resource-section-sub">The rules &mdash; at a glance</div>
+          </div>
+        </div>
+
+        <div class="callout callout-warning" style="margin-bottom:16px;">
+          <span class="callout-icon">&#9888;&#65039;</span>
+          <div>
+            <strong>New L1 Employees:</strong> Use <strong>Atlassian Rovo only</strong> for any work-related AI tasks. Do not use ChatGPT, Claude.ai (free), or any consumer AI tool for work. When in doubt, ask your team lead.
+          </div>
+        </div>
+
+        <div class="callout callout-info" style="margin-bottom:16px;">
+          <span class="callout-icon">&#9889;</span>
+          <div>
+            <strong>Senior L1 / L2+ Employees:</strong> You may use any AI tool, but you must <strong>vet every output</strong> before use. Never input PII, client data, proprietary code, internal financials, passwords, or trade secrets into consumer AI. Document AI contributions to deliverables.
+          </div>
+        </div>
+
+        <div class="callout callout-success">
+          <span class="callout-icon">&#9989;</span>
+          <div>
+            <strong>Universal Rule:</strong> AI is a tool, not an oracle. You are accountable for every output you use or share. Read it, check it, verify it &mdash; then use it.
+          </div>
+        </div>
+      </div>
+
+      <!-- ── All Links Summary ──────────────────────────────── -->
+      <div class="module animate-on-scroll" style="margin-top:0;">
+        <div class="module-number">&#128279;</div>
+        <h3 style="margin-bottom:20px;">&#128279; All Links &mdash; Quick Reference</h3>
+        <div class="grid-2 stagger">
+          <div>
+            <h4 style="color:var(--atlassian-light);margin-bottom:12px;">&#128309; Atlassian</h4>
+            <ul class="objectives">
+              <li><a href="https://community.atlassian.com/learning/team-training/course:15697742" target="_blank" rel="noopener">Atlassian AI Team Training Course</a></li>
+              <li><a href="https://www.atlassian.com/rovo" target="_blank" rel="noopener">Atlassian Rovo</a></li>
+              <li><a href="https://university.atlassian.com" target="_blank" rel="noopener">Atlassian University</a></li>
+            </ul>
+            <h4 style="color:var(--google);margin-bottom:12px;margin-top:20px;">&#128309; Google</h4>
+            <ul class="objectives">
+              <li><a href="https://www.skills.google/catalog" target="_blank" rel="noopener">Google Skills Catalog</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="color:var(--anthropic);margin-bottom:12px;">&#127825; Anthropic / Claude</h4>
+            <ul class="objectives">
+              <li><a href="https://www.anthropic.com/learn" target="_blank" rel="noopener">Anthropic Learn (Claude for You)</a></li>
+              <li><a href="https://www.anthropic.com/learn" target="_blank" rel="noopener">AI Fluency Course</a></li>
+              <li><a href="https://www.anthropic.com/learn" target="_blank" rel="noopener">Prompt Library</a></li>
+            </ul>
+            <h4 style="color:var(--secondary-light);margin-bottom:12px;margin-top:20px;">&#128218; Microsoft Docs</h4>
+            <ul class="objectives">
+              <li><a href="https://docs.microsoft.com/en-us/windows" target="_blank" rel="noopener">Windows Documentation</a></li>
+              <li><a href="https://docs.microsoft.com/en-us/powershell" target="_blank" rel="noopener">PowerShell Documentation</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo" style="display:inline-flex;">
+            <div class="nav-logo-icon">🤖</div>
+            <span>AI Training Hub</span>
+          </div>
+          <p>Internal AI training series &mdash; Resource Toolkit. Training date: June 19, 2026.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Sections</h5>
+          <ul>
+            <li><a href="#atlassian">Atlassian</a></li>
+            <li><a href="#anthropic">Anthropic / Claude</a></li>
+            <li><a href="#google">Google Ecosystem</a></li>
+            <li><a href="#microsoft">Microsoft Docs</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Navigation</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="level1.html">Level 1</a></li>
+            <li><a href="level2.html">Level 2</a></li>
+            <li><a href="activities.html">Activities</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Featured Links</h5>
+          <ul>
+            <li><a href="https://community.atlassian.com/learning/team-training/course:15697742" target="_blank" rel="noopener">Atlassian AI Course</a></li>
+            <li><a href="https://www.skills.google/catalog" target="_blank" rel="noopener">Google Skills</a></li>
+            <li><a href="https://docs.microsoft.com/en-us/powershell" target="_blank" rel="noopener">PowerShell Docs</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Internal use only &mdash; Lunch &amp; Learn AI Training Series &middot; RTP Service Desk</span>
+        <span>June 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

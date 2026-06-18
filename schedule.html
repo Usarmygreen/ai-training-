@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schedule — AI Training Hub</title>
+  <meta name="description" content="Lunch & Learn session schedule — Level 1 Foundations and Level 2 Application tracks, starting June 19, 2026." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .session-track {
+      margin-bottom: 56px;
+    }
+    .track-header {
+      display: flex; align-items: center; gap: 16px;
+      padding: 20px 28px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 20px;
+    }
+    .track-header.l1 { background: linear-gradient(135deg,rgba(124,58,237,0.15),rgba(124,58,237,0.05)); border: 1px solid rgba(124,58,237,0.25); }
+    .track-header.l2 { background: linear-gradient(135deg,rgba(37,99,235,0.15),rgba(6,182,212,0.05)); border: 1px solid rgba(37,99,235,0.25); }
+    .track-icon { font-size: 2rem; }
+    .track-meta h3 { margin-bottom: 2px; }
+    .track-meta p  { font-size: 0.85rem; margin: 0; }
+
+    .session-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 20px;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 12px;
+      transition: var(--transition-slow);
+    }
+    .session-item:hover { border-color: rgba(124,58,237,0.25); transform: translateX(4px); }
+    .session-item.next-up { border-color: rgba(124,58,237,0.4); background: linear-gradient(135deg,rgba(124,58,237,0.08),var(--bg-card)); }
+    .session-item.next-up-l2 { border-color: rgba(37,99,235,0.4); background: linear-gradient(135deg,rgba(37,99,235,0.08),var(--bg-card)); }
+
+    .session-date-block { text-align: center; }
+    .session-month { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+    .session-day { font-family: 'Outfit', sans-serif; font-size: 2.4rem; font-weight: 900; line-height: 1; background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .session-dow { font-size: 0.65rem; color: var(--text-muted); }
+
+    .session-body h4 { margin-bottom: 4px; font-size: 0.95rem; }
+    .session-body p  { font-size: 0.82rem; margin: 0; }
+    .session-tags   { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .session-tag {
+      font-size: 0.68rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 999px;
+    }
+    .tag-l1-sess  { background: rgba(124,58,237,0.15); color: var(--primary-light); }
+    .tag-l2-sess  { background: rgba(37,99,235,0.15); color: var(--secondary-light); }
+    .tag-time     { background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid var(--border); }
+    .tag-tomorrow { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.25); animation: pulse 2s infinite; }
+    .tag-activity { background: rgba(6,182,212,0.1); color: var(--accent-light); }
+
+    .session-status {
+      flex-shrink: 0;
+      font-size: 0.75rem; font-weight: 600;
+      padding: 6px 14px; border-radius: 999px;
+      text-align: center; white-space: nowrap;
+    }
+    .status-tomorrow { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+    .status-upcoming { background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid var(--border); }
+
+    .add-to-cal {
+      font-size: 0.72rem;
+      color: var(--primary-light);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 6px;
+      transition: var(--transition);
+    }
+    .add-to-cal:hover { color: var(--accent-light); }
+
+    .timeline-note {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      display: flex; gap: 14px; align-items: flex-start;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width:768px) {
+      .session-item { grid-template-columns: 60px 1fr; }
+      .session-status { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────────────── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">🤖</div>
+        <span>AI Training Hub</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="level1.html">Level 1: Foundations <span class="nav-badge">L1</span></a></li>
+        <li><a href="level2.html">Level 2: Application <span class="nav-badge" style="background:rgba(37,99,235,0.15);border-color:rgba(37,99,235,0.3);color:var(--secondary-light)">L2</span></a></li>
+        <li><a href="activities.html">🎯 Activities</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Page Hero ──────────────────────────────────────────── -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-content">
+        <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Schedule</span></div>
+        <div class="level-badge level-badge-l1" style="background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.3);color:#6ee7b7;">📅 Session Schedule</div>
+        <h1>Training <span class="gradient-text">Schedule</span></h1>
+        <p style="font-size:1.05rem;color:var(--text-secondary);max-width:580px;">
+          Two tracks, eight sessions. Pick your level and attend the sessions that match your current skill. <strong style="color:#6ee7b7;">Session 1 is tomorrow — June 19, 2026.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container" style="padding-top:60px;padding-bottom:80px;">
+
+      <!-- Quick note -->
+      <div class="timeline-note animate-on-scroll">
+        <span style="font-size:1.5rem;">📌</span>
+        <div>
+          <h4 style="margin-bottom:4px;font-size:0.95rem;">How to Use This Schedule</h4>
+          <p style="font-size:0.85rem;margin:0;">Attend <strong style="color:var(--primary-light);">L1 sessions</strong> if you're new to AI or Atlassian Rovo. Move to <strong style="color:var(--secondary-light);">L2 sessions</strong> once you've completed the L1 track. Sessions are 45–60 min over lunch — bring your laptop and your appetite.</p>
+        </div>
+      </div>
+
+      <!-- ── L1 Track ─────────────────────────────────────── -->
+      <div class="session-track animate-on-scroll">
+        <div class="track-header l1">
+          <div class="track-icon">🎓</div>
+          <div class="track-meta">
+            <h3>Level 1 Track — Foundations</h3>
+            <p>4 sessions · June – July 2026 · Open to all new L1 employees · Rovo required</p>
+          </div>
+        </div>
+
+        <!-- Session 1 — TOMORROW -->
+        <div class="session-item next-up">
+          <div class="session-date-block">
+            <div class="session-month">Jun</div>
+            <div class="session-day">19</div>
+            <div class="session-dow">Thu</div>
+          </div>
+          <div class="session-body">
+            <h4>Session 1 — AI Mindset &amp; Getting Started with Rovo</h4>
+            <p>What is an LLM? Hallucinations explained. Data privacy ground rules. First hands-on time with Atlassian Rovo in Jira.</p>
+            <div class="session-tags">
+              <span class="session-tag tag-tomorrow">⚡ Tomorrow</span>
+              <span class="session-tag tag-l1-sess">L1</span>
+              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
+              <span class="session-tag tag-activity">🎯 Group Activity: PowerShell Roulette</span>
+            </div>
+          </div>
+          <div class="session-status status-tomorrow">Tomorrow</div>
+        </div>
+
+        <!-- Session 2 -->
+        <div class="session-item">
+          <div class="session-date-block">
+            <div class="session-month">Jun</div>
+            <div class="session-day">26</div>
+            <div class="session-dow">Thu</div>
+          </div>
+          <div class="session-body">
+            <h4>Session 2 — Prompt Engineering 101 &amp; PCTF Framework</h4>
+            <p>The PCTF framework. Before &amp; after prompt examples. Hands-on iteration with real service desk scenarios.</p>
+            <div class="session-tags">
+              <span class="session-tag tag-l1-sess">L1</span>
+              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
+              <span class="session-tag tag-activity">🎯 Group Activity: Platform Trap (Mac/PC)</span>
+            </div>
+          </div>
+          <div class="session-status status-upcoming">Upcoming</div>
+        </div>
+
+        <!-- Session 3 -->
+        <div class="session-item">
+          <div class="session-date-block">
+            <div class="session-month">Jul</div>
+            <div class="session-day">10</div>
+            <div class="session-dow">Thu</div>
+          </div>
+          <div class="session-body">
+            <h4>Session 3 — Rovo Deep Dive &amp; Jira Ticket Workflows</h4>
+            <p>Using Rovo to triage, respond to, and close tickets faster. Confluence knowledge base + AI search. Real service desk use cases.</p>
+            <div class="session-tags">
+              <span class="session-tag tag-l1-sess">L1</span>
+              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
+              <span class="session-tag tag-activity">🎯 Group Activity: Ticket Triage + Network Ghost</span>
+            </div>
+          </div>
+          <div class="session-status status-upcoming">Upcoming</div>
+        </div>
+
+        <!-- Session 4 -->
+        <div class="session-item">
+          <div class="session-date-block">
+            <div class="session-month">Jul</div>
+            <div class="session-day">17</div>
+            <div class="session-dow">Thu</div>
+          </div>
+          <div class="session-body">
+            <h4>Session 4 — L1 Wrap-up: Prompt Olympics &amp; Graduation</h4>
+            <p>Full group activity session — Prompt Olympics competition. L1 completion criteria review. Transition briefing to L2 track.</p>
+            <div class="session-tags">
+              <span class="session-tag tag-l1-sess">L1 Graduation</span>
+              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
+              <span class="session-tag tag-activity">🏆 Activity: Prompt Olympics (Full Group)</span>
+            </div>
+          </div>
+          <div class="session-status status-upcoming">Upcoming</div>
+        </div>
+      </div>
+
+      <!-- ── L2 Track ─────────────────────────────────────── -->
+      <div class="session-track animate-on-scroll">
+        <div class="track-header l2">
+          <div class="track-icon">🔐</div>
+          <div class="track-meta">
+            <h3>Level 2 Track — Professional Application</h3>
+            <p>4 sessions · July – August 2026 · Senior L1 &amp; L2+ employees · Open AI choice with vetting</p>
+          </div>
+        </div>
+
+        <!-- Session 5 -->
+        <div class="session-item next-up-l2">
+          <div class="session-date-block">
+            <div class="session-month">Jul</div>
+            <div class="session-day">24</div>
+            <div class="session-dow">Thu</div>
+          </div>
+          <div class="session-body">
+            <h4>Session 5 — Security, Governance &amp; AI Policy Deep Dive</h4>
+            <p>Enterprise vs consumer AI. What never goes into an AI prompt. Approved tool policy walkthrough. Real breach scenario discussion.</p>
+            <div class="session-tags">
+              <span class="session-tag tag-l2-sess">L2</span>
+              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
+              <span class="session-tag tag-activity">🎯 Activity: Policy Scenario Roleplay</span>
+            </div>
+          </div>
+          <div class="session-status status-upcoming">Upcoming</div>
+        </div>
+
+        <!-- Session 6 -->
+        <div class="session-item">
+          <div class="session-date-block">
+            <div class="session-month">Aug</div>
+            <div class="session-day">07</div>
+            <div class="session-dow">Thu</div>
+          </div>
+          <div class="session-body">
+            <h4>Session 6 — Expanding the Ecosystem: Google &amp; Atlassian AI</h4>
+            <p>Gemini for Google Workspace (Docs, Gmail, Slides). Atlassian AI beyond Rovo. Google Skills Catalog — earning your AI credentials.</p>
+            <div class="session-tags">
+              <span class="session-tag tag-l2-sess">L2</span>
+              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
+              <span class="session-tag tag-activity">🎯 Activity: Tool Comparison Challenge</span>
+            </div>
+          </div>
+          <div class="session-status status-upcoming">Upcoming</div>
+        </div>
+
+        <!-- Session 7 -->
+        <div class="session-item">
+          <div class="session-date-block">
+            <div class="session-month">Aug</div>
+            <div class="session-day">14</div>
+            <div class="session-dow">Thu</div>
+          </div>
+          <div class="session-body">
+            <h4>Session 7 — Advanced Workflows: Automation &amp; Documentation</h4>
+            <p>Chaining AI prompts for multi-step tasks. Meeting summary automation with Rovo. Drafting runbooks and incident reports from bullets. Secure code review with AI.</p>
+            <div class="session-tags">
+              <span class="session-tag tag-l2-sess">L2</span>
+              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
+              <span class="session-tag tag-activity">🎯 Activity: Workflow Build Challenge</span>
+            </div>
+          </div>
+          <div class="session-status status-upcoming">Upcoming</div>
+        </div>
+
+        <!-- Session 8 -->
+        <div class="session-item">
+          <div class="session-date-block">
+            <div class="session-month">Aug</div>
+            <div class="session-day">21</div>
+            <div class="session-dow">Thu</div>
+          </div>
+          <div class="session-body">
+            <h4>Session 8 — L2 Graduation &amp; What's Next</h4>
+            <p>Full group showcase — teams present a real AI-assisted workflow they built. L2 completion. Discussion of continuous learning resources and next steps.</p>
+            <div class="session-tags">
+              <span class="session-tag tag-l2-sess">L2 Graduation</span>
+              <span class="session-tag tag-time">⏰ 12:00 PM – 1:00 PM</span>
+              <span class="session-tag tag-activity">🏆 Showcase: Real Workflow Demos</span>
+            </div>
+          </div>
+          <div class="session-status status-upcoming">Upcoming</div>
+        </div>
+      </div>
+
+      <!-- Quick reference -->
+      <div class="callout callout-info animate-on-scroll">
+        <span class="callout-icon">📋</span>
+        <span>Sessions run every <strong>other Thursday</strong> at noon. Bring your laptop. Each session is 45–60 minutes with ~15 minutes of group activity time. Questions? Reach out to your facilitator.</span>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo" style="display:inline-flex;"><div class="nav-logo-icon">🤖</div><span>AI Training Hub</span></div>
+          <p>8 sessions across two skill tracks — June through August 2026.</p>
+        </div>
+        <div class="footer-col">
+          <h5>L1 Sessions</h5>
+          <ul>
+            <li><a href="#">Jun 19 — Session 1 ⚡</a></li>
+            <li><a href="#">Jun 26 — Session 2</a></li>
+            <li><a href="#">Jul 10 — Session 3</a></li>
+            <li><a href="#">Jul 17 — Session 4</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>L2 Sessions</h5>
+          <ul>
+            <li><a href="#">Jul 24 — Session 5</a></li>
+            <li><a href="#">Aug 07 — Session 6</a></li>
+            <li><a href="#">Aug 14 — Session 7</a></li>
+            <li><a href="#">Aug 21 — Session 8</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Navigation</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="level1.html">Level 1</a></li>
+            <li><a href="level2.html">Level 2</a></li>
+            <li><a href="activities.html">Activities</a></li>
+            <li><a href="resources.html">Resources</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Internal use only — Lunch &amp; Learn AI Training Series</span>
+        <span>Last updated: June 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

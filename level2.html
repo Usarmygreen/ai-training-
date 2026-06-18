@@ -1,0 +1,457 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level 2: Professional Application — AI Training Hub</title>
+  <meta name="description" content="Level 2 AI Professional Application — security, governance, enterprise tools, and advanced AI workflows for the RTP Service Desk team." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .accordion-item { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 8px; overflow: hidden; }
+    .accordion-trigger { width: 100%; background: none; border: none; padding: 16px 20px; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
+    .accordion-trigger:hover { background: var(--bg-card-hover); }
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding: 0 20px; }
+    .accordion-item.open .accordion-content { padding: 0 20px 16px; }
+    .accordion-arrow { transition: transform 0.3s ease; color: var(--text-muted); }
+    .accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+    .policy-tier { border-radius: var(--radius-lg); padding: 28px 32px; margin-bottom: 16px; position: relative; overflow: hidden; }
+    .policy-tier-l1 { background: linear-gradient(135deg, rgba(0,82,204,0.12) 0%, rgba(87,157,255,0.05) 100%); border: 2px solid rgba(0,82,204,0.35); }
+    .policy-tier-l2 { background: linear-gradient(135deg, rgba(124,58,237,0.10) 0%, rgba(6,182,212,0.04) 100%); border: 1px solid rgba(124,58,237,0.25); }
+    .tier-label { display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; margin-bottom: 14px; }
+    .tier-label-l1 { background: rgba(0,82,204,0.2); border: 1px solid rgba(87,157,255,0.35); color: var(--atlassian-light); }
+    .tier-label-l2 { background: rgba(124,58,237,0.15); border: 1px solid rgba(167,139,250,0.3); color: var(--primary-light); }
+    .tier-rule { display: flex; align-items: flex-start; gap: 10px; font-size: 0.875rem; color: var(--text-secondary); padding: 6px 0; }
+    .tier-forbidden { display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: #fca5a5; padding: 4px 0; }
+    .compare-table { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 0.875rem; }
+    .compare-table th { padding: 12px 16px; text-align: left; font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 700; border-bottom: 1px solid var(--border); }
+    .compare-table th:first-child { color: var(--text-muted); }
+    .compare-table th.th-atl { background: rgba(0,82,204,0.1); color: var(--atlassian-light); }
+    .compare-table th.th-consumer { color: var(--text-secondary); }
+    .compare-table td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-secondary); vertical-align: top; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table td.td-atl { background: rgba(0,82,204,0.06); color: #6ee7b7; font-weight: 500; }
+    .compare-table td.td-feature { color: var(--text-muted); font-size: 0.8rem; }
+    .feature-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+    .feature-card { background: rgba(0,82,204,0.08); border: 1px solid rgba(0,82,204,0.2); border-radius: var(--radius-md); padding: 20px; text-align: center; transition: var(--transition); }
+    .feature-card:hover { background: rgba(0,82,204,0.14); border-color: rgba(87,157,255,0.4); transform: translateY(-3px); }
+    .feature-card-icon { font-size: 28px; margin-bottom: 10px; }
+    .feature-card h4 { font-size: 0.9rem; color: var(--atlassian-light); margin-bottom: 6px; }
+    .feature-card p { font-size: 0.8rem; color: var(--text-muted); }
+    .case-study-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; transition: var(--transition-slow); position: relative; overflow: hidden; }
+    .case-study-card::before { content: ''; position: absolute; inset: 0; background: var(--gradient-card); opacity: 0; transition: var(--transition); }
+    .case-study-card:hover { border-color: var(--border-glow); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
+    .case-study-card:hover::before { opacity: 1; }
+    .case-study-num { font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; position: relative; z-index: 1; }
+    .case-study-card h3 { font-size: 1.05rem; margin-bottom: 10px; position: relative; z-index: 1; }
+    .case-study-card p { font-size: 0.875rem; position: relative; z-index: 1; margin-bottom: 14px; }
+    .prompt-block { background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.06); border-left: 3px solid var(--secondary-light); border-radius: var(--radius-sm); padding: 14px 16px; font-family: 'Courier New', monospace; font-size: 0.8rem; color: var(--accent-light); line-height: 1.65; position: relative; z-index: 1; margin-top: 14px; }
+    .prompt-block-label { font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+    .ecosystem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; }
+    .ecosystem-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; transition: var(--transition-slow); }
+    .ecosystem-card:hover { border-color: rgba(124,58,237,0.3); transform: translateY(-3px); background: var(--bg-card-hover); }
+    .ecosystem-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .ecosystem-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    @media (max-width: 768px) { .feature-trio { grid-template-columns: 1fr; } .ecosystem-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">🤖</div>
+        <span>AI Training Hub</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="level1.html">Level 1: Foundations <span class="nav-badge">L1</span></a></li>
+        <li><a href="level2.html">Level 2: Application <span class="nav-badge" style="background:rgba(37,99,235,0.15);border-color:rgba(37,99,235,0.3);color:var(--secondary-light)">L2</span></a></li>
+        <li><a href="activities.html">🎯 Activities</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span>&rsaquo;</span>
+          <span>Level 2: Application</span>
+        </nav>
+        <div class="level-badge level-badge-l2">
+          <span>&#9889;</span> Level 2 &mdash; Professional Application
+        </div>
+        <h1>Moving from Personal Use<br>to <span class="gradient-text">Enterprise Workflows</span></h1>
+        <p class="hero-subtitle" style="margin-top:16px;">
+          You know how AI works. Now we apply it safely and strategically within enterprise policies, real tools, and real RTP Service Desk scenarios.
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
+          <a href="#policy" class="btn btn-primary">&#128737;&#65039; Start with Security</a>
+          <a href="#ecosystem" class="btn btn-secondary">Explore Tools &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container" style="padding-top:16px;padding-bottom:80px;">
+
+      <!-- Module 2.1 -->
+      <section id="policy" class="module animate-on-scroll" style="margin-top:48px;">
+        <div class="module-number">2.1</div>
+        <div class="module-header">
+          <div class="module-icon" style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.25);width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">&#128737;&#65039;</div>
+          <div>
+            <div class="module-tag tag-red">&#9888; Critical &mdash; Complete Before Using AI on Work Tasks</div>
+            <h2>Security &amp; Governance</h2>
+            <p style="margin:0;font-size:0.9rem;">AI is powerful &mdash; but so is your responsibility. Understand the rules before you use any AI tool on work tasks.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:16px;font-size:1.1rem;">&#127970; AI Usage Policy &mdash; Two-Tier System</h3>
+
+        <div class="policy-tier policy-tier-l1">
+          <div class="tier-label tier-label-l1">&#128309; New L1 Employees</div>
+          <h3 style="color:var(--atlassian-light);margin-bottom:12px;">USE ATLASSIAN ROVO ONLY</h3>
+          <div class="tier-rule">
+            <span style="flex-shrink:0;margin-top:1px;">&#9989;</span>
+            <span><strong style="color:var(--text-primary);">Why Rovo?</strong> Enterprise-governed, data stays within the Atlassian ecosystem, auditable, and approved by IT. It is built into the tools you already use &mdash; Jira and Confluence.</span>
+          </div>
+          <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(0,82,204,0.25);">
+            <div style="font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#fca5a5;margin-bottom:8px;">&#10060; Do NOT use for work tasks:</div>
+            <div class="tier-forbidden"><span>&#128683;</span> ChatGPT (free or Plus account)</div>
+            <div class="tier-forbidden"><span>&#128683;</span> Claude.ai (free tier) or any consumer Claude plan</div>
+            <div class="tier-forbidden"><span>&#128683;</span> Google Bard / Gemini (non-Workspace version)</div>
+            <div class="tier-forbidden"><span>&#128683;</span> Any AI chatbot not approved by IT</div>
+          </div>
+        </div>
+
+        <div class="policy-tier policy-tier-l2">
+          <div class="tier-label tier-label-l2">&#9889; Senior L1 / L2+ Employees</div>
+          <h3 style="color:var(--primary-light);margin-bottom:12px;">May Use Any AI Tool &mdash; With Full Responsibility</h3>
+          <div class="tier-rule">
+            <span style="flex-shrink:0;margin-top:1px;">&#9989;</span>
+            <span>You have the experience to evaluate AI output critically. You may use Claude, ChatGPT, Gemini, or other tools &mdash; but the rules below are non-negotiable.</span>
+          </div>
+          <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(124,58,237,0.2);">
+            <div style="font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#fca5a5;margin-bottom:8px;">&#128683; NEVER input into consumer AI:</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;">
+              <div class="tier-forbidden"><span>&#128683;</span> PII or client personal data</div>
+              <div class="tier-forbidden"><span>&#128683;</span> Internal financials or budgets</div>
+              <div class="tier-forbidden"><span>&#128683;</span> Proprietary source code</div>
+              <div class="tier-forbidden"><span>&#128683;</span> Passwords or credentials</div>
+              <div class="tier-forbidden"><span>&#128683;</span> Client contracts or SLAs</div>
+              <div class="tier-forbidden"><span>&#128683;</span> Trade secrets or IP</div>
+            </div>
+            <div style="margin-top:14px;" class="tier-rule">
+              <span style="flex-shrink:0;">&#128203;</span>
+              <span>Document AI usage when it substantially contributes to a deliverable. Vet ALL outputs before use &mdash; AI can be confidently wrong.</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin:28px 0 14px;font-size:1.05rem;">&#128203; Best Practices &mdash; Click to Expand</h3>
+        <div id="bestPracticesAccordion">
+
+          <div class="accordion-item">
+            <button class="accordion-trigger" aria-expanded="false">
+              <span>1&#65038; &nbsp;Never copy-paste AI output without review</span>
+              <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-content" role="region">
+              <p style="font-size:0.875rem;margin-top:0;">AI output is a <em>first draft</em>, not a final product. Always read through the response before using it anywhere. Check for factual errors, hallucinated links, incorrect syntax, and tone. A 30-second review can prevent a bad ticket, a broken script, or misinformation being forwarded to a client.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-trigger" aria-expanded="false">
+              <span>2&#65038; &nbsp;Cite when AI assisted in work product</span>
+              <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-content" role="region">
+              <p style="font-size:0.875rem;margin-top:0;">If AI substantially wrote, drafted, or structured something you are delivering as work product &mdash; a Confluence doc, an email, a runbook &mdash; note it. This builds trust, helps others understand what to verify, and keeps your team accountable to quality standards.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-trigger" aria-expanded="false">
+              <span>3&#65038; &nbsp;Verify all facts, links, and code before deploying</span>
+              <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-content" role="region">
+              <p style="font-size:0.875rem;margin-top:0;">AI models can hallucinate URLs, cmdlet names, API parameters, and dates. Before you paste a PowerShell script, check the syntax against <a href="https://docs.microsoft.com/en-us/powershell" target="_blank" rel="noopener">official Microsoft docs</a>. Before you reference a KB article number, confirm it exists. No exceptions.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-trigger" aria-expanded="false">
+              <span>4&#65038; &nbsp;Use PCTF prompting for better, safer outputs</span>
+              <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-content" role="region">
+              <p style="font-size:0.875rem;margin-top:0;">Structure every prompt with <strong style="color:var(--primary-light);">P</strong>ersona, <strong style="color:var(--primary-light);">C</strong>ontext, <strong style="color:var(--primary-light);">T</strong>ask, and <strong style="color:var(--primary-light);">F</strong>ormat. This gives the AI enough information to produce a targeted, relevant response and reduces the chance it makes something up to fill gaps. Better prompts = better, safer outputs.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-trigger" aria-expanded="false">
+              <span>5&#65038; &nbsp;Report AI output that seems wrong or dangerous</span>
+              <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-content" role="region">
+              <p style="font-size:0.875rem;margin-top:0;">If Rovo or any AI gives you advice that feels off, risky, or plainly wrong &mdash; flag it. Tell your team lead. Document what happened. AI tools are still maturing, and collective feedback makes the whole team smarter. If you encounter a security-relevant AI response, escalate immediately.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <h3 style="margin:32px 0 4px;font-size:1.05rem;">&#128269; Enterprise vs. Consumer AI &mdash; Side by Side</h3>
+        <p style="font-size:0.85rem;margin-bottom:0;">Understanding why the tool choice matters for your data.</p>
+        <div style="overflow-x:auto;">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th style="width:32%;">Feature</th>
+                <th class="th-atl">&#128309; Enterprise Rovo (Atlassian)</th>
+                <th class="th-consumer">&#9888; Consumer AI (ChatGPT, Claude free, etc.)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="td-feature">Data Protection</td>
+                <td class="td-atl">&#10004; Data encrypted, stays in your Atlassian org</td>
+                <td>&#9888; Data may be sent to external servers; retention varies by provider</td>
+              </tr>
+              <tr>
+                <td class="td-feature">Used to Train the AI Model</td>
+                <td class="td-atl">&#10004; Your data is NOT used to train AI models</td>
+                <td>&#10008; Free tiers may use your inputs for model training</td>
+              </tr>
+              <tr>
+                <td class="td-feature">Approved for Work Tasks</td>
+                <td class="td-atl">&#10004; Yes &mdash; fully approved for all L1/L2+ use</td>
+                <td>&#10008; Not approved for new L1 employees on work tasks</td>
+              </tr>
+              <tr>
+                <td class="td-feature">Integrated with Jira &amp; Confluence</td>
+                <td class="td-atl">&#10004; Native &mdash; Rovo has full context of your tickets &amp; docs</td>
+                <td>&#10008; Requires manual copy-paste; no native integration</td>
+              </tr>
+              <tr>
+                <td class="td-feature">Audit &amp; Compliance</td>
+                <td class="td-atl">&#10004; IT-governed; logs available for compliance review</td>
+                <td>&#10008; No organizational oversight or audit trail</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Module 2.2 -->
+      <section id="ecosystem" class="module animate-on-scroll">
+        <div class="module-number">2.2</div>
+        <div class="module-header">
+          <div class="module-icon card-icon-blue">&#127758;</div>
+          <div>
+            <div class="module-tag tag-blue">Ecosystem</div>
+            <h2>Expanding the AI Ecosystem</h2>
+            <p style="margin:0;font-size:0.9rem;">Beyond Rovo, there is a growing world of AI tools. Here is where to invest your learning time.</p>
+          </div>
+        </div>
+
+        <div class="atlassian-spotlight animate-on-scroll">
+          <div class="atlassian-spotlight-badge">&#11088; Enterprise Standard &middot; RTP Service Desk</div>
+          <h2 style="margin-bottom:10px;color:var(--atlassian-light);">Atlassian AI &mdash; Built for the RTP Service Desk</h2>
+          <p style="max-width:680px;margin-bottom:24px;">
+            Atlassian Rovo is not just another AI chatbot &mdash; it is natively woven into Jira and Confluence, giving it direct access to your tickets, documentation, and team knowledge base. It knows your backlog, your sprint, your runbooks. No copy-pasting context. No privacy risk. Just intelligent assistance where your work actually lives.
+          </p>
+          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px;">
+            <a href="https://community.atlassian.com/learning/team-training/course:15697742" target="_blank" rel="noopener" class="btn btn-atlassian btn-lg">
+              &#127891; Start the Atlassian AI Course &rarr;
+            </a>
+            <span style="font-size:0.8rem;color:var(--text-muted);">Required for all L1 employees &middot; Complete in your first two weeks</span>
+          </div>
+          <div class="feature-trio">
+            <div class="feature-card">
+              <div class="feature-card-icon">&#127915;</div>
+              <h4>Jira AI</h4>
+              <p>Summarize tickets, auto-fill fields, suggest priorities, and draft descriptions from bullet points &mdash; directly inside your Jira workflow.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-card-icon">&#128214;</div>
+              <h4>Confluence AI</h4>
+              <p>Turn meeting notes into structured action items, draft documentation pages, and get instant summaries of long Confluence spaces.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-card-icon">&#128172;</div>
+              <h4>Rovo Chat</h4>
+              <p>Ask questions about your projects in plain English. Rovo searches across Jira and Confluence to give contextual, sourced answers.</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:4px;font-size:1.05rem;">&#128218; Additional Learning Resources</h3>
+        <p style="font-size:0.85rem;margin-bottom:20px;">Senior L1 and L2+ employees can explore these platforms for continued AI skill development.</p>
+
+        <div class="ecosystem-grid animate-on-scroll">
+          <div class="ecosystem-card">
+            <div class="ecosystem-card-header">
+              <div class="ecosystem-icon" style="background:rgba(66,133,244,0.15);border:1px solid rgba(66,133,244,0.25);">&#128309;</div>
+              <div>
+                <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--google);margin-bottom:2px;">Google Ecosystem</div>
+                <h4 style="color:var(--text-primary);">Google Skills Catalog</h4>
+              </div>
+            </div>
+            <p style="font-size:0.875rem;margin-bottom:16px;">
+              Explore how AI is integrated into Google Workspace &mdash; Gemini for Google Docs, Gmail, and Slides. Look for <strong style="color:var(--text-primary);">Duet AI / Gemini for Workspace</strong> badges and credentials. Especially relevant if you use Google Workspace daily.
+            </p>
+            <a href="https://www.skills.google/catalog" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Explore Google Skills &rarr;</a>
+          </div>
+
+          <div class="ecosystem-card">
+            <div class="ecosystem-card-header">
+              <div class="ecosystem-icon" style="background:rgba(212,163,115,0.12);border:1px solid rgba(212,163,115,0.2);">&#127825;</div>
+              <div>
+                <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--anthropic);margin-bottom:2px;">Senior L1 / L2+ &mdash; Personal Skill Building</div>
+                <h4 style="color:var(--text-primary);">Anthropic / Claude Learning</h4>
+              </div>
+            </div>
+            <p style="font-size:0.875rem;margin-bottom:16px;">
+              Claude is one of the most capable AI assistants available. Senior L1 and L2+ staff can explore Anthropic's learning materials for personal AI fluency development. Always follow data policies when using Claude for any work-adjacent tasks.
+            </p>
+            <a href="https://www.anthropic.com/learn" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Explore Claude Learning &rarr;</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Module 2.3 -->
+      <section id="workflows" class="module animate-on-scroll">
+        <div class="module-number">2.3</div>
+        <div class="module-header">
+          <div class="module-icon card-icon-cyan">&#128300;</div>
+          <div>
+            <div class="module-tag tag-cyan">Advanced</div>
+            <h2>Advanced Workflows &mdash; Case Studies</h2>
+            <p style="margin:0;font-size:0.9rem;">Real-world scenarios for the RTP Service Desk. Adapt these patterns to your daily work.</p>
+          </div>
+        </div>
+
+        <div class="grid-3 stagger animate-on-scroll">
+
+          <div class="case-study-card">
+            <div class="case-study-num">Case Study 01 &middot; Security-First</div>
+            <div class="card-icon card-icon-purple" style="margin-bottom:14px;">&#128274;</div>
+            <h3>AI Code Refactor &mdash; Safely</h3>
+            <p>Need AI to review or improve a PowerShell script? You can do this without exposing sensitive logic, credentials, or internal environment specifics. The key is <strong style="color:var(--primary-light);">sanitizing before submitting</strong>.</p>
+            <ul class="objectives">
+              <li><span>1.</span> Remove all server names, IPs, and internal paths</li>
+              <li><span>2.</span> Replace credentials with <code style="color:var(--accent-light);font-size:0.8rem;"></code> values</li>
+              <li><span>3.</span> Ask for a code review, not execution</li>
+              <li><span>4.</span> Validate output against official PowerShell docs before running</li>
+            </ul>
+            <div class="prompt-block">
+              <div class="prompt-block-label">&#128161; Prompt Template</div>
+              "You are a senior PowerShell engineer. Review this script for errors, performance issues, and best practices. [PASTE SANITIZED SCRIPT]. Do not run it &mdash; explain what each section does and flag anything risky."
+            </div>
+          </div>
+
+          <div class="case-study-card">
+            <div class="case-study-num">Case Study 02 &middot; Rovo Workflow</div>
+            <div class="card-icon card-icon-atl" style="margin-bottom:14px;">&#128203;</div>
+            <h3>Meeting Summary Automation</h3>
+            <p>After a sprint review or incident debrief, use Rovo inside Confluence to instantly convert raw meeting notes into clean, actionable summaries &mdash; no manual rewriting required.</p>
+            <ul class="objectives">
+              <li><span>1.</span> Open the Confluence meeting notes page</li>
+              <li><span>2.</span> Invoke Rovo from the Confluence toolbar</li>
+              <li><span>3.</span> Paste or point Rovo to the notes content</li>
+              <li><span>4.</span> Review the output and add it as a child page</li>
+            </ul>
+            <div class="prompt-block">
+              <div class="prompt-block-label">&#128161; Example Rovo Prompt</div>
+              "Summarize these meeting notes into: 1) Key decisions made, 2) Action items with owner and due date, 3) Open questions still pending. Format as a table where possible."
+            </div>
+          </div>
+
+          <div class="case-study-card">
+            <div class="case-study-num">Case Study 03 &middot; Documentation</div>
+            <div class="card-icon card-icon-green" style="margin-bottom:14px;">&#128221;</div>
+            <h3>Documentation from Bullets</h3>
+            <p>Got rough bullet points from an incident or a new runbook request? AI can draft the full structured document from your shorthand notes &mdash; dramatically cutting documentation time.</p>
+            <ul class="objectives">
+              <li><span>1.</span> Write down your bullet-point facts and steps</li>
+              <li><span>2.</span> Remove any sensitive data before using consumer AI</li>
+              <li><span>3.</span> Use Rovo for internal docs (safe by default)</li>
+              <li><span>4.</span> Review output carefully and add real-world specifics</li>
+            </ul>
+            <div class="prompt-block">
+              <div class="prompt-block-label">&#128161; Example Prompt</div>
+              "You are an IT documentation specialist. Convert these bullet points into a professional incident report with sections: Summary, Timeline, Root Cause, Resolution, and Prevention. Bullets: [paste your notes]"
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <div class="callout callout-info animate-on-scroll" style="margin:40px 0 0;">
+        <span class="callout-icon">&#128161;</span>
+        <div>
+          <strong>Remember:</strong> AI is a multiplier, not a replacement. The best outcomes come when you bring your domain knowledge and judgment to guide the AI &mdash; then verify its output before it goes anywhere near a client or production system.
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo" style="display:inline-flex;">
+            <div class="nav-logo-icon">🤖</div>
+            <span>AI Training Hub</span>
+          </div>
+          <p>Internal AI training series &mdash; Level 2 Professional Application. Training date: June 19, 2026.</p>
+        </div>
+        <div class="footer-col">
+          <h5>L2 Modules</h5>
+          <ul>
+            <li><a href="#policy">2.1 Security &amp; Governance</a></li>
+            <li><a href="#ecosystem">2.2 Expanding the Ecosystem</a></li>
+            <li><a href="#workflows">2.3 Advanced Workflows</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Navigation</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="level1.html">Level 1</a></li>
+            <li><a href="activities.html">Activities</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Key Links</h5>
+          <ul>
+            <li><a href="https://community.atlassian.com/learning/team-training/course:15697742" target="_blank" rel="noopener">Atlassian Course</a></li>
+            <li><a href="https://www.skills.google/catalog" target="_blank" rel="noopener">Google Skills</a></li>
+            <li><a href="https://www.anthropic.com/learn" target="_blank" rel="noopener">Anthropic Learn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Internal use only &mdash; Lunch &amp; Learn AI Training Series &middot; RTP Service Desk</span>
+        <span>June 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
