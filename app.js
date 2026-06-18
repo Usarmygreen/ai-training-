@@ -106,11 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 2 + 0.5,
-        dx: (Math.random() - 0.5) * 0.4,
-        dy: (Math.random() - 0.5) * 0.4,
-        alpha: Math.random() * 0.4 + 0.1,
-        color: Math.random() > 0.5 ? '252,238,10' : '0,240,255',
+        r: Math.random() * 1.5 + 0.5,
+        dx: (Math.random() - 0.5) * 0.3,
+        dy: (Math.random() - 0.5) * 0.3,
+        alpha: Math.random() * 0.3 + 0.1,
+        color: Math.random() > 0.5 ? '255,255,255' : '6,182,212',
       });
     }
 
